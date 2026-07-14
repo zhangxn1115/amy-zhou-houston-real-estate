@@ -19,6 +19,7 @@ html = html.replaceAll('href="/favicon.svg"', 'href="./favicon.svg"');
 html = html.replaceAll('href="/amy-zhou.jpg"', 'href="./amy-zhou.jpg"');
 html = html.replaceAll('href="/wechat-qr.jpg"', 'href="./wechat-qr.jpg"');
 html = html.replaceAll('src="/amy-zhou.jpg"', 'src="./amy-zhou.jpg"');
+html = html.replaceAll('src="/amy-zhou-homes-logo.png"', 'src="./amy-zhou-homes-logo.png"');
 html = html.replaceAll('src="/wechat-qr.jpg"', 'src="./wechat-qr.jpg"');
 html = html.replaceAll('src="/areas/', 'src="./areas/');
 html = html.replace(/ nonce="[^"]+"/g, "");
