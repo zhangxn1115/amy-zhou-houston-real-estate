@@ -184,11 +184,12 @@ export default function Home() {
         </div>
         <div className="video-feature">
           <iframe
-            src="https://www.youtube.com/embed/vpIqfneYAhk?si=AMng3QWfoRP0RQQ4"
+            src="https://www.youtube-nocookie.com/embed/vpIqfneYAhk?si=AMng3QWfoRP0RQQ4"
             title="Amy Zhou 休斯顿房产视频解读"
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"
+            sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
             allowFullScreen
           />
         </div>

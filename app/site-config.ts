@@ -12,7 +12,8 @@ export function resolveSiteOrigin(fallbackOrigin: string) {
 
   if (configured) {
     try {
-      return new URL(configured).origin;
+      const url = new URL(configured);
+      if (url.protocol === "http:" || url.protocol === "https:") return url.origin;
     } catch {
       // Ignore an invalid optional override and use the request origin.
     }
