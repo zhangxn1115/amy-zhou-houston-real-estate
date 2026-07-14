@@ -2,9 +2,7 @@ import { readFile, writeFile } from "node:fs/promises";
 
 const sourcePath = process.argv[2] ?? "/tmp/amy-index.html";
 const outputPath = process.argv[3] ?? "site/index.html";
-const pagesOrigin = "https://zhangxn1115.github.io";
-const pagesPath = "/amy-zhou-houston-real-estate";
-const siteUrl = `${pagesOrigin}${pagesPath}`;
+const siteUrl = "https://amyzhouhomes.net";
 
 let html = await readFile(sourcePath, "utf8");
 
