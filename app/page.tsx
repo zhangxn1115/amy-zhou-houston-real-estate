@@ -223,9 +223,9 @@ export default function Home() {
         </div>
         <div className="contact-card">
           <p>欢迎咨询</p>
-          <a href="tel:+13465827694"><span>电话</span><strong>+1 346 582 7694</strong></a>
+          <div><span>电话</span><strong>+1 346 582 7694</strong></div>
           <a href="mailto:ningimeng12@gmail.com"><span>邮箱</span><strong>ningimeng12@gmail.com</strong></a>
-          <div><span>微信</span><strong>ningimengyanyan</strong></div>
+          <div className="wechat-contact"><span>微信</span><strong>ningimengyanyan</strong></div>
           <div className="contact-qr">
             <img className="contact-qr-image" src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" loading="lazy" decoding="async" />
             <p><strong>微信扫码咨询</strong><small>WECHAT QR CODE</small></p>
