@@ -187,9 +187,11 @@ footer p:last-child { text-align:right; }
 @media (max-width:520px) {
   .brand-copy { display:none; }
   .header-logo { width:210px; height:60px; }
+  .hero { display:flex; flex-direction:column; align-items:stretch; padding-top:138px; }
+  .hero-content { order:2; }
   .hero-actions { align-items:flex-start; flex-direction:column; gap:12px; }
   .hero-intro br { display:none; }
-  .portrait-card { height:430px; }
+  .portrait-card { order:1; height:430px; margin:0 0 42px; }
   .contact-card { padding:30px 24px; }
 }
 
