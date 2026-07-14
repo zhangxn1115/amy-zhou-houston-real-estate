@@ -1,0 +1,193 @@
+@import "tailwindcss";
+
+:root { --ink:#18362f; --forest:#173a32; --sage:#9aad98; --cream:#f3efe7; --paper:#faf8f3; --gold:#c9a96d; --line:rgba(24,54,47,.16); }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; background:#dedbd3; color:var(--ink); font-family:"Avenir Next","PingFang SC","Microsoft YaHei",sans-serif; }
+main { width:min(100%,1280px); margin:0 auto; overflow:hidden; background:var(--paper); box-shadow:0 0 70px rgba(23,58,50,.08); }
+a { color:inherit; text-decoration:none; }
+.skip-link { position:fixed; left:16px; top:12px; z-index:100; padding:10px 14px; background:#fff; color:var(--ink); box-shadow:0 8px 24px rgba(24,54,47,.18); transform:translateY(-160%); transition:transform .2s; }
+.skip-link:focus { transform:translateY(0); }
+.site-header { width:min(100%,1280px); height:130px; padding:0 118px 0 38px; display:flex; align-items:flex-start; justify-content:space-between; border-bottom:1px solid var(--line); position:absolute; left:50%; top:0; transform:translateX(-50%); z-index:10; }
+.brand { display:flex; align-items:center; gap:13px; }
+.site-header > .brand { margin-top:27px; }
+.brand-mark { width:42px; height:42px; border:1px solid currentColor; border-radius:50%; display:grid; place-items:center; font-family:Georgia,serif; font-size:14px; letter-spacing:-1px; }
+.brand-copy { display:flex; flex-direction:column; gap:3px; }
+.brand-copy strong { font-family:Georgia,serif; font-size:17px; letter-spacing:1.6px; }
+.brand-copy small { font-size:7px; letter-spacing:2.2px; opacity:.7; }
+.button span { margin-left:16px; }
+.header-contact-block { position:absolute; right:118px; top:21px; bottom:0; width:560px; display:flex; flex-direction:column; align-items:flex-end; }
+.qr-placeholder { width:76px; height:76px; padding:5px; border:1px solid rgba(24,54,47,.24); background:rgba(255,255,255,.5); }
+.qr-placeholder img { display:block; width:100%; height:100%; object-fit:contain; }
+.header-contact-details { position:absolute; right:0; bottom:8px; display:flex; flex-direction:row; align-items:center; justify-content:flex-end; gap:20px; }
+.header-contact-details p { margin:0; display:flex; justify-content:flex-end; gap:7px; color:#72807b; font-size:12px; line-height:1.2; white-space:nowrap; }
+.header-contact-details span { letter-spacing:1px; }
+.header-contact-details strong { color:#354f47; font-family:Georgia,serif; font-size:13px; font-weight:400; letter-spacing:.2px; }
+.locale-toggle { position:fixed; right:8px; top:8px; z-index:30; display:flex; align-items:center; gap:7px; padding:9px 11px; border:1px solid rgba(24,54,47,.18); border-radius:999px; background:rgba(250,248,243,.9); color:#87968f; box-shadow:0 8px 24px rgba(24,54,47,.1); backdrop-filter:blur(10px); cursor:pointer; font:11px/1 "Avenir Next","PingFang SC",sans-serif; }
+.locale-toggle span { transition:.2s; }
+.locale-toggle span.active { color:var(--ink); font-weight:700; }
+.locale-toggle i { width:1px; height:11px; background:rgba(24,54,47,.18); }
+.locale-toggle:hover { border-color:rgba(24,54,47,.38); }
+.hero { min-height:790px; height:100vh; max-height:940px; position:relative; overflow:hidden; padding:160px 5vw 80px; background:radial-gradient(circle at 75% 28%,#e9e5d7 0,transparent 34%),linear-gradient(115deg,#f8f5ef 0%,#efebe2 67%,#e5e7db 100%); display:flex; align-items:center; }
+.hero-content { position:absolute; z-index:2; width:56%; left:5vw; top:21%; }
+.eyebrow,.kicker { font-size:10px; letter-spacing:3.5px; text-transform:uppercase; font-weight:600; }
+.eyebrow { display:flex; align-items:center; gap:13px; }
+.eyebrow span { width:35px; height:1px; background:var(--gold); }
+h1,h2 { font-family:Georgia,"Songti SC",serif; font-weight:400; margin:0; letter-spacing:-.045em; }
+h1 { font-size:clamp(58px,6.2vw,94px); line-height:1.08; margin:28px 0 30px; }
+h1 em,h2 span { color:#9d6f49; font-weight:400; font-style:italic; }
+.hero-intro { font-family:Georgia,"Songti SC",serif; font-size:17px; line-height:1.9; color:#536a63; }
+.hero-actions { display:flex; align-items:center; gap:34px; margin-top:38px; }
+.button { display:inline-flex; align-items:center; justify-content:center; min-width:178px; padding:18px 22px; font-size:13px; transition:.25s; }
+.button-primary { background:var(--forest); color:white; }
+.button-primary:hover { background:#245346; transform:translateY(-2px); }
+.text-link { font-size:13px; padding:14px 0; border-bottom:1px solid var(--line); }
+.text-link span { margin-left:24px; }
+.portrait-card { width:min(31vw,430px); height:min(65vh,590px); position:absolute; right:4.5vw; top:21%; background:#d5d9cd; box-shadow:0 24px 65px rgba(38,53,46,.13); z-index:1; }
+.portrait-placeholder { height:calc(100% - 122px); display:flex; flex-direction:column; justify-content:center; align-items:center; background:linear-gradient(145deg,#bcc7ba,#e7e5d8); color:rgba(23,58,50,.4); }
+.portrait-placeholder span { font-family:Georgia,serif; font-size:110px; font-style:italic; }
+.portrait-placeholder small { font-size:8px; letter-spacing:3px; }
+.portrait-photo { display:block; width:100%; height:calc(100% - 122px); object-fit:cover; object-position:center 38%; }
+.portrait-caption { position:relative; height:122px; padding:12px 22px; background:white; display:flex; flex-direction:column; gap:3px; }
+.portrait-caption > span { font-size:12px; color:#75827d; }
+.portrait-caption > strong { font-family:Georgia,"Songti SC",serif; font-size:21px; font-weight:400; }
+.portrait-caption small { display:block; color:#71817b; font-size:12px; line-height:1.35; letter-spacing:.2px; }
+.portrait-caption .license-number { color:#29483f; font-weight:700; }
+.portrait-license { position:absolute; right:16px; bottom:13px; display:flex; align-items:center; justify-content:flex-end; gap:10px; text-align:right; }
+.portrait-caption .license-badge { width:38px; height:38px; flex:0 0 38px; display:grid; place-items:center; border:1px solid rgba(24,54,47,.22); color:var(--ink); font-family:Georgia,serif; font-size:14px; letter-spacing:.5px; }
+.hero-orbit { position:absolute; border:1px solid rgba(157,111,73,.16); border-radius:50%; }
+.hero-orbit-one { width:600px; height:600px; right:-140px; top:-170px; }
+.hero-orbit-two { width:390px; height:390px; right:21%; bottom:-220px; }
+.trust-strip { height:118px; padding:0 8vw; display:flex; align-items:center; justify-content:space-between; background:var(--forest); color:white; }
+.trust-strip div { display:flex; flex-direction:column; gap:8px; min-width:120px; text-align:center; }
+.trust-strip strong { font-family:Georgia,"Songti SC",serif; font-size:18px; font-weight:400; }
+.trust-strip span { font-size:9px; letter-spacing:2px; color:#aabeb7; }
+.trust-strip i { width:1px; height:34px; background:rgba(255,255,255,.16); }
+.section { padding:130px 8vw; }
+.section-label { font-size:9px; letter-spacing:2.7px; text-transform:uppercase; padding-bottom:18px; border-bottom:1px solid var(--line); }
+.section-label.light { border-color:rgba(255,255,255,.18); color:#acbeb7; }
+.about { display:grid; grid-template-columns:1fr 1.25fr; gap:40px 9vw; }
+.about .section-label { grid-column:1/-1; transform:translateY(-55px); margin-bottom:-34px; font-size:11px; }
+.kicker { color:#9d6f49; margin:42px 0 18px; }
+.about-heading .kicker { margin-top:8px; }
+.kicker.light { color:#d6bd8e; }
+h2 { font-size:clamp(42px,4.4vw,68px); line-height:1.16; }
+.about-heading h2 { font-size:clamp(36px,3.5vw,54px); }
+.about-copy { padding-top:44px; color:#5d706a; font-family:Georgia,"Songti SC",serif; font-size:15px; line-height:2; }
+.about-copy > p:first-child { font-size:18px; color:#324e46; margin-top:0; }
+.services { background:var(--forest); color:white; }
+.section-topline { display:grid; grid-template-columns:1.3fr .7fr; gap:5vw; }
+.services .section-label { padding-bottom:0; border-bottom:0; font-size:11px; transform:translateY(-45px); }
+.section-topline p { margin:0; color:#a8bab4; font-family:Georgia,"Songti SC",serif; font-size:13px; line-height:1.7; }
+.service-grid { display:grid; grid-template-columns:repeat(3,1fr); margin-top:55px; border-top:1px solid rgba(255,255,255,.18); border-bottom:1px solid rgba(255,255,255,.18); }
+.service-card { padding:24px 24px 34px; min-height:430px; position:relative; border-right:1px solid rgba(255,255,255,.18); transition:.3s; }
+.service-card:nth-child(3n) { border-right:0; }
+.service-card:nth-child(-n+3) { border-bottom:1px solid rgba(255,255,255,.18); }
+.service-card:hover { background:rgba(255,255,255,.055); transform:translateY(-5px); }
+.service-image { display:block; width:100%; height:178px; margin:0 0 30px; object-fit:cover; filter:saturate(.78) contrast(.96); }
+.service-card h3 { font-family:Georgia,"Songti SC",serif; font-size:26px; font-weight:400; margin:0 0 18px; }
+.service-card p { color:#a9bab4; font-size:14px; line-height:1.85; max-width:310px; }
+.schools { background:#ede8de; }
+.schools > .section-label { font-size:11px; }
+.schools-intro { display:grid; grid-template-columns:1fr .75fr; gap:9vw; align-items:start; margin:46px 0 58px; }
+.schools-intro .kicker { margin-top:0; }
+.schools-intro h2 { font-size:clamp(36px,3.5vw,54px); }
+.schools-intro > p { margin:0; color:#5d706a; font-family:Georgia,"Songti SC",serif; font-size:15px; line-height:1.9; }
+.school-grid { display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.school-card { min-height:240px; padding:30px; display:flex; flex-direction:column; border-right:1px solid var(--line); border-bottom:1px solid var(--line); background:rgba(250,248,243,.34); transition:.25s; }
+.school-card:hover { background:rgba(250,248,243,.75); transform:translateY(-3px); }
+.school-card > span { color:#9d6f49; font-size:9px; letter-spacing:1.2px; text-transform:uppercase; }
+.school-card h3 { margin:34px 0 16px; font-family:Georgia,serif; font-size:25px; font-weight:400; }
+.school-card p { margin:0; color:#63756f; font-size:13px; line-height:1.8; }
+.school-card a { width:max-content; margin-top:auto; padding-top:22px; color:#8f603d; font-size:11px; letter-spacing:.8px; border-bottom:1px solid rgba(143,96,61,.35); transition:.2s; }
+.school-card a:hover { color:#173a32; border-color:#173a32; }
+.school-card a i { margin-left:5px; font-style:normal; }
+.school-note { margin:18px 0 0; color:#7b8984; font-size:9px; line-height:1.6; text-align:right; }
+.process { display:grid; grid-template-columns:1fr 1fr; gap:11vw; }
+.process .section-label { font-size:11px; }
+.process h2 { font-size:clamp(36px,3.5vw,54px); }
+.process .kicker { margin-top:60px; }
+.process-intro { color:#63756f; font-family:Georgia,"Songti SC",serif; line-height:1.9; max-width:500px; margin-top:28px; }
+.step-list { list-style:none; padding:0; margin:50px 0 0; }
+.step-list li { min-height:90px; display:grid; grid-template-columns:60px 1fr 30px; align-items:center; border-bottom:1px solid var(--line); }
+.step-list li:first-child { border-top:1px solid var(--line); }
+.step-list span { font-size:10px; color:#9d6f49; }
+.step-list strong { font-family:Georgia,"Songti SC",serif; font-size:19px; font-weight:400; }
+.step-list i { font-style:normal; color:#9d6f49; }
+.videos { background:#f3efe7; }
+.videos > .section-label { font-size:11px; }
+.video-intro { display:grid; grid-template-columns:1fr .75fr; gap:9vw; align-items:start; margin:46px 0 58px; }
+.video-intro .kicker { margin-top:0; }
+.video-intro h2 { font-size:clamp(36px,3.5vw,54px); }
+.video-intro > p { margin:0; color:#5d706a; font-family:Georgia,"Songti SC",serif; font-size:15px; line-height:1.9; }
+.video-feature { width:100%; aspect-ratio:16/9; overflow:hidden; background:#173a32; box-shadow:0 24px 65px rgba(23,58,50,.14); }
+.video-feature iframe { display:block; width:100%; height:100%; border:0; }
+.contact { background:#d9d2c3; display:grid; grid-template-columns:1.15fr .85fr; gap:11vw; align-items:center; }
+.contact h2 { margin:30px 0; }
+.contact-copy > p:last-child { max-width:450px; color:#566a63; font-family:Georgia,"Songti SC",serif; line-height:1.9; }
+.contact-card { background:var(--forest); color:white; padding:40px; box-shadow:0 20px 60px rgba(23,58,50,.16); }
+.contact-card > p { font-family:Georgia,"Songti SC",serif; font-size:20px; margin:0 0 30px; }
+.contact-card > a:not(.button),.contact-card > div:not(.contact-qr) { display:flex; flex-direction:column; gap:6px; padding:15px 0; border-bottom:1px solid rgba(255,255,255,.16); }
+.contact-card span { font-size:9px; letter-spacing:2px; color:#aabbb5; }
+.contact-card strong { font-family:Georgia,serif; font-size:15px; font-weight:400; word-break:break-word; }
+.contact-qr { margin-top:28px; padding-top:28px; display:flex; align-items:center; gap:18px; border-top:1px solid rgba(255,255,255,.16); }
+.contact-qr-image { width:92px; height:92px; flex:0 0 92px; padding:7px; object-fit:contain; background:#fff; }
+.contact-qr p { margin:0; display:flex; flex-direction:column; gap:7px; }
+.contact-qr p strong { color:#fff; font-family:Georgia,"Songti SC",serif; font-size:17px; }
+.contact-qr p small { color:#aabbb5; font-size:8px; letter-spacing:1.8px; }
+.button-light { background:#e8e2d7; color:var(--ink); width:100%; margin-top:28px; }
+footer { padding:45px 6vw; background:#102d26; color:#a4b5af; display:grid; grid-template-columns:1fr 1fr 1fr; align-items:center; gap:30px; font-size:9px; letter-spacing:1px; }
+.footer-brand { color:white; }
+footer p:nth-child(2) { text-align:center; }
+footer p:last-child { text-align:right; }
+.image-credits { grid-column:1/-1; padding-top:12px; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:#758b84; font-size:7px; line-height:1.5; letter-spacing:.3px; }
+
+@media (max-width:900px) {
+  main { width:100%; box-shadow:none; }
+  .site-header { width:100%; height:122px; padding:0 88px 0 8vw; }
+  .site-header > .brand { margin-top:20px; }
+  .header-contact-block { right:10px; top:28px; width:calc(100vw - 20px); }
+  .qr-placeholder { width:64px; height:64px; padding:4px; }
+  .header-contact-details { bottom:6px; gap:8px; }
+  .header-contact-details p { gap:3px; font-size:8px; }
+  .header-contact-details strong { font-size:9px; }
+  .locale-toggle { right:6px; top:6px; }
+  .hero { height:auto; max-height:none; padding:130px 6vw 70px; display:block; }
+  .hero-content { position:relative; width:100%; left:auto; top:auto; }
+  h1 { font-size:clamp(50px,14vw,76px); }
+  .portrait-card { position:relative; width:100%; height:510px; right:auto; top:auto; margin-top:60px; }
+  .trust-strip { height:auto; padding:32px 6vw; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .trust-strip i { display:none; }
+  .section { padding:90px 6vw; }
+  .about,.process,.contact { grid-template-columns:1fr; }
+  .about .section-label { transform:translateY(-30px); margin-bottom:-20px; font-size:10px; }
+  .about-copy { padding-top:0; }
+  .section-topline { grid-template-columns:1fr; }
+  .services .section-label { font-size:10px; transform:translateY(-25px); }
+  .schools > .section-label { font-size:10px; }
+  .process .section-label { font-size:10px; }
+  .videos > .section-label { font-size:10px; }
+  .section-topline p { margin-top:20px; }
+  .service-grid { grid-template-columns:1fr; }
+  .service-card { border-right:0; border-bottom:1px solid rgba(255,255,255,.18); min-height:340px; }
+  .service-card:nth-child(-n+3) { border-bottom:1px solid rgba(255,255,255,.18); }
+  .service-card:last-child { border-bottom:0; }
+  .schools-intro { grid-template-columns:1fr; gap:28px; }
+  .school-grid { grid-template-columns:1fr; }
+  .school-card { min-height:210px; }
+  .school-note { text-align:left; }
+  .video-intro { grid-template-columns:1fr; gap:28px; }
+  footer { grid-template-columns:1fr; text-align:center; }
+  footer p:nth-child(2),footer p:last-child { text-align:center; }
+  .footer-brand { justify-content:center; }
+}
+
+@media (max-width:520px) {
+  .brand-copy { display:none; }
+  .hero-actions { align-items:flex-start; flex-direction:column; gap:12px; }
+  .hero-intro br { display:none; }
+  .portrait-card { height:430px; }
+  .contact-card { padding:30px 24px; }
+}
+
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none!important; } }
