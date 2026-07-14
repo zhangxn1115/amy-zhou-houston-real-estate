@@ -12,7 +12,7 @@ html = html.replace(/<script(?![^>]*type="application\/ld\+json")[^>]*>[\s\S]*?<
 html = html.replace(/<link[^>]*rel="modulepreload"[^>]*\/?>/g, "");
 html = html.replace(
   /<link rel="stylesheet" href="\/app\/globals\.css"[^>]*>/,
-  '<link rel="stylesheet" href="./assets/site.css"/>'
+  '<link rel="stylesheet" href="./assets/site.css?v=20260714-2"/>'
 );
 html = html.replaceAll("https://127.0.0.1:3000", siteUrl);
 html = html.replaceAll('href="/favicon.svg"', 'href="./favicon.svg"');
