@@ -29,8 +29,14 @@ function securityPolicy(url: URL, nonce?: string): string {
   const scriptSources = nonce
     ? [`'nonce-${nonce}'`, "'strict-dynamic'", "'self'"]
     : ["'self'", "'unsafe-inline'"];
+  scriptSources.push("https://www.googletagmanager.com");
   const styleSources = nonce ? ["'self'", `'nonce-${nonce}'`] : ["'self'", "'unsafe-inline'"];
-  const connectSources = ["'self'"];
+  const connectSources = [
+    "'self'",
+    "https://www.google-analytics.com",
+    "https://region1.google-analytics.com",
+    "https://analytics.google.com",
+  ];
 
   if (isLocal) {
     scriptSources.push("'unsafe-eval'");
@@ -42,7 +48,7 @@ function securityPolicy(url: URL, nonce?: string): string {
     "default-src 'self'",
     `script-src ${scriptSources.join(" ")}`,
     `style-src ${styleSources.join(" ")}`,
-    "img-src 'self' data: blob:",
+    "img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com",
     "font-src 'self' data:",
     `connect-src ${connectSources.join(" ")}`,
     "frame-src https://www.youtube.com https://www.youtube-nocookie.com",

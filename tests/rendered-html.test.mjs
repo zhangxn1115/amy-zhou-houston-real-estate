@@ -35,11 +35,14 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(policy, /object-src 'none'/);
   assert.match(policy, /frame-ancestors 'none'/);
   assert.match(policy, /frame-src https:\/\/www\.youtube\.com https:\/\/www\.youtube-nocookie\.com/);
+  assert.match(policy, /https:\/\/www\.googletagmanager\.com/);
+  assert.match(policy, /https:\/\/www\.google-analytics\.com/);
 
   const html = await response.text();
   assert.match(html, /<title>休斯顿房产经纪 Amy Zhou/);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
   assert.match(html, /application\/ld\+json/);
+  assert.match(html, /src="\/analytics\.js"/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 

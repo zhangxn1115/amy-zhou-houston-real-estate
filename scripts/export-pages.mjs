@@ -24,9 +24,12 @@ html = html.replaceAll('src="/areas/', 'src="./areas/');
 html = html.replace(/ nonce="[^"]+"/g, "");
 html = html.replace(
   '<meta charSet="utf-8"/>',
-  '<meta charSet="utf-8"/><meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\'; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data:; font-src \'self\' data:; connect-src \'self\'; frame-src https://www.youtube-nocookie.com; object-src \'none\'; base-uri \'self\'; form-action \'self\'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin">'
+  '<meta charSet="utf-8"/><meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\' https://www.googletagmanager.com; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src \'self\' data:; connect-src \'self\' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src \'none\'; base-uri \'self\'; form-action \'self\'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin">'
 );
-html = html.replace("</head>", '<script src="./locale.js" defer></script></head>');
+html = html.replace(
+  "</head>",
+  '<script src="./analytics.js" defer></script><script src="./locale.js" defer></script></head>'
+);
 
 await writeFile(outputPath, html);
 console.log(`Exported ${outputPath} for ${siteUrl}/`);

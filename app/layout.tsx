@@ -65,6 +65,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="zh-CN">
+      <head>
+        <script src="/analytics.js" defer />
+      </head>
       <body>
         <StructuredData />
         {children}
