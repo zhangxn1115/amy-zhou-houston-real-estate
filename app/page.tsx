@@ -67,7 +67,6 @@ export default function Home() {
     <main id="main-content">
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Amy Zhou 首页">
-          <span className="brand-mark">AZ</span>
           <span className="brand-copy"><strong>AMY ZHOU</strong><small>HOUSTON REAL ESTATE</small></span>
         </a>
         <div className="header-contact-block">
