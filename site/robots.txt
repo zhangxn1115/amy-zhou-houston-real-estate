@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zhangxn1115.github.io/amy-zhou-houston-real-estate/sitemap.xml
