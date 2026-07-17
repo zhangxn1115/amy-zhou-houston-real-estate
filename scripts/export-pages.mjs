@@ -3,6 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 const sourcePath = process.argv[2] ?? "/tmp/amy-index.html";
 const outputPath = process.argv[3] ?? "site/index.html";
 const siteUrl = "https://amyzhouhomes.net";
+const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20260717-1"/>';
 
 let html = await readFile(sourcePath, "utf8");
 
@@ -10,10 +11,7 @@ let html = await readFile(sourcePath, "utf8");
 // server-navigation payload. GitHub Pages serves this site as static HTML.
 html = html.replace(/<script(?![^>]*type="application\/ld\+json")[^>]*>[\s\S]*?<\/script>/g, "");
 html = html.replace(/<link[^>]*rel="modulepreload"[^>]*\/?>/g, "");
-html = html.replace(
-  /<link rel="stylesheet" href="\/app\/globals\.css"[^>]*>/,
-  '<link rel="stylesheet" href="./assets/site.css?v=20260714-2"/>'
-);
+html = html.replace(/<link[^>]*rel="stylesheet"[^>]*\/?>/g, "");
 html = html.replaceAll("https://127.0.0.1:3000", siteUrl);
 html = html.replaceAll('href="/favicon.svg"', 'href="./favicon.svg"');
 html = html.replaceAll('href="/amy-zhou.jpg"', 'href="./amy-zhou.jpg"');
@@ -29,8 +27,12 @@ html = html.replace(
 );
 html = html.replace(
   "</head>",
-  '<script src="./analytics.js" defer></script><script src="./locale.js" defer></script></head>'
+  `${staticStylesheet}<script src="./analytics.js" defer></script><script src="./locale.js" defer></script></head>`
 );
+
+if (!html.includes(staticStylesheet) || /href="\/assets\/index-[^"]+\.css"/.test(html)) {
+  throw new Error("Static stylesheet export failed");
+}
 
 await writeFile(outputPath, html);
 console.log(`Exported ${outputPath} for ${siteUrl}/`);
