@@ -48,6 +48,8 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /中文沟通｜休斯顿自住、投资、优质学区与社区置业服务/);
   assert.doesNotMatch(html, /href="tel:/);
   assert.match(html, /href="mailto:ningimeng12@gmail\.com"/);
+  assert.match(html, /youtube-nocookie\.com\/embed\/videoseries\?list=UU1ymf6PCQwnLL8-ETiPteHw/);
+  assert.doesNotMatch(html, /youtube-nocookie\.com\/embed\/vpIqfneYAhk/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
 
