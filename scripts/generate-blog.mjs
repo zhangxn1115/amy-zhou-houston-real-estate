@@ -42,6 +42,13 @@ function parseFrontmatter(source, filename) {
       continue;
     }
 
+    if (!value.startsWith('"') && !value.startsWith("'")) {
+      while (index + 1 < lines.length && /^\s+\S/.test(lines[index + 1]) && !/^\s+[A-Za-z0-9_]+:\s*/.test(lines[index + 1])) {
+        index += 1;
+        value += ` ${lines[index].trim()}`;
+      }
+    }
+
     if (value.startsWith('"') && value.endsWith('"')) {
       try { value = JSON.parse(value); } catch { value = value.slice(1, -1); }
     } else if (value.startsWith("'") && value.endsWith("'")) {
@@ -190,6 +197,11 @@ function textExcerpt(content) {
     .replace(/\s+/g, " ")
     .trim()
     .slice(0, 150);
+}
+
+function displayExcerpt(value, limit = 50) {
+  const characters = Array.from(String(value).trim());
+  return characters.length <= limit ? characters.join("") : `${characters.slice(0, limit - 1).join("")}…`;
 }
 
 function readingMinutes(content) {
@@ -390,7 +402,7 @@ function renderArticle(post) {
       <header class="article-header">
         <p class="article-category">${escapeHtml(post.category)}</p>
         <h1>${escapeHtml(post.title)}</h1>
-        <p class="article-deck">${escapeHtml(post.excerpt)}</p>
+        <p class="article-deck">${escapeHtml(displayExcerpt(post.excerpt))}</p>
         <div class="article-meta"><span>Amy Zhou</span><time datetime="${post.dateIso}">${post.dateLabel}</time><span>${post.readingMinutes} 分钟阅读</span></div>
       </header>
       <figure class="article-cover"><img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="1200" height="675"></figure>

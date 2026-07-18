@@ -6,10 +6,10 @@ const read = (path) => readFile(new URL(path, import.meta.url), "utf8");
 
 test("generates the blog index and SEO-ready article", async () => {
   const index = await read("../site/blog/index.html");
-  const article = await read("../site/blog/2026-07-18-houston-homebuying-first-steps/index.html");
+  const article = await read("../site/blog/2026-07-18-sugar-land-ryehill-price/index.html");
   const sitemap = await read("../site/sitemap.xml");
 
-  assert.match(index, /第一次在休斯顿买房：先理清这 6 件事/);
+  assert.match(index, /Sugar Land RYEHILL小区最新房源信息/);
   assert.match(index, /rel="canonical" href="https:\/\/amyzhouhomes\.net\/blog\/"/);
   assert.match(index, /\/assets\/blog\.css\?v=20260718-1/);
   assert.match(index, /Content-Security-Policy/);
@@ -20,9 +20,12 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(article, /class="article-author-qr"/);
   assert.match(article, /Amy Zhou 微信二维码/);
   assert.match(article, /wechat-qr\.jpg/);
+  const articleDeck = article.match(/<p class="article-deck">([^<]*)<\/p>/)?.[1] ?? "";
+  assert.ok(articleDeck.length > 0);
+  assert.ok(Array.from(articleDeck).length <= 50);
   assert.doesNotMatch(article, /NEXT STEP|把信息变成适合您的选择/);
   assert.doesNotMatch(article, /<script>alert\(/);
-  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-18-houston-homebuying-first-steps\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-18-sugar-land-ryehill-price\//);
 });
 
 test("ships a pinned Decap CMS admin configuration", async () => {
