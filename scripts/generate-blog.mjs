@@ -396,10 +396,11 @@ function renderArticle(post) {
       <figure class="article-cover"><img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="1200" height="675"></figure>
       <div class="article-layout">
         <aside class="article-author">
-          <img src="/amy-zhou.jpg" alt="休斯顿房产经纪 Amy Zhou" width="1280" height="1920">
+          <img class="article-author-photo" src="/amy-zhou.jpg" alt="休斯顿房产经纪 Amy Zhou" width="1280" height="1920">
           <strong>Amy Zhou</strong>
           <span>休斯顿房产经纪</span>
-          <small>License No. 839083</small>
+          <div class="article-author-qr"><img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830"><small>微信扫码咨询</small></div>
+          <small class="article-author-license">License No. 839083</small>
         </aside>
         <div class="article-body">${post.body}${videoLink}
           <div class="article-disclaimer">本文用于提供一般市场与社区信息，不构成法律、税务、贷款或投资建议。房源、学区边界与市场数据可能变化，请以相关机构及交易时的最新资料为准。</div>
