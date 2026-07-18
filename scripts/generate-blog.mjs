@@ -425,7 +425,7 @@ function renderArticle(post) {
       <header class="article-header">
         <p class="article-category">${escapeHtml(post.category)}</p>
         <h1>${escapeHtml(post.title)}</h1>
-        <p class="article-deck">${escapeHtml(displayExcerpt(post.excerpt))}</p>
+        <p class="article-deck">${escapeHtml(post.excerpt)}</p>
         <div class="article-meta"><span>Amy Zhou</span><time datetime="${post.dateIso}">${post.dateLabel}</time><span>${post.readingMinutes} 分钟阅读</span></div>
       </header>
       <figure class="article-cover"><img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="1200" height="675"></figure>

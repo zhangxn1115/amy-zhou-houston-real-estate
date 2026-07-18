@@ -26,7 +26,8 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(article, /"inLanguage":"zh-CN"/);
   const articleDeck = article.match(/<p class="article-deck">([^<]*)<\/p>/)?.[1] ?? "";
   assert.ok(articleDeck.length > 0);
-  assert.ok(Array.from(articleDeck).length <= 50);
+  assert.match(articleDeck, /整理最新房源和优惠，陪你一起实地看房/);
+  assert.doesNotMatch(articleDeck, /…$/);
   assert.doesNotMatch(article, /NEXT STEP|把信息变成适合您的选择/);
   assert.doesNotMatch(article, /<script>alert\(/);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-18-sugar-land-ryehill-price\//);
