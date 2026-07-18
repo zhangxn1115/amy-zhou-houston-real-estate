@@ -1,8 +1,6 @@
 import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import matter from "gray-matter";
-import MarkdownIt from "markdown-it";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentDirectory = path.join(root, "content", "blog");
@@ -12,24 +10,6 @@ const blogDirectory = path.join(siteDirectory, "blog");
 const siteMediaDirectory = path.join(siteDirectory, "blog-media");
 const origin = "https://amyzhouhomes.net";
 
-const markdown = new MarkdownIt({
-  html: false,
-  linkify: true,
-  typographer: false,
-});
-
-const externalLinkOpen = markdown.renderer.rules.link_open
-  ?? ((tokens, index, options, _environment, renderer) => renderer.renderToken(tokens, index, options));
-
-markdown.renderer.rules.link_open = (tokens, index, options, environment, renderer) => {
-  const href = tokens[index].attrGet("href") ?? "";
-  if (/^https?:\/\//i.test(href)) {
-    tokens[index].attrSet("target", "_blank");
-    tokens[index].attrSet("rel", "noopener noreferrer");
-  }
-  return externalLinkOpen(tokens, index, options, environment, renderer);
-};
-
 function escapeHtml(value = "") {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -37,6 +17,143 @@ function escapeHtml(value = "") {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function parseFrontmatter(source, filename) {
+  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (!match) throw new Error(`Missing frontmatter in ${filename}`);
+
+  const data = {};
+  const lines = match[1].split(/\r?\n/);
+  for (let index = 0; index < lines.length; index += 1) {
+    const property = lines[index].match(/^([A-Za-z0-9_]+):\s*(.*)$/);
+    if (!property) continue;
+    const [, key, rawValue] = property;
+    let value = rawValue.trim();
+
+    if (/^[>|][+-]?$/.test(value)) {
+      const folded = value.startsWith(">");
+      const parts = [];
+      while (index + 1 < lines.length && /^(?:\s{2,}|\t)/.test(lines[index + 1])) {
+        index += 1;
+        parts.push(lines[index].replace(/^(?:\s{2}|\t)/, ""));
+      }
+      data[key] = parts.join(folded ? " " : "\n").trim();
+      continue;
+    }
+
+    if (value.startsWith('"') && value.endsWith('"')) {
+      try { value = JSON.parse(value); } catch { value = value.slice(1, -1); }
+    } else if (value.startsWith("'") && value.endsWith("'")) {
+      value = value.slice(1, -1).replaceAll("''", "'");
+    } else if (value === "true" || value === "false") {
+      value = value === "true";
+    } else if (value === "null" || value === "~") {
+      value = null;
+    }
+    data[key] = value;
+  }
+
+  return { data, content: source.slice(match[0].length) };
+}
+
+function renderInline(value) {
+  const renderText = (text) => escapeHtml(text)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  const linkPattern = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+  let output = "";
+  let cursor = 0;
+
+  for (const match of value.matchAll(linkPattern)) {
+    output += renderText(value.slice(cursor, match.index));
+    const href = match[2];
+    if (/^(?:https?:\/\/|\/|#)/i.test(href) && !href.includes("..")) {
+      const external = /^https?:\/\//i.test(href);
+      output += `<a href="${escapeHtml(href)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ""}>${renderText(match[1])}</a>`;
+    } else {
+      output += renderText(match[0]);
+    }
+    cursor = match.index + match[0].length;
+  }
+  return output + renderText(value.slice(cursor));
+}
+
+function renderMarkdown(source) {
+  const lines = source.replace(/\r\n/g, "\n").split("\n");
+  const output = [];
+  let paragraph = [];
+  let listType = "";
+  let listItems = [];
+
+  const flushParagraph = () => {
+    if (paragraph.length) output.push(`<p>${renderInline(paragraph.join(" "))}</p>`);
+    paragraph = [];
+  };
+  const flushList = () => {
+    if (listItems.length) output.push(`<${listType}>${listItems.map((item) => `<li>${renderInline(item)}</li>`).join("")}</${listType}>`);
+    listType = "";
+    listItems = [];
+  };
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const line = lines[index];
+    if (!line.trim()) {
+      flushParagraph();
+      flushList();
+      continue;
+    }
+
+    const fence = line.match(/^```([A-Za-z0-9_-]*)\s*$/);
+    if (fence) {
+      flushParagraph();
+      flushList();
+      const code = [];
+      while (index + 1 < lines.length && !/^```\s*$/.test(lines[index + 1])) {
+        index += 1;
+        code.push(lines[index]);
+      }
+      if (index + 1 < lines.length) index += 1;
+      output.push(`<pre><code${fence[1] ? ` class="language-${escapeHtml(fence[1])}"` : ""}>${escapeHtml(code.join("\n"))}</code></pre>`);
+      continue;
+    }
+
+    const heading = line.match(/^(#{2,4})\s+(.+)$/);
+    if (heading) {
+      flushParagraph();
+      flushList();
+      const level = heading[1].length;
+      output.push(`<h${level}>${renderInline(heading[2])}</h${level}>`);
+      continue;
+    }
+
+    const unordered = line.match(/^[-*]\s+(.+)$/);
+    const ordered = line.match(/^\d+\.\s+(.+)$/);
+    if (unordered || ordered) {
+      flushParagraph();
+      const nextType = unordered ? "ul" : "ol";
+      if (listType && listType !== nextType) flushList();
+      listType = nextType;
+      listItems.push((unordered ?? ordered)[1]);
+      continue;
+    }
+
+    const quote = line.match(/^>\s?(.+)$/);
+    if (quote) {
+      flushParagraph();
+      flushList();
+      output.push(`<blockquote><p>${renderInline(quote[1])}</p></blockquote>`);
+      continue;
+    }
+
+    flushList();
+    paragraph.push(line.trim());
+  }
+
+  flushParagraph();
+  flushList();
+  return output.join("\n");
 }
 
 function safeAssetUrl(value, fallback = "/og.png") {
@@ -159,7 +276,7 @@ async function loadPosts() {
 
   for (const filename of filenames) {
     const source = await readFile(path.join(contentDirectory, filename), "utf8");
-    const { data, content } = matter(source);
+    const { data, content } = parseFrontmatter(source, filename);
     if (data.draft === true) continue;
 
     const slug = normalizeSlug(filename);
@@ -184,7 +301,7 @@ async function loadPosts() {
       updatedIso: updated.toISOString(),
       dateLabel: displayDate(date),
       readingMinutes: readingMinutes(content),
-      body: markdown.render(content),
+      body: renderMarkdown(content),
     });
   }
 
