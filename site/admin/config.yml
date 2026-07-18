@@ -1,0 +1,109 @@
+backend:
+  name: github
+  repo: zhangxn1115/amy-zhou-houston-real-estate
+  branch: main
+  use_graphql: true
+  site_domain: amyzhouhomes.net
+
+local_backend: true
+publish_mode: simple
+site_url: https://amyzhouhomes.net
+display_url: https://amyzhouhomes.net
+logo_url: https://amyzhouhomes.net/amy-zhou-homes-logo.png
+media_folder: public/blog-media
+public_folder: /blog-media
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: blog
+    label: 房产博客
+    label_singular: 博客文章
+    folder: content/blog
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
+    preview_path: "blog/{{slug}}/"
+    summary: "{{title}} · {{date}}"
+    sortable_fields:
+      fields: [date, title, category]
+      default:
+        field: date
+        direction: Descending
+    view_filters:
+      - label: 草稿
+        field: draft
+        pattern: true
+      - label: 房市动态
+        field: category
+        pattern: 房市动态
+      - label: 社区指南
+        field: category
+        pattern: 社区指南
+      - label: 学区分析
+        field: category
+        pattern: 学区分析
+    fields:
+      - label: 文章标题
+        name: title
+        widget: string
+        hint: 建议控制在 30 个中文字符以内
+      - label: 英文网址名
+        name: slug
+        widget: string
+        pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', '请使用小写英文字母、数字和短横线，例如 katy-home-guide']
+        hint: 用于文章网址，发布后尽量不要修改
+      - label: 发布日期
+        name: date
+        widget: datetime
+        date_format: YYYY-MM-DD
+        time_format: HH:mm
+        format: YYYY-MM-DDTHH:mm:ssZ
+      - label: 更新日期
+        name: updated
+        widget: datetime
+        required: false
+        date_format: YYYY-MM-DD
+        time_format: HH:mm
+        format: YYYY-MM-DDTHH:mm:ssZ
+      - label: 文章分类
+        name: category
+        widget: select
+        options: [房市动态, 社区指南, 学区分析, 新房探访, 买房指南, 投资知识]
+        default: 买房指南
+      - label: 简短简介
+        name: excerpt
+        widget: text
+        hint: 用于博客列表、Google 搜索和社交分享，建议 60–100 个中文字符
+      - label: 封面图片
+        name: cover
+        widget: image
+        choose_url: false
+        media_library:
+          config:
+            multiple: false
+      - label: 封面图片说明
+        name: cover_alt
+        widget: string
+        hint: 描述图片内容，有助于无障碍访问与图片搜索
+      - label: YouTube 视频链接
+        name: youtube
+        widget: string
+        required: false
+      - label: 设为推荐文章
+        name: featured
+        widget: boolean
+        default: false
+      - label: 保存为草稿
+        name: draft
+        widget: boolean
+        default: false
+        hint: 开启后文章不会出现在公开网站
+      - label: 正文
+        name: body
+        widget: markdown

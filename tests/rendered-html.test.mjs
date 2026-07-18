@@ -49,6 +49,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.doesNotMatch(html, /href="tel:/);
   assert.match(html, /href="mailto:ningimeng12@gmail\.com"/);
   assert.match(html, /youtube-nocookie\.com\/embed\/videoseries\?list=UU1ymf6PCQwnLL8-ETiPteHw/);
+  assert.match(html, /href="\/blog\/">阅读房产博客/);
   assert.doesNotMatch(html, /youtube-nocookie\.com\/embed\/vpIqfneYAhk/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });

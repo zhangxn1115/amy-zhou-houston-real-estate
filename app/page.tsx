@@ -215,6 +215,18 @@ export default function Home() {
         </ol>
       </section>
 
+      <section className="blog-promo section" id="blog">
+        <div>
+          <div className="section-label">06 / 房产博客</div>
+          <p className="kicker">AMY&apos;S HOUSTON NOTES</p>
+          <h2>持续更新的休斯顿<span>房产观察。</span></h2>
+        </div>
+        <div className="blog-promo-copy">
+          <p>房市趋势、热门社区、学区信息、新房探访与买房知识，用中文整理成值得长期参考的文章。</p>
+          <a className="button button-primary" href="/blog/">阅读房产博客 <span>↗</span></a>
+        </div>
+      </section>
+
       <section className="contact section" id="contact">
         <div className="contact-copy">
           <p className="eyebrow"><span /> LET&apos;S TALK</p>

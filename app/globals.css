@@ -123,6 +123,13 @@ h2 { font-size:clamp(42px,4.4vw,68px); line-height:1.16; }
 .video-intro > p { margin:0; color:#5d706a; font-family:Georgia,"Songti SC",serif; font-size:15px; line-height:1.9; }
 .video-feature { width:100%; aspect-ratio:16/9; overflow:hidden; background:#173a32; box-shadow:0 24px 65px rgba(23,58,50,.14); }
 .video-feature iframe { display:block; width:100%; height:100%; border:0; }
+.blog-promo { display:grid; grid-template-columns:1fr .8fr; gap:11vw; align-items:end; background:#e7e2d8; }
+.blog-promo .section-label { font-size:11px; }
+.blog-promo .kicker { margin-top:52px; }
+.blog-promo h2 { font-size:clamp(36px,3.5vw,54px); }
+.blog-promo-copy { color:#60736c; font-family:Georgia,"Songti SC",serif; line-height:1.9; }
+.blog-promo-copy p { margin:0; }
+.blog-promo-copy .button { margin-top:24px; font-family:"Avenir Next","PingFang SC",sans-serif; }
 .contact { background:#d9d2c3; display:grid; grid-template-columns:1.15fr .85fr; gap:11vw; align-items:center; }
 .contact h2 { margin:30px 0; }
 .contact-copy > p:last-child { max-width:450px; color:#566a63; font-family:Georgia,"Songti SC",serif; line-height:1.9; }
@@ -162,7 +169,7 @@ footer p:last-child { text-align:right; }
   .trust-strip { height:auto; padding:32px 6vw; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
   .trust-strip i { display:none; }
   .section { padding:90px 6vw; }
-  .about,.process,.contact { grid-template-columns:1fr; }
+  .about,.process,.blog-promo,.contact { grid-template-columns:1fr; }
   .about .section-label { transform:translateY(-30px); margin-bottom:-20px; font-size:10px; }
   .about-copy { padding-top:0; }
   .section-topline { grid-template-columns:1fr; }
@@ -170,6 +177,7 @@ footer p:last-child { text-align:right; }
   .schools > .section-label { font-size:10px; }
   .process .section-label { font-size:10px; }
   .videos > .section-label { font-size:10px; }
+  .blog-promo .section-label { font-size:10px; }
   .section-topline p { margin-top:20px; }
   .service-grid { grid-template-columns:1fr; }
   .service-card { border-right:0; border-bottom:1px solid rgba(255,255,255,.18); min-height:340px; }
