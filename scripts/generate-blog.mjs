@@ -9,6 +9,16 @@ const siteDirectory = path.join(root, "site");
 const blogDirectory = path.join(siteDirectory, "blog");
 const siteMediaDirectory = path.join(siteDirectory, "blog-media");
 const origin = "https://amyzhouhomes.net";
+const seoKeywords = [
+  "休斯顿华人房产经纪",
+  "华人房产经纪",
+  "休斯顿买房",
+  "休斯顿购房",
+  "休斯顿新房",
+  "休斯顿看房",
+  "休斯顿二手房",
+  "Amy Zhou",
+];
 
 function escapeHtml(value = "") {
   return String(value)
@@ -204,6 +214,14 @@ function displayExcerpt(value, limit = 50) {
   return characters.length <= limit ? characters.join("") : `${characters.slice(0, limit - 1).join("")}…`;
 }
 
+function articleSeoDescription(excerpt) {
+  const candidate = Array.from(String(excerpt).trim()).slice(0, 72).join("");
+  const punctuationIndex = Math.max(...["。", "！", "？", "，", ".", "!", "?", ","].map((mark) => candidate.lastIndexOf(mark)));
+  const lead = (punctuationIndex >= 40 ? candidate.slice(0, punctuationIndex + 1) : displayExcerpt(candidate, 72)).replace(/[，,]$/, "。");
+  const separator = lead && !/[。！？.!?]$/.test(lead) ? "。" : "";
+  return `${lead}${separator}Amy Zhou 是休斯顿华人房产经纪，提供休斯顿买房、休斯顿购房、休斯顿新房、休斯顿看房及休斯顿二手房中文服务。`;
+}
+
 function readingMinutes(content) {
   const chineseCharacters = (content.match(/[\u3400-\u9fff]/g) ?? []).length;
   const latinWords = (content.replace(/[\u3400-\u9fff]/g, " ").match(/[A-Za-z0-9]+/g) ?? []).length;
@@ -227,7 +245,7 @@ function localeButton() {
   return '<button type="button" class="locale-toggle" data-locale-control="true" aria-label="切换为繁体中文"><span class="active">简</span><i></i><span>繁</span></button>';
 }
 
-function pageHead({ title, description, canonical, image, type = "website" }) {
+function pageHead({ title, description, canonical, image, type = "website", keywords = seoKeywords }) {
   const safeTitle = escapeHtml(title);
   const safeDescription = escapeHtml(description);
   const imageUrl = escapeHtml(absoluteUrl(image));
@@ -240,6 +258,7 @@ function pageHead({ title, description, canonical, image, type = "website" }) {
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>${safeTitle}</title>
   <meta name="description" content="${safeDescription}">
+  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="${escapeHtml(canonical)}">
   <meta property="og:type" content="${type}">
@@ -254,7 +273,7 @@ function pageHead({ title, description, canonical, image, type = "website" }) {
   <meta name="twitter:description" content="${safeDescription}">
   <meta name="twitter:image" content="${imageUrl}">
   <link rel="icon" href="/favicon.svg">
-  <link rel="stylesheet" href="/assets/blog.css?v=20260718-1">
+  <link rel="stylesheet" href="/assets/blog.css?v=20260718-2">
   <script src="/analytics.js" defer></script>
   <script src="/locale.js" defer></script>
 </head>`;
@@ -369,6 +388,7 @@ function renderIndex(posts) {
 
 function renderArticle(post) {
   const canonical = `${origin}/blog/${post.slug}/`;
+  const seoDescription = articleSeoDescription(post.excerpt);
   const videoLink = post.youtube
     ? `<p class="article-video-link"><a href="${escapeHtml(post.youtube)}" target="_blank" rel="noopener noreferrer">观看相关 YouTube 视频 <span>↗</span></a></p>`
     : "";
@@ -376,7 +396,10 @@ function renderArticle(post) {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
-    description: post.excerpt,
+    description: seoDescription,
+    keywords: seoKeywords,
+    articleSection: post.category,
+    inLanguage: "zh-CN",
     image: absoluteUrl(post.cover),
     datePublished: post.dateIso,
     dateModified: post.updatedIso,
@@ -387,7 +410,7 @@ function renderArticle(post) {
 
   return `${pageHead({
     title: `${post.title}｜Amy Zhou 休斯顿房产博客`,
-    description: post.excerpt,
+    description: seoDescription,
     canonical,
     image: post.cover,
     type: "article",
@@ -408,10 +431,10 @@ function renderArticle(post) {
       <figure class="article-cover"><img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="1200" height="675"></figure>
       <div class="article-layout">
         <aside class="article-author">
-          <img class="article-author-photo" src="/amy-zhou.jpg" alt="休斯顿房产经纪 Amy Zhou" width="1280" height="1920">
+          <img class="article-author-photo" src="/amy-zhou.jpg" alt="休斯顿房产经纪 Amy Zhou" width="1280" height="1920" loading="lazy" decoding="async">
           <strong>Amy Zhou</strong>
           <span>休斯顿房产经纪</span>
-          <div class="article-author-qr"><img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830"><small>微信扫码咨询</small></div>
+          <div class="article-author-qr"><img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" loading="lazy" decoding="async"><small>微信扫码咨询</small></div>
           <small class="article-author-license">License No. 839083</small>
         </aside>
         <div class="article-body">${post.body}${videoLink}

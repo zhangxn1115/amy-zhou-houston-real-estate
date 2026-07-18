@@ -1,0 +1,11 @@
+{
+  "name": "amy-zhou-blog-tools",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.9"
+  },
+  "dependencies": {
+    "sharp": "0.35.3"
+  }
+}

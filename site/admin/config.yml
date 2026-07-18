@@ -14,6 +14,9 @@ display_url: https://amyzhouhomes.net
 logo_url: https://amyzhouhomes.net/amy-zhou-homes-logo.png
 media_folder: public/blog-media
 public_folder: /blog-media
+media_library:
+  config:
+    max_file_size: 12582912
 
 slug:
   encoding: ascii
@@ -85,6 +88,7 @@ collections:
         media_library:
           config:
             multiple: false
+            max_file_size: 12582912
       - label: 封面图片说明
         name: cover_alt
         widget: string

@@ -27,8 +27,14 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 24
+      - name: Install pnpm
+        run: npm install --global pnpm@11.9.0
+      - name: Install image optimizer
+        run: pnpm install --dir blog-tools --ignore-workspace --frozen-lockfile
       - name: Generate blog
         run: node scripts/generate-blog.mjs
+      - name: Optimize uploaded images
+        run: node blog-tools/optimize-images.mjs
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
