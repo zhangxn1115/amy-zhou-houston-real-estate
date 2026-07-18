@@ -1,0 +1,8 @@
+name = "amy-zhou-cms-auth"
+main = "worker.js"
+compatibility_date = "2026-07-18"
+workers_dev = false
+route = { pattern = "cms-auth.amyzhouhomes.net", zone_name = "amyzhouhomes.net", custom_domain = true }
+
+[vars]
+GITHUB_REPO_PRIVATE = "0"

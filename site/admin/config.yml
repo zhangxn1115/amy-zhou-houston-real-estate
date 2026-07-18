@@ -4,6 +4,8 @@ backend:
   branch: main
   use_graphql: true
   site_domain: amyzhouhomes.net
+  base_url: https://cms-auth.amyzhouhomes.net
+  auth_endpoint: /auth
 
 local_backend: true
 publish_mode: simple

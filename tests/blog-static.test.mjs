@@ -28,6 +28,8 @@ test("ships a pinned Decap CMS admin configuration", async () => {
   assert.match(admin, /decap-cms@3\.14\.1/);
   assert.match(admin, /noindex, nofollow/);
   assert.match(config, /repo: zhangxn1115\/amy-zhou-houston-real-estate/);
+  assert.match(config, /base_url: https:\/\/cms-auth\.amyzhouhomes\.net/);
+  assert.match(config, /auth_endpoint: \/auth/);
   assert.match(config, /media_folder: public\/blog-media/);
   assert.match(config, /folder: content\/blog/);
   assert.match(config, /sortable_fields: \[date, title, category\]/);
