@@ -30,11 +30,7 @@ collections:
     slug: "{{year}}-{{month}}-{{day}}-{{fields.slug}}"
     preview_path: "blog/{{slug}}/"
     summary: "{{title}} · {{date}}"
-    sortable_fields:
-      fields: [date, title, category]
-      default:
-        field: date
-        direction: Descending
+    sortable_fields: [date, title, category]
     view_filters:
       - label: 草稿
         field: draft

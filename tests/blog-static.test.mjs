@@ -30,5 +30,6 @@ test("ships a pinned Decap CMS admin configuration", async () => {
   assert.match(config, /repo: zhangxn1115\/amy-zhou-houston-real-estate/);
   assert.match(config, /media_folder: public\/blog-media/);
   assert.match(config, /folder: content\/blog/);
+  assert.match(config, /sortable_fields: \[date, title, category\]/);
   assert.match(config, /slug: "\{\{year\}\}-\{\{month\}\}-\{\{day\}\}-\{\{fields\.slug\}\}"/);
 });
