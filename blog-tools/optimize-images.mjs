@@ -21,12 +21,13 @@ async function collectFiles(directory) {
 async function optimizeImage(filename) {
   const extension = path.extname(filename).toLowerCase();
   const before = (await stat(filename)).size;
-  let pipeline = sharp(await readFile(filename), { failOn: "warning" })
+  const input = await readFile(filename);
+  let pipeline = sharp(input, { failOn: "warning" })
     .autoOrient()
-    .resize({ width: 1800, height: 1800, fit: "inside", withoutEnlargement: true });
+    .resize({ width: 1600, height: 1600, fit: "inside", withoutEnlargement: true });
 
   if (extension === ".jpg" || extension === ".jpeg") {
-    pipeline = pipeline.jpeg({ quality: 78, mozjpeg: true });
+    pipeline = pipeline.jpeg({ quality: 72, mozjpeg: true });
   } else if (extension === ".png") {
     pipeline = pipeline.png({ compressionLevel: 9, palette: true, quality: 85 });
   } else if (extension === ".webp") {
@@ -39,6 +40,17 @@ async function optimizeImage(filename) {
   if (optimized.length < before) await writeFile(filename, optimized);
   const after = Math.min(before, optimized.length);
   console.log(`${path.relative(root, filename)}: ${Math.round(before / 1024)} KB -> ${Math.round(after / 1024)} KB`);
+
+  if (![".webp", ".avif"].includes(extension)) {
+    const webpFilename = filename.slice(0, -extension.length) + ".webp";
+    const webp = await sharp(input, { failOn: "warning" })
+      .autoOrient()
+      .resize({ width: 1400, height: 1400, fit: "inside", withoutEnlargement: true })
+      .webp({ quality: 70, effort: 5 })
+      .toBuffer();
+    await writeFile(webpFilename, webp);
+    console.log(`${path.relative(root, webpFilename)}: ${Math.round(webp.length / 1024)} KB`);
+  }
 }
 
 const files = await collectFiles(mediaDirectory);

@@ -1,4 +1,5 @@
 import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -9,6 +10,7 @@ const siteDirectory = path.join(root, "site");
 const blogDirectory = path.join(siteDirectory, "blog");
 const siteMediaDirectory = path.join(siteDirectory, "blog-media");
 const origin = "https://amyzhouhomes.net";
+let blogCss = "";
 const seoKeywords = [
   "休斯顿华人房产经纪",
   "华人房产经纪",
@@ -180,6 +182,10 @@ function safeAssetUrl(value, fallback = "/og.png") {
   return fallback;
 }
 
+function webCoverUrl(value) {
+  return /^\/blog-media\/.+\.(?:jpe?g|png)$/i.test(value) ? value.replace(/\.(?:jpe?g|png)$/i, ".webp") : "";
+}
+
 function safeVideoUrl(value) {
   const candidate = typeof value === "string" ? value.trim() : "";
   return /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//i.test(candidate) ? candidate : "";
@@ -245,16 +251,18 @@ function localeButton() {
   return '<button type="button" class="locale-toggle" data-locale-control="true" aria-label="切换为繁体中文"><span class="active">简</span><i></i><span>繁</span></button>';
 }
 
-function pageHead({ title, description, canonical, image, type = "website", keywords = seoKeywords }) {
+function pageHead({ title, description, canonical, image, type = "website", keywords = seoKeywords, preloadImage = "" }) {
   const safeTitle = escapeHtml(title);
   const safeDescription = escapeHtml(description);
   const imageUrl = escapeHtml(absoluteUrl(image));
+  const inlineCss = blogCss.replaceAll("</style", "<\\/style");
+  const styleHash = createHash("sha256").update(inlineCss).digest("base64");
   return `<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'sha256-${styleHash}'; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>${safeTitle}</title>
   <meta name="description" content="${safeDescription}">
@@ -273,7 +281,7 @@ function pageHead({ title, description, canonical, image, type = "website", keyw
   <meta name="twitter:description" content="${safeDescription}">
   <meta name="twitter:image" content="${imageUrl}">
   <link rel="icon" href="/favicon.svg">
-  <link rel="stylesheet" href="/assets/blog.css?v=20260718-2">
+${preloadImage ? `  <link rel="preload" href="${escapeHtml(preloadImage)}" as="image" fetchpriority="high">\n` : ""}  <style>${inlineCss}</style>
   <script src="/analytics.js" defer></script>
   <script src="/locale.js" defer></script>
 </head>`;
@@ -341,9 +349,11 @@ async function loadPosts() {
 
 function renderCards(posts) {
   if (!posts.length) return '<p class="blog-empty">第一篇文章正在准备中，欢迎稍后再来。</p>';
-  return posts.map((post) => `<article class="blog-card">
+  return posts.map((post) => {
+    const webCover = webCoverUrl(post.cover);
+    return `<article class="blog-card">
     <a class="blog-card-image" href="/blog/${post.slug}/">
-      <img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" loading="lazy" decoding="async">
+      <picture>${webCover ? `<source srcset="${escapeHtml(webCover)}" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" loading="lazy" decoding="async"></picture>
     </a>
     <div class="blog-card-copy">
       <p class="blog-card-meta"><span>${escapeHtml(post.category)}</span><time datetime="${post.dateIso}">${post.dateLabel}</time></p>
@@ -351,7 +361,8 @@ function renderCards(posts) {
       <p>${escapeHtml(post.excerpt)}</p>
       <a class="blog-read-link" href="/blog/${post.slug}/">阅读全文 <span>↗</span></a>
     </div>
-  </article>`).join("\n");
+  </article>`;
+  }).join("\n");
 }
 
 function renderIndex(posts) {
@@ -389,6 +400,7 @@ function renderIndex(posts) {
 function renderArticle(post) {
   const canonical = `${origin}/blog/${post.slug}/`;
   const seoDescription = articleSeoDescription(post.excerpt);
+  const webCover = webCoverUrl(post.cover);
   const videoLink = post.youtube
     ? `<p class="article-video-link"><a href="${escapeHtml(post.youtube)}" target="_blank" rel="noopener noreferrer">观看相关 YouTube 视频 <span>↗</span></a></p>`
     : "";
@@ -414,6 +426,7 @@ function renderArticle(post) {
     canonical,
     image: post.cover,
     type: "article",
+    preloadImage: webCover || post.cover,
   })}
 <body>
   <script type="application/ld+json">${structuredData}</script>
@@ -428,7 +441,7 @@ function renderArticle(post) {
         <p class="article-deck">${escapeHtml(post.excerpt)}</p>
         <div class="article-meta"><span>Amy Zhou</span><time datetime="${post.dateIso}">${post.dateLabel}</time><span>${post.readingMinutes} 分钟阅读</span></div>
       </header>
-      <figure class="article-cover"><img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="1200" height="675"></figure>
+      <figure class="article-cover"><picture>${webCover ? `<source srcset="${escapeHtml(webCover)}" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="1200" height="675" fetchpriority="high" decoding="async"></picture></figure>
       <div class="article-layout">
         <aside class="article-author">
           <img class="article-author-photo" src="/amy-zhou.jpg" alt="休斯顿房产经纪 Amy Zhou" width="1280" height="1920" loading="lazy" decoding="async">
@@ -476,9 +489,11 @@ ${url.image ? `    <image:image>
 }
 
 async function buildBlog() {
+  blogCss = await readFile(path.join(siteDirectory, "assets", "blog.css"), "utf8");
   const posts = await loadPosts();
   await rm(blogDirectory, { recursive: true, force: true });
   await mkdir(blogDirectory, { recursive: true });
+  await rm(siteMediaDirectory, { recursive: true, force: true });
   await mkdir(siteMediaDirectory, { recursive: true });
   await cp(publicMediaDirectory, siteMediaDirectory, { recursive: true, force: true });
 
