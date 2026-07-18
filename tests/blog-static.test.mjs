@@ -17,6 +17,7 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(article, /application\/ld\+json/);
   assert.match(article, /"@type":"BlogPosting"/);
   assert.match(article, /休斯顿房产经纪 Amy Zhou/);
+  assert.doesNotMatch(article, /NEXT STEP|把信息变成适合您的选择/);
   assert.doesNotMatch(article, /<script>alert\(/);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-18-houston-homebuying-first-steps\//);
 });

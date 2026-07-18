@@ -406,7 +406,6 @@ function renderArticle(post) {
         </div>
       </div>
     </article>
-    <section class="article-cta"><div><p>NEXT STEP</p><h2>把信息变成适合您的选择。</h2></div><a href="/#contact">欢迎咨询 Amy <span>↗</span></a></section>
   </main>
   ${siteFooter()}
   ${localeButton()}

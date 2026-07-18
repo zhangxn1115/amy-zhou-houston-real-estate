@@ -14,8 +14,8 @@ a{color:inherit;text-decoration:none}
 .blog-header nav a:hover,.blog-header nav a[aria-current="page"]{border-color:var(--gold)}
 main{background:var(--paper);overflow:hidden}
 .blog-hero{min-height:480px;padding:105px 8vw 90px;background:radial-gradient(circle at 86% 20%,#dfe3d8,transparent 35%),linear-gradient(115deg,#f8f5ef,#ebe7dc);position:relative}
-.blog-eyebrow,.blog-section-heading>p,.blog-consult>div>p,.article-cta p{margin:0 0 24px;color:var(--gold);font-size:10px;font-weight:700;letter-spacing:3px}
-.blog-hero h1,.article-header h1,.blog-consult h2,.article-cta h2{margin:0;font-family:Georgia,"Songti SC",serif;font-weight:400;letter-spacing:-.045em}
+.blog-eyebrow,.blog-section-heading>p,.blog-consult>div>p{margin:0 0 24px;color:var(--gold);font-size:10px;font-weight:700;letter-spacing:3px}
+.blog-hero h1,.article-header h1,.blog-consult h2{margin:0;font-family:Georgia,"Songti SC",serif;font-weight:400;letter-spacing:-.045em}
 .blog-hero h1{font-size:clamp(54px,7vw,88px);line-height:1.03}
 .blog-hero h1 em{color:var(--gold);font-weight:400}
 .blog-hero>p:last-child{max-width:620px;margin:34px 0 0;color:#536a63;font-family:Georgia,"Songti SC",serif;font-size:17px;line-height:1.9}
@@ -37,11 +37,11 @@ main{background:var(--paper);overflow:hidden}
 .blog-card-copy>p:not(.blog-card-meta){min-height:54px;margin:0;color:#60736c;font-size:13px;line-height:1.8}
 .blog-read-link{display:inline-flex;gap:18px;margin-top:26px;padding-bottom:6px;border-bottom:1px solid rgba(157,111,73,.35);color:var(--gold);font-size:12px}
 .blog-empty{grid-column:1/-1;padding:60px 0;color:#60736c;text-align:center}
-.blog-consult,.article-cta{padding:76px 8vw;background:#d9d2c3;display:flex;align-items:center;justify-content:space-between;gap:44px}
-.blog-consult h2,.article-cta h2{font-size:40px}
+.blog-consult{padding:76px 8vw;background:#d9d2c3;display:flex;align-items:center;justify-content:space-between;gap:44px}
+.blog-consult h2{font-size:40px}
 .blog-consult>div>span{display:block;margin-top:14px;color:#536a63;font-family:Georgia,"Songti SC",serif}
-.blog-consult>a,.article-cta>a{min-width:170px;padding:18px 22px;background:var(--forest);color:#fff;text-align:center;font-size:12px}
-.blog-consult>a span,.article-cta>a span{margin-left:22px}
+.blog-consult>a{min-width:170px;padding:18px 22px;background:var(--forest);color:#fff;text-align:center;font-size:12px}
+.blog-consult>a span{margin-left:22px}
 .blog-footer{padding:42px 6vw;background:#102d26;color:#a4b5af;display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;align-items:center;font-size:9px;letter-spacing:1px}
 .blog-footer>div{display:flex;flex-direction:column;color:#fff}
 .blog-footer>div strong{font-family:Georgia,serif;font-size:15px;letter-spacing:1.5px}
@@ -81,7 +81,6 @@ main{background:var(--paper);overflow:hidden}
 .article-video-link{margin-top:45px!important}
 .article-video-link a{display:inline-block;padding:14px 18px;background:var(--forest);color:#fff;border:0}
 .article-disclaimer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:#80908a;font-family:"Avenir Next","PingFang SC",sans-serif;font-size:10px;line-height:1.8}
-.article-cta{width:calc(100% + 16vw);margin:0 -8vw -120px;margin-top:110px}
 @media(max-width:760px){
   .blog-header{height:112px;padding:34px 20px 0;align-items:center}
   .blog-logo img{width:190px;height:58px}
@@ -96,8 +95,8 @@ main{background:var(--paper);overflow:hidden}
   .blog-grid{grid-template-columns:1fr;gap:30px}
   .blog-card-copy{padding:25px 24px 28px}
   .blog-card-copy h2{font-size:25px}
-  .blog-consult,.article-cta{padding:58px 6vw;align-items:flex-start;flex-direction:column}
-  .blog-consult h2,.article-cta h2{font-size:34px}
+  .blog-consult{padding:58px 6vw;align-items:flex-start;flex-direction:column}
+  .blog-consult h2{font-size:34px}
   .blog-footer{grid-template-columns:1fr;text-align:center}
   .blog-footer>div{align-items:center}
   .blog-footer p:nth-child(2),.blog-footer p:last-child{text-align:center}
@@ -115,6 +114,5 @@ main{background:var(--paper);overflow:hidden}
   .article-author strong,.article-author span,.article-author small{grid-column:2;margin:0}
   .article-body{font-size:16px;line-height:1.95}
   .article-body h2{font-size:28px}
-  .article-cta{width:calc(100% + 12vw);margin:80px -6vw -90px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
