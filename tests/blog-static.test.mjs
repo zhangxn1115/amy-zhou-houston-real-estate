@@ -31,6 +31,8 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.doesNotMatch(article, /NEXT STEP|把信息变成适合您的选择/);
   assert.doesNotMatch(article, /<script>alert\(/);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-18-sugar-land-ryehill-price\//);
+  assert.match(sitemap, /xmlns:image="http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1"/);
+  assert.match(sitemap, /<image:loc>https:\/\/amyzhouhomes\.net\/blog-media\/_20260718140820_5_9\.jpg<\/image:loc>/);
 });
 
 test("ships a pinned Decap CMS admin configuration", async () => {

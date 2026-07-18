@@ -458,17 +458,20 @@ function renderSitemap(posts) {
       lastmod: post.updatedIso.slice(0, 10),
       priority: "0.8",
       frequency: "monthly",
+      image: absoluteUrl(post.cover),
     })),
   ];
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 ${urls.map((url) => `  <url>
     <loc>${escapeHtml(url.loc)}</loc>
     <lastmod>${url.lastmod}</lastmod>
     <changefreq>${url.frequency}</changefreq>
     <priority>${url.priority}</priority>
-  </url>`).join("\n")}
+${url.image ? `    <image:image>
+      <image:loc>${escapeHtml(url.image)}</image:loc>
+    </image:image>\n` : ""}  </url>`).join("\n")}
 </urlset>\n`;
 }
 
