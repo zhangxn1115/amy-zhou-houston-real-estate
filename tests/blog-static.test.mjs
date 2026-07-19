@@ -70,3 +70,19 @@ test("publishes a web-optimized copy of uploaded blog images", async () => {
   assert.ok(published.size < 1_500_000, "published image should be suitable for web delivery");
   assert.ok(webp.size < published.size, "modern browsers should receive an even smaller WebP cover");
 });
+
+test("publishes the California and Texas comparison with authoritative sources", async () => {
+  const article = await read("../site/blog/2026-07-19-california-vs-texas-living-cost-schools-industries/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /产业对比：加州偏创新密度，德州偏多元与实体经济/);
+  assert.match(article, /学校对比：不要比较“州”，要比较具体学区和地址/);
+  assert.match(article, /生活成本对比：住房差距最大/);
+  assert.match(article, /天气与气候：加州更干燥多样，德州更炎热/);
+  assert.match(article, /https:\/\/www\.bea\.gov\/data\/prices-inflation\/regional-price-parities-state-and-metro-area/);
+  assert.match(article, /https:\/\/www\.census\.gov\/quickfacts\/fact\/table\/TX\/HSG860223/);
+  assert.match(article, /https:\/\/tea\.texas\.gov\/school-and-district-leaders\/accountability/);
+  assert.match(article, /https:\/\/statesummaries\.ncics\.org\/chapter\/ca/);
+  assert.match(article, /https:\/\/statesummaries\.ncics\.org\/chapter\/tx/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-19-california-vs-texas-living-cost-schools-industries\//);
+});
