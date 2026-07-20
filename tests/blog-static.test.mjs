@@ -86,3 +86,23 @@ test("publishes the California and Texas comparison with authoritative sources",
   assert.match(article, /https:\/\/statesummaries\.ncics\.org\/chapter\/tx/);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-19-california-vs-texas-living-cost-schools-industries\//);
 });
+
+test("publishes Amy's Houston homebuyer research toolbox and adds it to the sitemap", async () => {
+  const article = await read("../site/blog/2026-07-20-houston-homebuyer-research-tools/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /我通常先用30分钟做一轮初筛/);
+  assert.match(article, /查学区：先确认地址，再看学校表现/);
+  assert.match(article, /查治安：看近期记录，也要看真实环境/);
+  assert.match(article, /查洪水：两个地图要一起看/);
+  assert.match(article, /查房产税：不要直接照搬卖家的税单/);
+  assert.match(article, /https:\/\/txschools\.gov\//);
+  assert.match(article, /https:\/\/www\.houstontx\.gov\/police\/cs\/index-1\.htm/);
+  assert.match(article, /https:\/\/msc\.fema\.gov\/portal\/home/);
+  assert.match(article, /https:\/\/arcweb\.hcad\.org\/parcel-viewer-v2\.0\//);
+  assert.match(article, /https:\/\/www\.houstonpermittingcenter\.org\/permit-finder/);
+  assert.match(article, /https:\/\/www\.helpinsure\.com\//);
+  assert.match(article, /Amy整理休斯顿买房前常用的查询工具/);
+  assert.match(article, /休斯顿华人房产经纪/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-20-houston-homebuyer-research-tools\//);
+});
