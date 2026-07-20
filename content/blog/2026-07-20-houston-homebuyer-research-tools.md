@@ -5,8 +5,8 @@ date: 2026-07-20T10:00:00-05:00
 updated: 2026-07-20T10:00:00-05:00
 category: 买房指南
 excerpt: Amy整理休斯顿买房前常用的查询工具，涵盖学区、治安、洪水、房产税、产权、建筑许可、保险和通勤，帮助华人家庭在出价前做好基础功课。
-cover: /blog-media/houston-homebuying-first-steps.jpg
-cover_alt: 休斯顿买房前学区治安洪水及房产税查询工具
+cover: /blog-media/houston-homebuyer-research-tools-cover.png
+cover_alt: 休斯顿买房前必查工具大全，涵盖洪水、治安、学区、地税与房屋信息查询
 featured: true
 draft: false
 ---

@@ -104,5 +104,8 @@ test("publishes Amy's Houston homebuyer research toolbox and adds it to the site
   assert.match(article, /https:\/\/www\.helpinsure\.com\//);
   assert.match(article, /Amy整理休斯顿买房前常用的查询工具/);
   assert.match(article, /休斯顿华人房产经纪/);
+  assert.match(article, /houston-homebuyer-research-tools-cover\.png/);
+  assert.match(article, /houston-homebuyer-research-tools-cover\.webp/);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-20-houston-homebuyer-research-tools\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-homebuyer-research-tools-cover\.png/);
 });
