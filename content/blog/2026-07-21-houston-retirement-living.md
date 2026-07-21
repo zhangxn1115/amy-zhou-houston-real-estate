@@ -5,8 +5,8 @@ date: 2026-07-21T10:00:00-05:00
 updated: 2026-07-21T10:00:00-05:00
 category: 生活方式
 excerpt: Amy从医疗资源、生活成本、平层住宅、气候和华人生活便利出发，分享为什么休斯顿值得华人家庭纳入养老与退休居住选择。
-cover: /blog-media/houston-homebuying-first-steps.jpg
-cover_alt: 休斯顿Sugar Land社区生活环境，适合华人家庭规划退休养老
+cover: /blog-media/houston-retirement-living-cover.jpg
+cover_alt: 休斯顿湖畔社区夕阳下散步休息的退休夫妇与平层住宅环境
 featured: true
 draft: false
 ---

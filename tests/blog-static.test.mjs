@@ -123,5 +123,8 @@ test("publishes Amy's personal guide to retiring in Houston", async () => {
   assert.match(article, /https:\/\/www\.weather\.gov\/hgx\/climate_iah_normals_summary/);
   assert.match(article, /Amy从医疗资源、生活成本、平层住宅、气候和华人生活便利出发/);
   assert.match(article, /休斯顿华人房产经纪/);
+  assert.match(article, /houston-retirement-living-cover\.jpg/);
+  assert.match(article, /houston-retirement-living-cover\.webp/);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-21-houston-retirement-living\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-retirement-living-cover\.jpg/);
 });
