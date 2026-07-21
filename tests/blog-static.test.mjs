@@ -109,3 +109,19 @@ test("publishes Amy's Houston homebuyer research toolbox and adds it to the site
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-20-houston-homebuyer-research-tools\//);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-homebuyer-research-tools-cover\.png/);
 });
+
+test("publishes Amy's personal guide to retiring in Houston", async () => {
+  const article = await read("../site/blog/2026-07-21-houston-retirement-living/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /医疗资源，是我认为休斯顿最重要的养老优势/);
+  assert.match(article, /平层住宅，是休斯顿很实用的房型优势/);
+  assert.match(article, /华人生活便利，让养老不只是“住得下”，而是“住得惯”/);
+  assert.match(article, /我对养老选房最看重的，是未来还能住得安心/);
+  assert.match(article, /https:\/\/www\.tmc\.edu\//);
+  assert.match(article, /https:\/\/profile\.tmb\.state\.tx\.us\//);
+  assert.match(article, /https:\/\/www\.weather\.gov\/hgx\/climate_iah_normals_summary/);
+  assert.match(article, /Amy从医疗资源、生活成本、平层住宅、气候和华人生活便利出发/);
+  assert.match(article, /休斯顿华人房产经纪/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-21-houston-retirement-living\//);
+});
