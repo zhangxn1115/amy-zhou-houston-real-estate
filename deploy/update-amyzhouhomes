@@ -13,7 +13,7 @@ if [[ ! -d "$repository/.git" ]]; then
 else
   git -C "$repository" fetch --quiet origin main
   git -C "$repository" reset --quiet --hard origin/main
-  git -C "$repository" clean -quiet -fd
+  git -C "$repository" clean --quiet -fd
 fi
 
 test -f "$repository/site/index.html"
