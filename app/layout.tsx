@@ -87,7 +87,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="zh-CN">
       <head>
-        <meta name="baidu-site-verification" content="codeva-QDZu7DpXmi" />
+        <meta name="baidu-site-verification" content="codeva-Hb26Im9o4q" />
         <script src="/analytics.js" defer />
       </head>
       <body>
