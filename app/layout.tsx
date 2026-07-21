@@ -71,7 +71,11 @@ export async function generateMetadata(): Promise<Metadata> {
       ...(googleVerification ? { google: googleVerification } : {}),
       ...(bingVerification ? { other: { "msvalidate.01": bingVerification } } : {}),
     },
-    icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+    icons: {
+      icon: [{ url: "/favicon.png", type: "image/png", sizes: "512x512" }],
+      shortcut: "/favicon.png",
+      apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    },
   };
 }
 

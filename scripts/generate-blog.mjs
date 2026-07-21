@@ -280,7 +280,8 @@ function pageHead({ title, description, canonical, image, type = "website", keyw
   <meta name="twitter:title" content="${safeTitle}">
   <meta name="twitter:description" content="${safeDescription}">
   <meta name="twitter:image" content="${imageUrl}">
-  <link rel="icon" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 ${preloadImage ? `  <link rel="preload" href="${escapeHtml(preloadImage)}" as="image" fetchpriority="high">\n` : ""}  <style>${inlineCss}</style>
   <script src="/analytics.js" defer></script>
   <script src="/locale.js" defer></script>
@@ -516,6 +517,8 @@ async function buildBlog() {
   await rm(siteMediaDirectory, { recursive: true, force: true });
   await mkdir(siteMediaDirectory, { recursive: true });
   await cp(publicMediaDirectory, siteMediaDirectory, { recursive: true, force: true });
+  await cp(path.join(root, "public", "favicon.png"), path.join(siteDirectory, "favicon.png"), { force: true });
+  await cp(path.join(root, "public", "apple-touch-icon.png"), path.join(siteDirectory, "apple-touch-icon.png"), { force: true });
 
   await writeFile(path.join(blogDirectory, "index.html"), renderIndex(posts));
   await writeFile(path.join(blogDirectory, "index.json"), JSON.stringify(posts.map((post) => ({

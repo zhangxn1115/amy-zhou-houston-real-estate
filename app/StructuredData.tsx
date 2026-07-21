@@ -24,7 +24,7 @@ export async function StructuredData() {
         alternateName: siteConfig.name,
         url: `${origin}/`,
         image: `${origin}/amy-zhou.jpg`,
-        logo: `${origin}/favicon.svg`,
+        logo: `${origin}/favicon.png`,
         telephone: "+1-346-582-7694",
         email: "ningimeng12@gmail.com",
         description: siteConfig.description,
