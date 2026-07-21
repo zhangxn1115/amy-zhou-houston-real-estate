@@ -1,0 +1,11 @@
+[Unit]
+Description=Update Amy Zhou Homes from the generated GitHub site
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/update-amyzhouhomes
+
+[Install]
+WantedBy=multi-user.target

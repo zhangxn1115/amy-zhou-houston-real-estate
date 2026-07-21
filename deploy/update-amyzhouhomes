@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repository="/opt/amyzhouhomes-source"
+webroot="/var/www/amyzhouhomes.net"
+remote="https://github.com/zhangxn1115/amy-zhou-houston-real-estate.git"
+
+exec 9>/run/lock/amyzhouhomes-update.lock
+flock -n 9 || exit 0
+
+if [[ ! -d "$repository/.git" ]]; then
+  git clone --depth 1 --branch main "$remote" "$repository"
+else
+  git -C "$repository" fetch --quiet origin main
+  git -C "$repository" reset --quiet --hard origin/main
+  git -C "$repository" clean -quiet -fd
+fi
+
+test -f "$repository/site/index.html"
+test -f "$repository/site/sitemap.xml"
+
+rsync -a --delete "$repository/site/" "$webroot/"
+chown -R root:root "$webroot"
+find "$webroot" -type d -exec chmod 755 {} +
+find "$webroot" -type f -exec chmod 644 {} +
+
+nginx -t
+systemctl reload nginx
