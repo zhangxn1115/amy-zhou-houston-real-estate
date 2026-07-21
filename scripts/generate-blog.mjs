@@ -365,6 +365,26 @@ function renderCards(posts) {
   }).join("\n");
 }
 
+function renderHomeLatest(posts) {
+  const latest = posts.slice(0, 3);
+  return `<section class="hero-latest" data-blog-latest="true" aria-labelledby="hero-latest-title">
+    <div class="hero-latest-heading"><h2 id="hero-latest-title">最新文章</h2><a href="/blog/">查看全部 <span>↗</span></a></div>
+    <div class="hero-blog-list">${latest.map((post) => `<a class="hero-blog-item" href="/blog/${post.slug}/">
+      <picture>${webCoverUrl(post.cover) ? `<source srcset="${escapeHtml(webCoverUrl(post.cover))}" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="320" height="180" loading="lazy" decoding="async"></picture>
+      <span class="hero-blog-copy"><strong>${escapeHtml(post.title)}</strong><small>${escapeHtml(post.excerpt)}</small></span>
+    </a>`).join("")}</div>
+  </section>`;
+}
+
+async function updateHomeLatest(posts) {
+  const homePath = path.join(siteDirectory, "index.html");
+  let home = await readFile(homePath, "utf8");
+  const region = /<section[^>]*class="hero-latest"[^>]*data-blog-latest="true"[^>]*>[\s\S]*?<\/section>/;
+  if (!region.test(home)) throw new Error("Homepage latest-blog region is missing");
+  home = home.replace(region, renderHomeLatest(posts));
+  await writeFile(homePath, home);
+}
+
 function renderIndex(posts) {
   const title = "休斯顿房产博客｜Amy Zhou 房市、社区与学区指南";
   const description = "Amy Zhou 的休斯顿中文房产博客，分享大休斯顿房市动态、热门社区、优质学区、新房探访和买房知识。";
@@ -513,6 +533,7 @@ async function buildBlog() {
     await writeFile(path.join(postDirectory, "index.html"), renderArticle(post));
   }
 
+  await updateHomeLatest(posts);
   await writeFile(path.join(siteDirectory, "sitemap.xml"), renderSitemap(posts));
   console.log(`Generated ${posts.length} blog post${posts.length === 1 ? "" : "s"}.`);
 }

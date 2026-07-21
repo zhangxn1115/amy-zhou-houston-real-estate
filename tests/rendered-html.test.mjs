@@ -50,6 +50,10 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /href="mailto:ningimeng12@gmail\.com"/);
   assert.match(html, /youtube-nocookie\.com\/embed\/videoseries\?list=UU1ymf6PCQwnLL8-ETiPteHw/);
   assert.match(html, /href="\/blog\/">阅读房产博客/);
+  assert.match(html, /class="hero-latest"/);
+  assert.match(html, /为什么我觉得休斯顿适合养老/);
+  assert.match(html, /class="portrait-actions"/);
+  assert.ok(html.indexOf("License No. 839083") < html.indexOf("了解休斯顿房市"));
   assert.doesNotMatch(html, /youtube-nocookie\.com\/embed\/vpIqfneYAhk/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });

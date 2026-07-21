@@ -60,6 +60,36 @@ const schoolDistricts = [
   { name: "Pearland ISD", area: "Pearland", text: "靠近医学中心与南部就业区，是兼顾通勤、社区生活和教育需求的选择。", website: "https://www.pearlandisd.org/" },
 ];
 
+const latestPosts = [
+  {
+    title: "为什么我觉得休斯顿适合养老？医疗、平层住宅与华人生活圈",
+    excerpt: "从医疗资源、生活成本、平层住宅、气候与华人生活便利，聊聊休斯顿的退休生活。",
+    href: "/blog/2026-07-21-houston-retirement-living/",
+    image: "/blog-media/houston-retirement-living-cover.jpg",
+    alt: "休斯顿湖畔社区的退休生活",
+    width: 1024,
+    height: 559,
+  },
+  {
+    title: "休斯顿买房前必查的10个实用网站",
+    excerpt: "Amy整理学区、治安、洪水、房产税、产权、保险和通勤等买房前基础功课。",
+    href: "/blog/2026-07-20-houston-homebuyer-research-tools/",
+    image: "/blog-media/houston-homebuyer-research-tools-cover.png",
+    alt: "休斯顿买房前必查工具大全",
+    width: 1536,
+    height: 1024,
+  },
+  {
+    title: "加州与德州怎么选？产业、学校、生活成本与气候全面对比",
+    excerpt: "从工作机会到住房成本，梳理两地不同的生活方式，帮助跨州家庭做出选择。",
+    href: "/blog/2026-07-19-california-vs-texas-living-cost-schools-industries/",
+    image: "/blog-media/houston-homebuying-first-steps.jpg",
+    alt: "加州与德州生活及买房选择对比",
+    width: 1280,
+    height: 853,
+  },
+];
+
 export default function Home() {
   return (
     <>
@@ -95,11 +125,23 @@ export default function Home() {
           <p className="eyebrow"><span /> 休斯顿房产经纪 · HOUSTON · TEXAS</p>
           <h1>在休斯顿，<br />找到属于您的<br /><em>理想生活。</em></h1>
           <p className="hero-intro">以专业判断理解房产，以真诚沟通理解您。<br />为全球华人家庭提供值得信赖的休斯顿置业服务。</p>
-          <nav className="hero-actions" aria-label="页面重点内容">
-            <a className="text-link" href="#houston">了解休斯顿房市 <span>↓</span></a>
-            <a className="text-link" href="#schools">了解优质学区 <span>↓</span></a>
-            <a className="text-link" href="#videos">Amy 视频看房 <span>↓</span></a>
-          </nav>
+          <section className="hero-latest" data-blog-latest="true" aria-labelledby="hero-latest-title">
+            <div className="hero-latest-heading">
+              <h2 id="hero-latest-title">最新文章</h2>
+              <a href="/blog/">查看全部 <span>↗</span></a>
+            </div>
+            <div className="hero-blog-list">
+              {latestPosts.map((post) => (
+                <a className="hero-blog-item" href={post.href} key={post.href}>
+                  <img src={post.image} alt={post.alt} width={post.width} height={post.height} loading="lazy" decoding="async" />
+                  <span className="hero-blog-copy">
+                    <strong>{post.title}</strong>
+                    <small>{post.excerpt}</small>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </section>
         </div>
 
         <div className="portrait-card" aria-label="Amy Zhou 个人照片">
@@ -114,6 +156,11 @@ export default function Home() {
                 <small className="license-number">License No. 839083</small>
               </div>
             </div>
+            <nav className="portrait-actions" aria-label="页面重点内容">
+              <a href="#houston">了解休斯顿房市 <span>↓</span></a>
+              <a href="#schools">了解优质学区 <span>↓</span></a>
+              <a href="#videos">Amy 视频看房 <span>↓</span></a>
+            </nav>
           </div>
         </div>
 

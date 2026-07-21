@@ -128,3 +128,17 @@ test("publishes Amy's personal guide to retiring in Houston", async () => {
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-21-houston-retirement-living\//);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-retirement-living-cover\.jpg/);
 });
+
+test("keeps the homepage latest articles in reverse chronological order", async () => {
+  const home = await read("../site/index.html");
+  const retirement = home.indexOf("为什么我觉得休斯顿适合养老");
+  const tools = home.indexOf("休斯顿买房前必查的10个实用网站");
+  const comparison = home.indexOf("加州与德州怎么选");
+
+  assert.ok(retirement > -1);
+  assert.ok(retirement < tools);
+  assert.ok(tools < comparison);
+  assert.match(home, /class="hero-blog-item"/);
+  assert.match(home, /class="portrait-actions"/);
+  assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解休斯顿房市"));
+});
