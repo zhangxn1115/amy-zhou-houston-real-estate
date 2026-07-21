@@ -13,6 +13,8 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(index, /Sugar Land RYEHILL小区最新房源信息/);
   assert.match(index, /rel="canonical" href="https:\/\/amyzhouhomes\.net\/blog\/"/);
   assert.match(index, /rel="icon" type="image\/png" sizes="512x512" href="\/favicon\.png"/);
+  assert.match(index, /sizes="32x32" href="\/favicon-32\.png"/);
+  assert.match(index, /sizes="16x16" href="\/favicon-16\.png"/);
   assert.match(index, /rel="apple-touch-icon" sizes="180x180" href="\/apple-touch-icon\.png"/);
   assert.match(index, /<style>:root\{--ink:/);
   assert.doesNotMatch(index, /rel="stylesheet" href="\/assets\/blog\.css/);

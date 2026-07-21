@@ -15,6 +15,8 @@ html = html.replace(/<link[^>]*rel="stylesheet"[^>]*\/?>/g, "");
 html = html.replaceAll("https://127.0.0.1:3000", siteUrl);
 html = html.replaceAll('href="/favicon.svg"', 'href="./favicon.svg"');
 html = html.replaceAll('href="/favicon.png"', 'href="./favicon.png"');
+html = html.replaceAll('href="/favicon-32.png"', 'href="./favicon-32.png"');
+html = html.replaceAll('href="/favicon-16.png"', 'href="./favicon-16.png"');
 html = html.replaceAll('href="/apple-touch-icon.png"', 'href="./apple-touch-icon.png"');
 html = html.replaceAll('href="/amy-zhou.jpg"', 'href="./amy-zhou.jpg"');
 html = html.replaceAll('href="/wechat-qr.jpg"', 'href="./wechat-qr.jpg"');

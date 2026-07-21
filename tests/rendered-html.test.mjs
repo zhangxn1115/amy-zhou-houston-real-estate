@@ -46,6 +46,8 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /property="og:title" content="休斯顿房产经纪 Amy Zhou"/);
   assert.match(html, /amy-zhou-wechat-share\.jpg/);
   assert.match(html, /favicon\.png/);
+  assert.match(html, /favicon-32\.png/);
+  assert.match(html, /favicon-16\.png/);
   assert.match(html, /apple-touch-icon\.png/);
   assert.match(html, /中文沟通｜休斯顿自住、投资、优质学区与社区置业服务/);
   assert.doesNotMatch(html, /href="tel:/);

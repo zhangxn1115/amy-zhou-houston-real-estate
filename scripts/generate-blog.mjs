@@ -280,7 +280,10 @@ function pageHead({ title, description, canonical, image, type = "website", keyw
   <meta name="twitter:title" content="${safeTitle}">
   <meta name="twitter:description" content="${safeDescription}">
   <meta name="twitter:image" content="${imageUrl}">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+  <link rel="shortcut icon" href="/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 ${preloadImage ? `  <link rel="preload" href="${escapeHtml(preloadImage)}" as="image" fetchpriority="high">\n` : ""}  <style>${inlineCss}</style>
   <script src="/analytics.js" defer></script>
@@ -518,6 +521,8 @@ async function buildBlog() {
   await mkdir(siteMediaDirectory, { recursive: true });
   await cp(publicMediaDirectory, siteMediaDirectory, { recursive: true, force: true });
   await cp(path.join(root, "public", "favicon.png"), path.join(siteDirectory, "favicon.png"), { force: true });
+  await cp(path.join(root, "public", "favicon-32.png"), path.join(siteDirectory, "favicon-32.png"), { force: true });
+  await cp(path.join(root, "public", "favicon-16.png"), path.join(siteDirectory, "favicon-16.png"), { force: true });
   await cp(path.join(root, "public", "apple-touch-icon.png"), path.join(siteDirectory, "apple-touch-icon.png"), { force: true });
 
   await writeFile(path.join(blogDirectory, "index.html"), renderIndex(posts));
