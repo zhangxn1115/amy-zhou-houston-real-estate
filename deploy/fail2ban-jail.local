@@ -1,6 +1,8 @@
 [sshd]
 enabled = true
 backend = systemd
-maxretry = 5
+maxretry = 3
 findtime = 10m
-bantime = 1h
+bantime = 24h
+bantime.increment = true
+bantime.rndtime = 10m

@@ -87,8 +87,9 @@ export function AutoLocale() {
 
   useEffect(() => {
     const detected = preferredLocale();
-    setLocale(detected);
     applyLocale(detected);
+    const update = window.setTimeout(() => setLocale(detected), 0);
+    return () => window.clearTimeout(update);
   }, []);
 
   function toggleLocale() {

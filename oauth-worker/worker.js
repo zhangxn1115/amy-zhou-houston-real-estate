@@ -131,7 +131,7 @@ async function handleCallback(request, url, env) {
   return callbackPage(payload.access_token);
 }
 
-export default {
+const worker = {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (url.origin !== OAUTH_ORIGIN) return errorResponse("Invalid host", 403);
@@ -145,3 +145,5 @@ export default {
     return errorResponse("Not found", 404);
   },
 };
+
+export default worker;
