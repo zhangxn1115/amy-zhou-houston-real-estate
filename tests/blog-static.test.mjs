@@ -133,15 +133,34 @@ test("publishes Amy's personal guide to retiring in Houston", async () => {
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-retirement-living-cover\.jpg/);
 });
 
+test("publishes Amy's Houston career and neighborhood guide for young professionals", async () => {
+  const article = await read("../site/blog/2026-07-22-houston-young-professionals-careers-neighborhoods/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /休斯顿不只有石油，年轻人的工作选择比想象中更宽/);
+  assert.match(article, /医疗、生命科学与健康服务/);
+  assert.match(article, /能源、工程与能源转型/);
+  assert.match(article, /不优先考虑学区，年轻人可以重点看这些区域/);
+  assert.match(article, /刚工作，到底应该先租还是买/);
+  assert.match(article, /https:\/\/www\.bls\.gov\/regions\/southwest\/news-release\/occupationalemploymentandwages_houston\.htm/);
+  assert.match(article, /https:\/\/www\.ridemetro\.org\/riding-metro\/transit-services\/metrorail/);
+  assert.match(article, /https:\/\/www\.nasa\.gov\/johnson\//);
+  assert.match(article, /houston-young-professionals-careers-neighborhoods\.jpg/);
+  assert.match(article, /houston-young-professionals-careers-neighborhoods\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-22-houston-young-professionals-careers-neighborhoods\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-young-professionals-careers-neighborhoods\.jpg/);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const careers = home.indexOf("刚毕业来休斯顿，从哪里开始");
   const retirement = home.indexOf("为什么我觉得休斯顿适合养老");
   const tools = home.indexOf("休斯顿买房前必查的10个实用网站");
-  const comparison = home.indexOf("加州与德州怎么选");
 
+  assert.ok(careers > -1);
   assert.ok(retirement > -1);
+  assert.ok(careers < retirement);
   assert.ok(retirement < tools);
-  assert.ok(tools < comparison);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解休斯顿房市"));
