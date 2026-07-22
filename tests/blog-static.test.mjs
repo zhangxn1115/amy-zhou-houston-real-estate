@@ -21,6 +21,8 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(index, /style-src 'self' 'sha256-[A-Za-z0-9+/=]+'/);
   assert.match(index, /grid-template-columns:88px minmax\(0,1fr\) 88px/);
   assert.match(index, /\.article-author-qr\{grid-column:3;grid-row:1\/4/);
+  assert.match(index, /\.article-author-qr small\{[^}]*font-size:11px/);
+  assert.match(index, /\.article-author-license\{[^}]*font-size:11px/);
   const inlineStyle = index.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? "";
   const declaredStyleHash = index.match(/style-src 'self' 'sha256-([A-Za-z0-9+/=]+)'/)?.[1] ?? "";
   assert.equal(createHash("sha256").update(inlineStyle).digest("base64"), declaredStyleHash);
