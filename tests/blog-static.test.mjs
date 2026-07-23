@@ -34,6 +34,11 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(article, /class="article-author-qr"/);
   assert.match(article, /Amy Zhou 微信二维码/);
   assert.match(article, /wechat-qr\.jpg/);
+  assert.match(article, /class="article-consult-button"[^>]*data-lead-open/);
+  assert.match(article, /在线咨询/);
+  assert.match(article, /id="lead-dialog"/);
+  assert.match(article, /action="\/api\/leads"/);
+  assert.match(article, /src="\/lead-form\.js"/);
   assert.match(article, /rel="preload" href="\/blog-media\/_20260718140820_5_9\.webp" as="image" fetchpriority="high"/);
   assert.match(article, /<source srcset="\/blog-media\/_20260718140820_5_9\.webp" type="image\/webp">/);
   assert.match(article, /<meta name="keywords" content="[^"]*休斯顿华人房产经纪[^"]*休斯顿买房[^"]*休斯顿二手房/);

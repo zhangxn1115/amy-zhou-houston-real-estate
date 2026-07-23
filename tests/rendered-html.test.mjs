@@ -60,7 +60,9 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /class="hero-latest"/);
   assert.match(html, /为什么我觉得休斯顿适合养老/);
   assert.match(html, /class="portrait-actions"/);
-  assert.match(html, /class="lead-fab"/);
+  assert.match(html, /class="hero-consult-button"/);
+  assert.match(html, /在线咨询/);
+  assert.doesNotMatch(html, /class="lead-fab"/);
   assert.match(html, /id="lead-dialog"/);
   assert.match(html, /action="\/api\/leads"/);
   assert.match(html, /name="website"/);

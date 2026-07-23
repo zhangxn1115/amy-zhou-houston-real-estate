@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'sha256-47E2D8bjcU28/19jRUuMuDF9NC2BG8OMhEyrcFJUIew='; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'sha256-V/HDlbG2HGxpqCmkIGKbgYMK4j53kzLIBJW32uo5oqo='; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Sugar Land RYEHILL小区最新房源信息｜Amy Zhou 休斯顿房产博客</title>
   <meta name="description" content="如果你想了解Sugar Land Ryehill 还有哪些房子值得买，或者想对比 Taylor Morrison、Pulte开发商。Amy Zhou 是休斯顿华人房产经纪，提供休斯顿买房、休斯顿购房、休斯顿新房、休斯顿看房及休斯顿二手房中文服务。">
@@ -103,6 +103,9 @@ main{background:var(--paper);overflow:hidden}
 .article-author-qr img{width:138px;height:138px;aspect-ratio:1;padding:12px;object-fit:contain;background:#fff;border:1px solid rgba(24,54,47,.1)}
 .article-author-qr small{display:block;margin-top:9px;color:#6e8179;font-size:11px;letter-spacing:.5px}
 .article-author-license{margin-top:17px;color:var(--gold);font-size:11px;font-weight:700}
+.article-consult-button{display:flex;align-items:center;justify-content:space-between;width:138px;margin-top:18px;padding:12px 14px;border:0;background:var(--forest);color:#fff;cursor:pointer;font-family:Georgia,"Songti SC",serif;font-size:12px;transition:background .2s,transform .2s}
+.article-consult-button:hover{background:#245346;transform:translateY(-2px)}
+.article-consult-button span{margin:0;color:#d4b59c;font-size:12px}
 .article-body{min-width:0;color:#324e46;font-family:Georgia,"Songti SC",serif;font-size:17px;line-height:2}
 .article-body h2,.article-body h3{color:var(--ink);font-weight:400;line-height:1.4}
 .article-body h2{margin:2.1em 0 .7em;font-size:32px}
@@ -117,6 +120,40 @@ main{background:var(--paper);overflow:hidden}
 .article-video-link{margin-top:45px!important}
 .article-video-link a{display:inline-block;padding:14px 18px;background:var(--forest);color:#fff;border:0}
 .article-disclaimer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:#80908a;font-family:"Avenir Next","PingFang SC",sans-serif;font-size:10px;line-height:1.8}
+.lead-dialog{width:min(920px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 32px);margin:auto;padding:0;overflow:auto;border:0;background:transparent;color:var(--ink)}
+.lead-dialog::backdrop{background:rgba(14,35,29,.72);backdrop-filter:blur(5px)}
+.lead-dialog-panel{position:relative;display:grid;grid-template-columns:.88fr 1.12fr;min-height:600px;background:#f5f1e9;box-shadow:0 30px 100px rgba(7,25,20,.34)}
+.lead-dialog-close{position:absolute;z-index:2;top:16px;right:18px;width:36px;height:36px;padding:0;border:1px solid rgba(41,72,63,.2);border-radius:50%;background:rgba(255,255,255,.55);color:#29483f;cursor:pointer;font-family:Arial,sans-serif;font-size:24px;font-weight:300;line-height:32px}
+.lead-dialog-heading{display:flex;flex-direction:column;justify-content:center;padding:62px 44px;background:var(--forest);color:#fff}
+.lead-dialog-heading>p{margin:0 0 28px;color:#b6c5c0;font-size:8px;letter-spacing:2px}
+.lead-dialog-heading h2{margin:0 0 26px;font-family:Georgia,"Songti SC",serif;font-size:36px;font-weight:400;line-height:1.35}
+.lead-dialog-heading h2 span{display:block;color:#d4b59c;font-style:italic;font-weight:400}
+.lead-dialog-heading small{color:#c1cdc9;font-family:Georgia,"Songti SC",serif;font-size:12px;line-height:1.85}
+.lead-form{display:flex;flex-direction:column;gap:15px;padding:58px 48px 38px}
+.lead-form>label,.lead-form-row label{display:flex;flex-direction:column;gap:7px}
+.lead-form label>span{color:#597068;font-size:10px;letter-spacing:.7px}
+.lead-form input[type="text"],.lead-form select,.lead-form textarea{width:100%;border:1px solid #cfc8bb;border-radius:0;outline:0;background:rgba(255,255,255,.56);color:#29483f;font:13px/1.5 Georgia,"Songti SC",serif;transition:border-color .2s,box-shadow .2s}
+.lead-form input[type="text"],.lead-form select{height:44px;padding:0 13px}
+.lead-form textarea{min-height:84px;padding:11px 13px;resize:vertical}
+.lead-field-hint,.lead-character-count{align-self:flex-end;margin-top:-3px;color:#81918b;font-size:9px;font-weight:400}
+.lead-character-count b{font-weight:400}
+.lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus{border-color:#6e8a80;box-shadow:0 0 0 3px rgba(51,91,78,.09)}
+.lead-form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.lead-consent{flex-direction:row!important;align-items:center;gap:9px!important}
+.lead-consent input{width:16px;height:16px;margin:0;accent-color:var(--forest)}
+.lead-consent span{letter-spacing:0!important;line-height:1.5}
+.lead-submit{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:48px;padding:0 18px;border:0;background:var(--forest);color:#fff;cursor:pointer;font-family:Georgia,"Songti SC",serif;font-size:14px}
+.lead-submit:disabled{cursor:wait;opacity:.68}
+.lead-submit i{font-style:normal}
+.lead-form-status{min-height:18px;margin:0;color:#a34437;font-size:11px;line-height:1.5}
+.lead-honeypot{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+.lead-success{align-self:center;padding:60px 48px;text-align:center}
+.lead-success>span{display:inline-grid;width:52px;height:52px;place-items:center;margin-bottom:22px;border-radius:50%;background:var(--forest);color:#fff;font-size:22px}
+.lead-success h3{margin:0 0 14px;font-family:Georgia,"Songti SC",serif;font-size:26px;font-weight:400}
+.lead-success p{margin:0 0 28px;color:#62746e;font-family:Georgia,"Songti SC",serif;font-size:13px;line-height:1.8}
+.lead-success button{min-width:130px;padding:12px 20px;border:0;background:var(--forest);color:#fff;cursor:pointer}
+.lead-form[hidden],.lead-success[hidden]{display:none!important}
+body:has(.lead-dialog[open]){overflow:hidden}
 @media(max-width:760px){
   .blog-header{height:112px;padding:34px 20px 0;align-items:center}
   .blog-logo img{width:190px;height:58px}
@@ -152,13 +189,25 @@ main{background:var(--paper);overflow:hidden}
   .article-author-qr img{width:88px;height:88px;padding:9px}
   .article-author-qr small{margin:0;text-align:center;line-height:1.35}
   .article-author-license{grid-column:1/-1;margin-top:14px}
+  .article-consult-button{grid-column:1/-1;width:100%;margin-top:12px}
   .article-body{font-size:16px;line-height:1.95}
   .article-body h2{font-size:28px}
+  .lead-dialog{width:calc(100vw - 20px);max-height:calc(100dvh - 20px)}
+  .lead-dialog-panel{grid-template-columns:1fr;min-height:0}
+  .lead-dialog-heading{padding:42px 28px 28px}
+  .lead-dialog-heading>p{margin-bottom:15px}
+  .lead-dialog-heading h2{margin-bottom:14px;font-size:26px}
+  .lead-dialog-heading h2 span{display:inline}
+  .lead-dialog-heading small{font-size:11px}
+  .lead-form{gap:12px;padding:25px 24px 20px}
+  .lead-form-row{grid-template-columns:1fr 1fr;gap:9px}
+  .lead-success{padding:42px 28px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
   <script src="/analytics.js" defer></script>
   <script src="/locale.js" defer></script>
+  <script src="/lead-form.js" defer></script>
 </head>
 <body>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Sugar Land RYEHILL小区最新房源信息","description":"如果你想了解Sugar Land Ryehill 还有哪些房子值得买，或者想对比 Taylor Morrison、Pulte开发商。Amy Zhou 是休斯顿华人房产经纪，提供休斯顿买房、休斯顿购房、休斯顿新房、休斯顿看房及休斯顿二手房中文服务。","keywords":["休斯顿华人房产经纪","华人房产经纪","休斯顿买房","休斯顿购房","休斯顿新房","休斯顿看房","休斯顿二手房","Amy Zhou"],"articleSection":"新房探访","inLanguage":"zh-CN","image":"https://amyzhouhomes.net/blog-media/_20260718140820_5_9.jpg","datePublished":"2026-07-18T19:03:00.000Z","dateModified":"2026-07-18T19:03:00.000Z","mainEntityOfPage":"https://amyzhouhomes.net/blog/2026-07-18-sugar-land-ryehill-price/","author":{"@type":"Person","name":"Amy Zhou","url":"https://amyzhouhomes.net"},"publisher":{"@type":"RealEstateAgent","name":"Amy Zhou Houston Real Estate","url":"https://amyzhouhomes.net"}}</script>
@@ -190,6 +239,7 @@ main{background:var(--paper);overflow:hidden}
           <span>休斯顿房产经纪</span>
           <div class="article-author-qr"><img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" loading="lazy" decoding="async"><small>微信扫码咨询</small></div>
           <small class="article-author-license">License No. 839083</small>
+          <button class="article-consult-button" type="button" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">在线咨询 <span>↗</span></button>
         </aside>
         <div class="article-body"><p>今天去了一趟 Ryehill 社区（Rosenberg），刚拿到了开发商最新的现房信息，顺便看了几套样板房，给大家分享一下。</p>
 <p>如果预算在 35-45万美元左右，又希望买到全新独栋，这个社区值得了解一下。</p>
@@ -315,6 +365,66 @@ main{background:var(--paper);overflow:hidden}
       </div>
     </article>
   </main>
+  <dialog class="lead-dialog" id="lead-dialog" aria-labelledby="lead-dialog-title">
+    <div class="lead-dialog-panel">
+      <button class="lead-dialog-close" type="button" data-lead-close aria-label="关闭咨询表单">×</button>
+      <div class="lead-dialog-heading">
+        <p>PRIVATE CONSULTATION · 中文沟通</p>
+        <h2 id="lead-dialog-title">告诉 Amy，<span>您想寻找怎样的家。</span></h2>
+        <small>留下基本需求后，Amy 会尽快与您联系。您的信息仅用于本次置业咨询。</small>
+      </div>
+      <form class="lead-form" action="/api/leads" method="post" data-lead-form>
+        <input type="hidden" name="startedAt" value="" data-lead-started-at>
+        <div class="lead-honeypot" aria-hidden="true">
+          <label for="lead-website">网站</label>
+          <input id="lead-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <label><span>您的姓名 *</span>
+          <input name="name" type="text" required minlength="1" maxlength="10" autocomplete="name" placeholder="怎么称呼您">
+          <small class="lead-field-hint">最多5个汉字或10个英文字符</small>
+        </label>
+        <label><span>电话 / 微信 / 邮箱 *</span>
+          <input name="contact" type="text" required minlength="3" maxlength="20" autocomplete="email" placeholder="填写一种方便联系您的方式">
+          <small class="lead-field-hint">最多20个字符</small>
+        </label>
+        <div class="lead-form-row">
+          <label><span>置业目的 *</span>
+            <select name="intent" required>
+              <option value="" selected>请选择</option>
+              <option value="通勤">通勤</option>
+              <option value="学区">学区</option>
+              <option value="投资">投资</option>
+            </select>
+          </label>
+          <label><span>计划时间</span>
+            <select name="timeframe">
+              <option value="" selected>请选择</option>
+              <option value="3个月内">3个月内</option>
+              <option value="3至6个月">3至6个月</option>
+              <option value="半年至一年">半年至一年</option>
+              <option value="先了解市场">先了解市场</option>
+            </select>
+          </label>
+        </div>
+        <label><span>想了解的区域或具体需求</span>
+          <textarea name="message" maxlength="100" rows="3" placeholder="例如预算、工作地点、偏好区域、房型或学区需求"></textarea>
+          <small class="lead-character-count"><b data-lead-character-count>0</b>/100</small>
+        </label>
+        <label class="lead-consent">
+          <input name="consent" type="checkbox" required>
+          <span>我同意 Amy 因本次置业咨询与我联系。</span>
+        </label>
+        <button class="lead-submit" type="submit"><span data-lead-submit-label>提交置业需求</span><i>↗</i></button>
+        <p class="lead-form-status" data-lead-status role="status" aria-live="polite"></p>
+      </form>
+      <div class="lead-success" data-lead-success hidden>
+        <span>✓</span>
+        <h3>已收到您的需求</h3>
+        <p>Amy 会尽快与您联系，也欢迎先添加微信 ningimengyanyan。</p>
+        <button type="button" data-lead-close>完成</button>
+      </div>
+    </div>
+  </dialog>
   <footer class="blog-footer">
     <div><strong>AMY ZHOU</strong><span>HOUSTON REAL ESTATE</span></div>
     <p>为全球华人家庭提供休斯顿房产服务</p>

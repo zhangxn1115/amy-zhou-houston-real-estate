@@ -288,6 +288,7 @@ function pageHead({ title, description, canonical, image, type = "website", keyw
 ${preloadImage ? `  <link rel="preload" href="${escapeHtml(preloadImage)}" as="image" fetchpriority="high">\n` : ""}  <style>${inlineCss}</style>
   <script src="/analytics.js" defer></script>
   <script src="/locale.js" defer></script>
+  <script src="/lead-form.js" defer></script>
 </head>`;
 }
 
@@ -310,6 +311,69 @@ function siteFooter() {
     <p>为全球华人家庭提供休斯顿房产服务</p>
     <p>Texas Real Estate Sales Agent · License #839083</p>
   </footer>`;
+}
+
+function leadDialog() {
+  return `<dialog class="lead-dialog" id="lead-dialog" aria-labelledby="lead-dialog-title">
+    <div class="lead-dialog-panel">
+      <button class="lead-dialog-close" type="button" data-lead-close aria-label="关闭咨询表单">×</button>
+      <div class="lead-dialog-heading">
+        <p>PRIVATE CONSULTATION · 中文沟通</p>
+        <h2 id="lead-dialog-title">告诉 Amy，<span>您想寻找怎样的家。</span></h2>
+        <small>留下基本需求后，Amy 会尽快与您联系。您的信息仅用于本次置业咨询。</small>
+      </div>
+      <form class="lead-form" action="/api/leads" method="post" data-lead-form>
+        <input type="hidden" name="startedAt" value="" data-lead-started-at>
+        <div class="lead-honeypot" aria-hidden="true">
+          <label for="lead-website">网站</label>
+          <input id="lead-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <label><span>您的姓名 *</span>
+          <input name="name" type="text" required minlength="1" maxlength="10" autocomplete="name" placeholder="怎么称呼您">
+          <small class="lead-field-hint">最多5个汉字或10个英文字符</small>
+        </label>
+        <label><span>电话 / 微信 / 邮箱 *</span>
+          <input name="contact" type="text" required minlength="3" maxlength="20" autocomplete="email" placeholder="填写一种方便联系您的方式">
+          <small class="lead-field-hint">最多20个字符</small>
+        </label>
+        <div class="lead-form-row">
+          <label><span>置业目的 *</span>
+            <select name="intent" required>
+              <option value="" selected>请选择</option>
+              <option value="通勤">通勤</option>
+              <option value="学区">学区</option>
+              <option value="投资">投资</option>
+            </select>
+          </label>
+          <label><span>计划时间</span>
+            <select name="timeframe">
+              <option value="" selected>请选择</option>
+              <option value="3个月内">3个月内</option>
+              <option value="3至6个月">3至6个月</option>
+              <option value="半年至一年">半年至一年</option>
+              <option value="先了解市场">先了解市场</option>
+            </select>
+          </label>
+        </div>
+        <label><span>想了解的区域或具体需求</span>
+          <textarea name="message" maxlength="100" rows="3" placeholder="例如预算、工作地点、偏好区域、房型或学区需求"></textarea>
+          <small class="lead-character-count"><b data-lead-character-count>0</b>/100</small>
+        </label>
+        <label class="lead-consent">
+          <input name="consent" type="checkbox" required>
+          <span>我同意 Amy 因本次置业咨询与我联系。</span>
+        </label>
+        <button class="lead-submit" type="submit"><span data-lead-submit-label>提交置业需求</span><i>↗</i></button>
+        <p class="lead-form-status" data-lead-status role="status" aria-live="polite"></p>
+      </form>
+      <div class="lead-success" data-lead-success hidden>
+        <span>✓</span>
+        <h3>已收到您的需求</h3>
+        <p>Amy 会尽快与您联系，也欢迎先添加微信 ningimengyanyan。</p>
+        <button type="button" data-lead-close>完成</button>
+      </div>
+    </div>
+  </dialog>`;
 }
 
 async function loadPosts() {
@@ -473,6 +537,7 @@ function renderArticle(post) {
           <span>休斯顿房产经纪</span>
           <div class="article-author-qr"><img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" loading="lazy" decoding="async"><small>微信扫码咨询</small></div>
           <small class="article-author-license">License No. 839083</small>
+          <button class="article-consult-button" type="button" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">在线咨询 <span>↗</span></button>
         </aside>
         <div class="article-body">${post.body}${videoLink}
           <div class="article-disclaimer">本文用于提供一般市场与社区信息，不构成法律、税务、贷款或投资建议。房源、学区边界与市场数据可能变化，请以相关机构及交易时的最新资料为准。</div>
@@ -480,6 +545,7 @@ function renderArticle(post) {
       </div>
     </article>
   </main>
+  ${leadDialog()}
   ${siteFooter()}
   ${localeButton()}
 </body>
