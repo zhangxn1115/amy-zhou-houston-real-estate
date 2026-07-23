@@ -41,6 +41,19 @@ def clean_text(value: object, maximum: int) -> str:
     return cleaned[:maximum]
 
 
+def weighted_name_length(value: str) -> int:
+    return sum(
+        2
+        if (
+            "\u3400" <= character <= "\u4dbf"
+            or "\u4e00" <= character <= "\u9fff"
+            or "\uf900" <= character <= "\ufaff"
+        )
+        else 1
+        for character in value
+    )
+
+
 def load_salt() -> bytes:
     SALT_FILE.parent.mkdir(parents=True, exist_ok=True)
     if SALT_FILE.exists():
@@ -283,14 +296,14 @@ class LeadHandler(BaseHTTPRequestHandler):
 
         raw_name = payload.get("name", "")
         raw_contact = payload.get("contact", "")
-        if not isinstance(raw_name, str) or len(raw_name) > 30:
-            self.send_json(422, {"message": "姓名请控制在30个字符以内。"})
+        if not isinstance(raw_name, str) or weighted_name_length(raw_name) > 10:
+            self.send_json(422, {"message": "姓名最多填写5个汉字或10个英文字符。"})
             return
-        if not isinstance(raw_contact, str) or len(raw_contact) > 60:
-            self.send_json(422, {"message": "联系方式请控制在60个字符以内。"})
+        if not isinstance(raw_contact, str) or len(raw_contact) > 20:
+            self.send_json(422, {"message": "联系方式请控制在20个字符以内。"})
             return
-        name = clean_text(raw_name, 30)
-        contact = clean_text(raw_contact, 60)
+        name = clean_text(raw_name, 10)
+        contact = clean_text(raw_contact, 20)
         intent = clean_text(payload.get("intent"), 20)
         timeframe = clean_text(payload.get("timeframe"), 20)
         raw_message = payload.get("message", "")

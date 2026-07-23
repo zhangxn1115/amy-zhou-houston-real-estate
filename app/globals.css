@@ -180,6 +180,7 @@ h2 { font-size:clamp(42px,4.4vw,68px); line-height:1.16; }
 .lead-form input[type="text"],.lead-form select,.lead-form textarea { width:100%; border:1px solid #cfc8bb; border-radius:0; outline:0; background:rgba(255,255,255,.56); color:#29483f; font:13px/1.5 Georgia,"Songti SC",serif; transition:border-color .2s,box-shadow .2s; }
 .lead-form input[type="text"],.lead-form select { height:44px; padding:0 13px; }
 .lead-form textarea { min-height:84px; padding:11px 13px; resize:vertical; }
+.lead-field-hint { align-self:flex-end; margin-top:-3px; color:#81918b; font-size:9px; font-weight:400; }
 .lead-character-count { align-self:flex-end; margin-top:-3px; color:#81918b; font-size:9px; font-weight:400; }
 .lead-character-count b { font-weight:400; }
 .lead-form input:focus,.lead-form select:focus,.lead-form textarea:focus { border-color:#6e8a80; box-shadow:0 0 0 3px rgba(51,91,78,.09); }

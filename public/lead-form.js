@@ -7,8 +7,22 @@
   const status = form.querySelector("[data-lead-status]");
   const submitLabel = form.querySelector("[data-lead-submit-label]");
   const success = dialog.querySelector("[data-lead-success]");
+  const name = form.querySelector("input[name='name']");
   const message = form.querySelector("textarea[name='message']");
   const characterCount = form.querySelector("[data-lead-character-count]");
+
+  function isChineseCharacter(character) {
+    return /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u.test(character);
+  }
+
+  function validateNameLength() {
+    if (!(name instanceof HTMLInputElement)) return;
+    const length = Array.from(name.value).reduce(
+      (total, character) => total + (isChineseCharacter(character) ? 2 : 1),
+      0,
+    );
+    name.setCustomValidity(length > 10 ? "姓名最多填写5个汉字或10个英文字符。" : "");
+  }
 
   function markStarted() {
     if (startedAt instanceof HTMLInputElement) startedAt.value = String(Date.now());
@@ -40,9 +54,13 @@
       characterCount.textContent = String(message.value.length);
     });
   }
+  if (name instanceof HTMLInputElement) {
+    name.addEventListener("input", validateNameLength);
+  }
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    validateNameLength();
     if (!form.reportValidity()) return;
 
     const submit = form.querySelector("button[type='submit']");

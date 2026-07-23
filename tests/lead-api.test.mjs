@@ -83,25 +83,32 @@ test("stores valid same-origin leads and rejects cross-origin submissions", asyn
     const oversizedName = await fetch(`http://127.0.0.1:${port}/api/leads`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Origin: "https://amyzhouhomes.net" },
-      body: JSON.stringify({ ...payload, name: "名".repeat(31) }),
+      body: JSON.stringify({ ...payload, name: "名".repeat(6) }),
     });
     assert.equal(oversizedName.status, 422);
-    assert.match((await oversizedName.json()).message, /30个字符以内/);
+    assert.match((await oversizedName.json()).message, /5个汉字或10个英文字符/);
+
+    const oversizedEnglishName = await fetch(`http://127.0.0.1:${port}/api/leads`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Origin: "https://amyzhouhomes.net" },
+      body: JSON.stringify({ ...payload, name: "a".repeat(11) }),
+    });
+    assert.equal(oversizedEnglishName.status, 422);
 
     const oversizedContact = await fetch(`http://127.0.0.1:${port}/api/leads`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Origin: "https://amyzhouhomes.net" },
-      body: JSON.stringify({ ...payload, contact: "1".repeat(61) }),
+      body: JSON.stringify({ ...payload, contact: "1".repeat(21) }),
     });
     assert.equal(oversizedContact.status, 422);
-    assert.match((await oversizedContact.json()).message, /60个字符以内/);
+    assert.match((await oversizedContact.json()).message, /20个字符以内/);
 
     const injectionAttempt = await fetch(`http://127.0.0.1:${port}/api/leads`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Origin: "https://amyzhouhomes.net" },
       body: JSON.stringify({
         ...payload,
-        name: "Robert'); DROP TABLE leads;--",
+        name: "' OR 1=1",
         contact: "=1+1",
         message: "<script>alert(1)</script>",
         startedAt: Date.now() - 4000,
@@ -115,7 +122,7 @@ test("stores valid same-origin leads and rejects cross-origin submissions", asyn
       { env: { ...globalThis.process.env, LEAD_DATABASE: database }, encoding: "utf8" },
     );
     assert.equal(protectedExport.status, 0);
-    assert.match(protectedExport.stdout, /Robert'\); DROP TABLE leads;--/);
+    assert.match(protectedExport.stdout, /' OR 1=1/);
     assert.match(protectedExport.stdout, /'=1\+1/);
 
     const escapedEmail = spawnSync(
