@@ -125,15 +125,17 @@ export default function Home() {
           <p className="eyebrow"><span /> 休斯顿房产经纪 · HOUSTON · TEXAS</p>
           <h1>在休斯顿，<br />找到属于您的<br /><em>理想生活。</em></h1>
           <p className="hero-intro">以专业判断理解房产，以真诚沟通理解您。<br />为全球华人家庭提供值得信赖的休斯顿置业服务。</p>
-          <button
-            className="hero-consult-button"
-            type="button"
-            data-lead-open
-            aria-haspopup="dialog"
-            aria-controls="lead-dialog"
-          >
-            在线咨询 <span>↗</span>
-          </button>
+          <div className="hero-consult-row">
+            <button
+              className="hero-consult-button"
+              type="button"
+              data-lead-open
+              aria-haspopup="dialog"
+              aria-controls="lead-dialog"
+            >
+              在线咨询 <span>↗</span>
+            </button>
+          </div>
           <section className="hero-latest" data-blog-latest="true" aria-labelledby="hero-latest-title">
             <div className="hero-latest-heading">
               <h2 id="hero-latest-title">最新文章</h2>
