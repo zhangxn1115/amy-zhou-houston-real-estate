@@ -322,8 +322,8 @@ export default function Home() {
             </label>
             <label>
               <span>电话 / 微信 / 邮箱 *</span>
-              <input name="contact" type="text" required minLength={3} maxLength={20} autoComplete="email" placeholder="填写一种方便联系您的方式" />
-              <small className="lead-field-hint">最多20个字符</small>
+              <input name="contact" type="text" required minLength={3} maxLength={30} autoComplete="email" placeholder="填写一种方便联系您的方式" />
+              <small className="lead-field-hint">最多30个字符</small>
             </label>
             <div className="lead-form-row">
               <label>

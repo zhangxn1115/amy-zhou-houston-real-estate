@@ -98,10 +98,10 @@ test("stores valid same-origin leads and rejects cross-origin submissions", asyn
     const oversizedContact = await fetch(`http://127.0.0.1:${port}/api/leads`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Origin: "https://amyzhouhomes.net" },
-      body: JSON.stringify({ ...payload, contact: "1".repeat(21) }),
+      body: JSON.stringify({ ...payload, contact: "1".repeat(31) }),
     });
     assert.equal(oversizedContact.status, 422);
-    assert.match((await oversizedContact.json()).message, /20个字符以内/);
+    assert.match((await oversizedContact.json()).message, /30个字符以内/);
 
     const injectionAttempt = await fetch(`http://127.0.0.1:${port}/api/leads`, {
       method: "POST",

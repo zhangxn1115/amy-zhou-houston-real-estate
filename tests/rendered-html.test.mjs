@@ -70,7 +70,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /option value="学区"/);
   assert.match(html, /option value="投资"/);
   assert.match(html, /input(?=[^>]*name="name")(?=[^>]*maxLength="10")[^>]*>/);
-  assert.match(html, /input(?=[^>]*name="contact")(?=[^>]*maxLength="20")[^>]*>/);
+  assert.match(html, /input(?=[^>]*name="contact")(?=[^>]*maxLength="30")[^>]*>/);
   assert.match(html, /最多5个汉字或10个英文字符/);
   assert.match(html, /textarea[^>]*maxLength="100"/);
   assert.match(html, /src="\/lead-form\.js"/);
