@@ -281,8 +281,16 @@ class LeadHandler(BaseHTTPRequestHandler):
             self.send_json(200, {"ok": True})
             return
 
-        name = clean_text(payload.get("name"), 60)
-        contact = clean_text(payload.get("contact"), 120)
+        raw_name = payload.get("name", "")
+        raw_contact = payload.get("contact", "")
+        if not isinstance(raw_name, str) or len(raw_name) > 30:
+            self.send_json(422, {"message": "姓名请控制在30个字符以内。"})
+            return
+        if not isinstance(raw_contact, str) or len(raw_contact) > 60:
+            self.send_json(422, {"message": "联系方式请控制在60个字符以内。"})
+            return
+        name = clean_text(raw_name, 30)
+        contact = clean_text(raw_contact, 60)
         intent = clean_text(payload.get("intent"), 20)
         timeframe = clean_text(payload.get("timeframe"), 20)
         raw_message = payload.get("message", "")

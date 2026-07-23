@@ -319,11 +319,11 @@ export default function Home() {
             </div>
             <label>
               <span>您的姓名 *</span>
-              <input name="name" type="text" required maxLength={60} autoComplete="name" placeholder="怎么称呼您" />
+              <input name="name" type="text" required minLength={1} maxLength={30} autoComplete="name" placeholder="怎么称呼您" />
             </label>
             <label>
               <span>电话 / 微信 / 邮箱 *</span>
-              <input name="contact" type="text" required maxLength={120} autoComplete="email" placeholder="填写一种方便联系您的方式" />
+              <input name="contact" type="text" required minLength={3} maxLength={60} autoComplete="email" placeholder="填写一种方便联系您的方式" />
             </label>
             <div className="lead-form-row">
               <label>

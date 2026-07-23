@@ -67,6 +67,8 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /option value="通勤"/);
   assert.match(html, /option value="学区"/);
   assert.match(html, /option value="投资"/);
+  assert.match(html, /input(?=[^>]*name="name")(?=[^>]*maxLength="30")[^>]*>/);
+  assert.match(html, /input(?=[^>]*name="contact")(?=[^>]*maxLength="60")[^>]*>/);
   assert.match(html, /textarea[^>]*maxLength="100"/);
   assert.match(html, /src="\/lead-form\.js"/);
   assert.match(leadScript, /addEventListener\("click", openDialog\)/);
