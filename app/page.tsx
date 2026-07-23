@@ -327,14 +327,12 @@ export default function Home() {
             </label>
             <div className="lead-form-row">
               <label>
-                <span>置业目的</span>
-                <select name="intent" defaultValue="">
+                <span>置业目的 *</span>
+                <select name="intent" defaultValue="" required>
                   <option value="">请选择</option>
-                  <option value="自住">自住</option>
+                  <option value="通勤">通勤</option>
+                  <option value="学区">学区</option>
                   <option value="投资">投资</option>
-                  <option value="学区房">学区房</option>
-                  <option value="新房">新房</option>
-                  <option value="其他">其他</option>
                 </select>
               </label>
               <label>
@@ -350,7 +348,8 @@ export default function Home() {
             </div>
             <label>
               <span>想了解的区域或具体需求</span>
-              <textarea name="message" maxLength={600} rows={3} placeholder="例如预算、工作地点、偏好区域、房型或学区需求" />
+              <textarea name="message" maxLength={100} rows={3} placeholder="例如预算、工作地点、偏好区域、房型或学区需求" />
+              <small className="lead-character-count"><b data-lead-character-count>0</b>/100</small>
             </label>
             <label className="lead-consent">
               <input name="consent" type="checkbox" required />

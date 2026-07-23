@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function loadWorker() {
@@ -39,6 +40,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(policy, /https:\/\/www\.google-analytics\.com/);
 
   const html = await response.text();
+  const leadScript = await readFile(new URL("../public/lead-form.js", import.meta.url), "utf8");
   assert.match(html, /<title>休斯顿房产经纪 Amy Zhou/);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
   assert.match(html, /application\/ld\+json/);
@@ -62,7 +64,13 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /id="lead-dialog"/);
   assert.match(html, /action="\/api\/leads"/);
   assert.match(html, /name="website"/);
+  assert.match(html, /option value="通勤"/);
+  assert.match(html, /option value="学区"/);
+  assert.match(html, /option value="投资"/);
+  assert.match(html, /textarea[^>]*maxLength="100"/);
   assert.match(html, /src="\/lead-form\.js"/);
+  assert.match(leadScript, /addEventListener\("click", openDialog\)/);
+  assert.doesNotMatch(leadScript, /setTimeout\(openDialog/);
   assert.ok(html.indexOf("License No. 839083") < html.indexOf("了解休斯顿房市"));
   assert.doesNotMatch(html, /youtube-nocookie\.com\/embed\/vpIqfneYAhk/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);

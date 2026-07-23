@@ -39,7 +39,7 @@ test("stores valid same-origin leads and rejects cross-origin submissions", asyn
     const payload = {
       name: "测试客户",
       contact: "wechat-example",
-      intent: "自住",
+      intent: "通勤",
       timeframe: "3至6个月",
       message: "希望了解 Katy",
       consent: true,
@@ -71,6 +71,56 @@ test("stores valid same-origin leads and rejects cross-origin submissions", asyn
     assert.match(exported.stdout, /测试客户/);
     assert.match(exported.stdout, /wechat-example/);
     assert.doesNotMatch(exported.stdout, /ip_hash/);
+
+    const oversized = await fetch(`http://127.0.0.1:${port}/api/leads`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Origin: "https://amyzhouhomes.net" },
+      body: JSON.stringify({ ...payload, message: "长".repeat(101) }),
+    });
+    assert.equal(oversized.status, 422);
+    assert.match((await oversized.json()).message, /100字以内/);
+
+    const injectionAttempt = await fetch(`http://127.0.0.1:${port}/api/leads`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Origin: "https://amyzhouhomes.net" },
+      body: JSON.stringify({
+        ...payload,
+        name: "Robert'); DROP TABLE leads;--",
+        contact: "=1+1",
+        message: "<script>alert(1)</script>",
+        startedAt: Date.now() - 4000,
+      }),
+    });
+    assert.equal(injectionAttempt.status, 201);
+
+    const protectedExport = spawnSync(
+      "/usr/bin/python3",
+      [path.join(root, "server/export_leads.py")],
+      { env: { ...globalThis.process.env, LEAD_DATABASE: database }, encoding: "utf8" },
+    );
+    assert.equal(protectedExport.status, 0);
+    assert.match(protectedExport.stdout, /Robert'\); DROP TABLE leads;--/);
+    assert.match(protectedExport.stdout, /'=1\+1/);
+
+    const escapedEmail = spawnSync(
+      "/usr/bin/python3",
+      [
+        "-c",
+        "import sys; sys.path.insert(0, sys.argv[1]); import lead_api; print(lead_api.email_table_row('需求', '<script>alert(1)</script>'))",
+        path.join(root, "server"),
+      ],
+      {
+        env: {
+          ...globalThis.process.env,
+          LEAD_DATABASE: database,
+          LEAD_HASH_SALT_FILE: path.join(directory, "hash-salt"),
+        },
+        encoding: "utf8",
+      },
+    );
+    assert.equal(escapedEmail.status, 0);
+    assert.match(escapedEmail.stdout, /&lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+    assert.doesNotMatch(escapedEmail.stdout, /<script>alert/);
   } finally {
     process.kill("SIGTERM");
     await rm(directory, { recursive: true, force: true });

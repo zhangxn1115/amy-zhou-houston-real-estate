@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if [[ ${EUID} -ne 0 ]]; then
+  exec sudo "$0" "$@"
+fi
+
+email="ningimeng12@gmail.com"
+printf 'Gmail account: %s\n' "$email"
+printf 'Paste the 16-character Gmail App Password (input is hidden): '
+IFS= read -r -s password
+printf '\n'
+
+password=${password// /}
+if [[ ! "$password" =~ ^[A-Za-z0-9]{16}$ ]]; then
+  echo "Invalid App Password. Expected 16 letters or numbers." >&2
+  exit 1
+fi
+
+temporary=$(mktemp /etc/.amyzhou-leads.env.XXXXXX)
+trap 'rm -f "$temporary"' EXIT
+chmod 600 "$temporary"
+cat >"$temporary" <<EOF
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USERNAME=$email
+SMTP_PASSWORD=$password
+LEAD_EMAIL_TO=$email
+EOF
+
+install -o root -g root -m 600 "$temporary" /etc/amyzhou-leads.env
+systemctl restart amyzhou-leads.service
+systemctl is-active --quiet amyzhou-leads.service
+echo "Lead email delivery is configured and the service is running."
