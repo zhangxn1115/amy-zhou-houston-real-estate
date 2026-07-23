@@ -89,6 +89,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <meta name="baidu-site-verification" content="codeva-Hb26Im9o4q" />
         <script src="/analytics.js" defer />
+        <script src="/lead-form.js" defer />
       </head>
       <body>
         <StructuredData />

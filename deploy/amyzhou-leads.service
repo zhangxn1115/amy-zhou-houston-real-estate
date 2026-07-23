@@ -1,0 +1,31 @@
+[Unit]
+Description=Amy Zhou Homes private lead intake API
+After=network.target
+
+[Service]
+Type=simple
+DynamicUser=yes
+StateDirectory=amyzhou-leads
+StateDirectoryMode=0700
+ExecStart=/usr/bin/python3 /opt/amyzhou-lead-api/lead_api.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=yes
+PrivateDevices=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+IPAddressDeny=any
+IPAddressAllow=localhost
+
+[Install]
+WantedBy=multi-user.target

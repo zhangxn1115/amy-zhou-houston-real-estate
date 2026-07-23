@@ -292,6 +292,85 @@ export default function Home() {
         </div>
       </section>
 
+      <button
+        className="lead-fab"
+        type="button"
+        data-lead-open
+        aria-haspopup="dialog"
+        aria-controls="lead-dialog"
+      >
+        <span>中文咨询</span>
+        <strong>留下您的置业需求</strong>
+      </button>
+
+      <dialog className="lead-dialog" id="lead-dialog" aria-labelledby="lead-dialog-title">
+        <div className="lead-dialog-panel">
+          <button className="lead-dialog-close" type="button" data-lead-close aria-label="关闭咨询表单">×</button>
+          <div className="lead-dialog-heading">
+            <p>PRIVATE CONSULTATION · 中文沟通</p>
+            <h2 id="lead-dialog-title">告诉 Amy，<span>您想寻找怎样的家。</span></h2>
+            <small>留下基本需求后，Amy 会尽快与您联系。您的信息仅用于本次置业咨询。</small>
+          </div>
+          <form className="lead-form" action="/api/leads" method="post" data-lead-form>
+            <input type="hidden" name="startedAt" value="" data-lead-started-at />
+            <div className="lead-honeypot" aria-hidden="true">
+              <label htmlFor="lead-website">网站</label>
+              <input id="lead-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+            </div>
+            <label>
+              <span>您的姓名 *</span>
+              <input name="name" type="text" required maxLength={60} autoComplete="name" placeholder="怎么称呼您" />
+            </label>
+            <label>
+              <span>电话 / 微信 / 邮箱 *</span>
+              <input name="contact" type="text" required maxLength={120} autoComplete="email" placeholder="填写一种方便联系您的方式" />
+            </label>
+            <div className="lead-form-row">
+              <label>
+                <span>置业目的</span>
+                <select name="intent" defaultValue="">
+                  <option value="">请选择</option>
+                  <option value="自住">自住</option>
+                  <option value="投资">投资</option>
+                  <option value="学区房">学区房</option>
+                  <option value="新房">新房</option>
+                  <option value="其他">其他</option>
+                </select>
+              </label>
+              <label>
+                <span>计划时间</span>
+                <select name="timeframe" defaultValue="">
+                  <option value="">请选择</option>
+                  <option value="3个月内">3个月内</option>
+                  <option value="3至6个月">3至6个月</option>
+                  <option value="半年至一年">半年至一年</option>
+                  <option value="先了解市场">先了解市场</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              <span>想了解的区域或具体需求</span>
+              <textarea name="message" maxLength={600} rows={3} placeholder="例如预算、工作地点、偏好区域、房型或学区需求" />
+            </label>
+            <label className="lead-consent">
+              <input name="consent" type="checkbox" required />
+              <span>我同意 Amy 因本次置业咨询与我联系。</span>
+            </label>
+            <button className="lead-submit" type="submit">
+              <span data-lead-submit-label>提交置业需求</span>
+              <i>↗</i>
+            </button>
+            <p className="lead-form-status" data-lead-status role="status" aria-live="polite" />
+          </form>
+          <div className="lead-success" data-lead-success hidden>
+            <span>✓</span>
+            <h3>已收到您的需求</h3>
+            <p>Amy 会尽快与您联系，也欢迎先添加微信 ningimengyanyan。</p>
+            <button type="button" data-lead-close>完成</button>
+          </div>
+        </div>
+      </dialog>
+
       <footer>
         <div className="brand footer-brand"><span className="brand-mark">AZ</span><span className="brand-copy"><strong>AMY ZHOU</strong><small>HOUSTON REAL ESTATE</small></span></div>
         <p>为全球华人家庭提供休斯顿房产服务</p>

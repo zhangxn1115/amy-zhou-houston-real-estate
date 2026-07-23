@@ -31,7 +31,7 @@ html = html.replace(
 );
 html = html.replace(
   "</head>",
-  `${staticStylesheet}<script src="./analytics.js" defer></script><script src="./locale.js" defer></script></head>`
+  `${staticStylesheet}<script src="./analytics.js" defer></script><script src="./locale.js" defer></script><script src="./lead-form.js" defer></script></head>`
 );
 
 if (!html.includes(staticStylesheet) || /href="\/assets\/index-[^"]+\.css"/.test(html)) {
