@@ -1,9 +1,9 @@
-import { copyFile, readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 
 const sourcePath = process.argv[2] ?? "/tmp/amy-index.html";
 const outputPath = process.argv[3] ?? "site/index.html";
 const siteUrl = "https://amyzhouhomes.net";
-const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20260726-1"/>';
+const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20260723-3"/>';
 
 let html = await readFile(sourcePath, "utf8");
 
@@ -23,7 +23,6 @@ html = html.replaceAll('href="/wechat-qr.jpg"', 'href="./wechat-qr.jpg"');
 html = html.replaceAll('src="/amy-zhou.jpg"', 'src="./amy-zhou.jpg"');
 html = html.replaceAll('src="/amy-zhou-homes-logo.png"', 'src="./amy-zhou-homes-logo.png"');
 html = html.replaceAll('src="/wechat-qr.jpg"', 'src="./wechat-qr.jpg"');
-html = html.replaceAll('src="/wechat-qr-house.png"', 'src="./wechat-qr-house.png"');
 html = html.replaceAll('src="/areas/', 'src="./areas/');
 html = html.replace(/ nonce="[^"]+"/g, "");
 html = html.replace(
@@ -40,5 +39,4 @@ if (!html.includes(staticStylesheet) || /href="\/assets\/index-[^"]+\.css"/.test
 }
 
 await writeFile(outputPath, html);
-await copyFile(new URL("../public/wechat-qr-house.png", import.meta.url), "site/wechat-qr-house.png");
 console.log(`Exported ${outputPath} for ${siteUrl}/`);

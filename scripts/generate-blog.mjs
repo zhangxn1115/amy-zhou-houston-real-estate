@@ -535,7 +535,7 @@ function renderArticle(post) {
           <img class="article-author-photo" src="/amy-zhou.jpg" alt="休斯顿房产经纪 Amy Zhou" width="1280" height="1920" loading="lazy" decoding="async">
           <strong>Amy Zhou</strong>
           <span>休斯顿房产经纪</span>
-          <div class="article-author-qr"><img src="/wechat-qr-house.png" alt="Amy Zhou 微信二维码" width="480" height="429" loading="lazy" decoding="async"><small>微信扫码咨询</small></div>
+          <div class="article-author-qr"><img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" loading="lazy" decoding="async"><small>微信扫码咨询</small></div>
           <small class="article-author-license">License No. 839083</small>
           <button class="article-consult-button" type="button" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">在线咨询 <span>↗</span></button>
         </aside>
