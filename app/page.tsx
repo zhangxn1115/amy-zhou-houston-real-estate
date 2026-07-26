@@ -108,7 +108,7 @@ export default function Home() {
         </a>
         <div className="header-contact-block">
           <div className="qr-placeholder">
-            <img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" />
+            <img src="/wechat-qr-house.png" alt="Amy Zhou 微信二维码" width="480" height="429" />
           </div>
           <div className="header-contact-details">
             <p><span>电话</span><strong>+1 346 582 7694</strong></p>

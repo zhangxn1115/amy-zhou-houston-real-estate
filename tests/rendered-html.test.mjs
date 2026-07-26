@@ -51,6 +51,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /favicon-32\.png/);
   assert.match(html, /favicon-16\.png/);
   assert.match(html, /apple-touch-icon\.png/);
+  assert.match(html, /wechat-qr-house\.png/);
   assert.match(html, /name="baidu-site-verification" content="codeva-Hb26Im9o4q"/);
   assert.match(html, /中文沟通｜休斯顿自住、投资、优质学区与社区置业服务/);
   assert.doesNotMatch(html, /href="tel:/);

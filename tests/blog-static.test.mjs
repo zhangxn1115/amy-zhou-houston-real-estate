@@ -19,7 +19,7 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(index, /<style>:root\{--ink:/);
   assert.doesNotMatch(index, /rel="stylesheet" href="\/assets\/blog\.css/);
   assert.match(index, /style-src 'self' 'sha256-[A-Za-z0-9+/=]+'/);
-  assert.match(index, /grid-template-columns:88px minmax\(0,1fr\) 88px/);
+  assert.match(index, /grid-template-columns:88px minmax\(0,1fr\) 104px/);
   assert.match(index, /\.article-author-qr\{grid-column:3;grid-row:1\/4/);
   assert.match(index, /\.article-author-qr small\{[^}]*font-size:11px/);
   assert.match(index, /\.article-author-license\{[^}]*font-size:11px/);
@@ -33,7 +33,7 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(article, /休斯顿房产经纪 Amy Zhou/);
   assert.match(article, /class="article-author-qr"/);
   assert.match(article, /Amy Zhou 微信二维码/);
-  assert.match(article, /wechat-qr\.jpg/);
+  assert.match(article, /wechat-qr-house\.png/);
   assert.match(article, /class="article-consult-button"[^>]*data-lead-open/);
   assert.match(article, /在线咨询/);
   assert.match(article, /id="lead-dialog"/);
