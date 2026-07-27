@@ -49,6 +49,11 @@ const services = [
   },
 ];
 
+function responsiveWebp(image: string) {
+  const base = image.replace(/\.(?:jpe?g|png)$/i, "");
+  return `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`;
+}
+
 const steps = ["了解您的需求", "制定置业方案", "筛选与实地看房", "谈判、签约与交割"];
 
 const schoolDistricts = [
@@ -103,12 +108,12 @@ export default function Home() {
             alt="Amy Zhou Homes"
             width="768"
             height="512"
-            fetchPriority="high"
+            decoding="async"
           />
         </a>
         <div className="header-contact-block">
           <div className="qr-placeholder">
-            <img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" />
+            <img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" loading="lazy" decoding="async" fetchPriority="low" />
           </div>
           <div className="header-contact-details">
             <p><span>电话</span><strong>+1 346 582 7694</strong></p>
@@ -144,7 +149,10 @@ export default function Home() {
             <div className="hero-blog-list">
               {latestPosts.map((post) => (
                 <a className="hero-blog-item" href={post.href} key={post.href}>
-                  <img src={post.image} alt={post.alt} width={post.width} height={post.height} loading="lazy" decoding="async" />
+                  <picture>
+                    <source srcSet={responsiveWebp(post.image)} sizes="(max-width: 720px) 112px, 150px" type="image/webp" />
+                    <img src={post.image} alt={post.alt} width={post.width} height={post.height} loading="lazy" decoding="async" />
+                  </picture>
                   <span className="hero-blog-copy">
                     <strong>{post.title}</strong>
                     <small>{post.excerpt}</small>
@@ -207,7 +215,10 @@ export default function Home() {
         <div className="service-grid">
           {services.map((service) => (
             <article className="service-card" key={service.title}>
-              <img className="service-image" src={service.image} alt={service.alt} width={service.width} height={service.height} loading="lazy" decoding="async" />
+              <picture>
+                <source srcSet={responsiveWebp(service.image)} sizes="(max-width: 760px) 100vw, 33vw" type="image/webp" />
+                <img className="service-image" src={service.image} alt={service.alt} width={service.width} height={service.height} loading="lazy" decoding="async" />
+              </picture>
               <h3>{service.title}</h3>
               <p>{service.text}</p>
             </article>
@@ -248,7 +259,7 @@ export default function Home() {
         </div>
         <div className="video-feature">
           <iframe
-            src="https://www.youtube-nocookie.com/embed/videoseries?list=UU1ymf6PCQwnLL8-ETiPteHw"
+            data-video-src="https://www.youtube-nocookie.com/embed/videoseries?list=UU1ymf6PCQwnLL8-ETiPteHw"
             title="Amy Zhou 休斯顿房产最新视频"
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

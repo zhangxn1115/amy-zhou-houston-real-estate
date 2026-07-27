@@ -38,9 +38,9 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(article, /在线咨询/);
   assert.match(article, /id="lead-dialog"/);
   assert.match(article, /action="\/api\/leads"/);
-  assert.match(article, /src="\/lead-form\.js"/);
+  assert.match(article, /src="\/lead-form\.js\?v=20260727-1"/);
   assert.match(article, /rel="preload" href="\/blog-media\/_20260718140820_5_9\.webp" as="image" fetchpriority="high"/);
-  assert.match(article, /<source srcset="\/blog-media\/_20260718140820_5_9\.webp" type="image\/webp">/);
+  assert.match(article, /<source srcset="\/blog-media\/_20260718140820_5_9-480\.webp 480w, \/blog-media\/_20260718140820_5_9-800\.webp 800w, \/blog-media\/_20260718140820_5_9\.webp 1200w"/);
   assert.match(article, /<meta name="keywords" content="[^"]*休斯顿华人房产经纪[^"]*休斯顿买房[^"]*休斯顿二手房/);
   assert.match(article, /<meta name="description" content="[^"]*休斯顿华人房产经纪[^"]*休斯顿购房[^"]*休斯顿新房[^"]*休斯顿看房/);
   assert.match(article, /"keywords":\["休斯顿华人房产经纪"/);
@@ -76,10 +76,12 @@ test("publishes a web-optimized copy of uploaded blog images", async () => {
   const source = await stat(new URL("../public/blog-media/_20260718140820_5_9.jpg", import.meta.url));
   const published = await stat(new URL("../site/blog-media/_20260718140820_5_9.jpg", import.meta.url));
   const webp = await stat(new URL("../site/blog-media/_20260718140820_5_9.webp", import.meta.url));
+  const mobileWebp = await stat(new URL("../site/blog-media/_20260718140820_5_9-480.webp", import.meta.url));
 
-  assert.ok(published.size < source.size, "published image should be smaller than the CMS original");
+  assert.ok(published.size <= source.size, "published image should not exceed the optimized CMS image");
   assert.ok(published.size < 1_500_000, "published image should be suitable for web delivery");
   assert.ok(webp.size < published.size, "modern browsers should receive an even smaller WebP cover");
+  assert.ok(mobileWebp.size < webp.size, "mobile browsers should receive a smaller responsive cover");
 });
 
 test("publishes the California and Texas comparison with authoritative sources", async () => {

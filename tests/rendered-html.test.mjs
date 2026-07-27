@@ -44,7 +44,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /<title>休斯顿房产经纪 Amy Zhou/);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
   assert.match(html, /application\/ld\+json/);
-  assert.match(html, /src="\/analytics\.js"/);
+  assert.match(html, /src="\/analytics\.js\?v=20260727-1"/);
   assert.match(html, /property="og:title" content="休斯顿房产经纪 Amy Zhou"/);
   assert.match(html, /amy-zhou-wechat-share\.jpg/);
   assert.match(html, /favicon\.png/);
@@ -74,7 +74,9 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /input(?=[^>]*name="contact")(?=[^>]*maxLength="30")[^>]*>/);
   assert.match(html, /最多5个汉字或10个英文字符/);
   assert.match(html, /textarea[^>]*maxLength="100"/);
-  assert.match(html, /src="\/lead-form\.js"/);
+  assert.match(html, /src="\/lead-form\.js\?v=20260727-1"/);
+  assert.match(html, /src="\/video-lazy\.js\?v=20260727-1"/);
+  assert.match(html, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/videoseries/);
   assert.match(leadScript, /addEventListener\("click", openDialog\)/);
   assert.doesNotMatch(leadScript, /setTimeout\(openDialog/);
   assert.ok(html.indexOf("License No. 839083") < html.indexOf("了解休斯顿房市"));

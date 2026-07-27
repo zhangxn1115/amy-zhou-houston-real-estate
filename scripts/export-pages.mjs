@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 const sourcePath = process.argv[2] ?? "/tmp/amy-index.html";
 const outputPath = process.argv[3] ?? "site/index.html";
 const siteUrl = "https://amyzhouhomes.net";
-const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20260723-3"/>';
+const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20260727-1"/>';
 
 let html = await readFile(sourcePath, "utf8");
 
@@ -31,7 +31,7 @@ html = html.replace(
 );
 html = html.replace(
   "</head>",
-  `${staticStylesheet}<script src="./analytics.js" defer></script><script src="./locale.js" defer></script><script src="./lead-form.js" defer></script></head>`
+  `${staticStylesheet}<script src="./analytics.js?v=20260727-1" defer></script><script src="./locale.js?v=20260727-1" defer></script><script src="./lead-form.js?v=20260727-1" defer></script><script src="./video-lazy.js?v=20260727-1" defer></script></head>`
 );
 
 if (!html.includes(staticStylesheet) || /href="\/assets\/index-[^"]+\.css"/.test(html)) {

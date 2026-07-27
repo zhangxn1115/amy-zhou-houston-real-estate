@@ -105,6 +105,7 @@ h2 { font-size:clamp(42px,4.4vw,68px); line-height:1.16; }
 .service-card:nth-child(3n) { border-right:0; }
 .service-card:nth-child(-n+3) { border-bottom:1px solid rgba(255,255,255,.18); }
 .service-card:hover { background:rgba(255,255,255,.055); transform:translateY(-5px); }
+.service-card > picture { display:block; width:100%; }
 .service-image { display:block; width:100%; height:178px; margin:0 0 30px; object-fit:cover; filter:saturate(.78) contrast(.96); }
 .service-card h3 { font-family:Georgia,"Songti SC",serif; font-size:26px; font-weight:400; margin:0 0 18px; }
 .service-card p { color:#a9bab4; font-size:14px; line-height:1.85; max-width:310px; }

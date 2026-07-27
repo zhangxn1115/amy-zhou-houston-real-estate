@@ -186,6 +186,16 @@ function webCoverUrl(value) {
   return /^\/blog-media\/.+\.(?:jpe?g|png)$/i.test(value) ? value.replace(/\.(?:jpe?g|png)$/i, ".webp") : "";
 }
 
+function webCoverSrcSet(value) {
+  const webCover = webCoverUrl(value);
+  if (!webCover) return "";
+  return [
+    `${webCover.replace(/\.webp$/i, "-480.webp")} 480w`,
+    `${webCover.replace(/\.webp$/i, "-800.webp")} 800w`,
+    `${webCover} 1200w`,
+  ].join(", ");
+}
+
 function safeVideoUrl(value) {
   const candidate = typeof value === "string" ? value.trim() : "";
   return /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//i.test(candidate) ? candidate : "";
@@ -286,9 +296,10 @@ function pageHead({ title, description, canonical, image, type = "website", keyw
   <link rel="shortcut icon" href="/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 ${preloadImage ? `  <link rel="preload" href="${escapeHtml(preloadImage)}" as="image" fetchpriority="high">\n` : ""}  <style>${inlineCss}</style>
-  <script src="/analytics.js" defer></script>
-  <script src="/locale.js" defer></script>
-  <script src="/lead-form.js" defer></script>
+  <script src="/analytics.js?v=20260727-1" defer></script>
+  <script src="/locale.js?v=20260727-1" defer></script>
+  <script src="/lead-form.js?v=20260727-1" defer></script>
+  <script src="/video-lazy.js?v=20260727-1" defer></script>
 </head>`;
 }
 
@@ -421,7 +432,7 @@ function renderCards(posts) {
     const webCover = webCoverUrl(post.cover);
     return `<article class="blog-card">
     <a class="blog-card-image" href="/blog/${post.slug}/">
-      <picture>${webCover ? `<source srcset="${escapeHtml(webCover)}" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" loading="lazy" decoding="async"></picture>
+      <picture>${webCover ? `<source srcset="${escapeHtml(webCoverSrcSet(post.cover))}" sizes="(max-width: 760px) 100vw, 42vw" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" loading="lazy" decoding="async"></picture>
     </a>
     <div class="blog-card-copy">
       <p class="blog-card-meta"><span>${escapeHtml(post.category)}</span><time datetime="${post.dateIso}">${post.dateLabel}</time></p>
@@ -438,7 +449,7 @@ function renderHomeLatest(posts) {
   return `<section class="hero-latest" data-blog-latest="true" aria-labelledby="hero-latest-title">
     <div class="hero-latest-heading"><h2 id="hero-latest-title">最新文章</h2><a href="/blog/">查看全部 <span>↗</span></a></div>
     <div class="hero-blog-list">${latest.map((post) => `<a class="hero-blog-item" href="/blog/${post.slug}/">
-      <picture>${webCoverUrl(post.cover) ? `<source srcset="${escapeHtml(webCoverUrl(post.cover))}" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="320" height="180" loading="lazy" decoding="async"></picture>
+      <picture>${webCoverUrl(post.cover) ? `<source srcset="${escapeHtml(webCoverSrcSet(post.cover))}" sizes="(max-width: 720px) 112px, 150px" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="320" height="180" loading="lazy" decoding="async"></picture>
       <span class="hero-blog-copy"><strong>${escapeHtml(post.title)}</strong><small>${escapeHtml(post.excerpt)}</small></span>
     </a>`).join("")}</div>
   </section>`;
@@ -529,7 +540,7 @@ function renderArticle(post) {
         <p class="article-deck">${escapeHtml(post.excerpt)}</p>
         <div class="article-meta"><span>Amy Zhou</span><time datetime="${post.dateIso}">${post.dateLabel}</time><span>${post.readingMinutes} 分钟阅读</span></div>
       </header>
-      <figure class="article-cover"><picture>${webCover ? `<source srcset="${escapeHtml(webCover)}" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="1200" height="675" fetchpriority="high" decoding="async"></picture></figure>
+      <figure class="article-cover"><picture>${webCover ? `<source srcset="${escapeHtml(webCoverSrcSet(post.cover))}" sizes="(max-width: 760px) 100vw, 1200px" type="image/webp">` : ""}<img src="${escapeHtml(post.cover)}" alt="${escapeHtml(post.coverAlt)}" width="1200" height="675" fetchpriority="high" decoding="async"></picture></figure>
       <div class="article-layout">
         <aside class="article-author">
           <img class="article-author-photo" src="/amy-zhou.jpg" alt="休斯顿房产经纪 Amy Zhou" width="1280" height="1920" loading="lazy" decoding="async">
@@ -590,6 +601,9 @@ async function buildBlog() {
   await cp(path.join(root, "public", "favicon-32.png"), path.join(siteDirectory, "favicon-32.png"), { force: true });
   await cp(path.join(root, "public", "favicon-16.png"), path.join(siteDirectory, "favicon-16.png"), { force: true });
   await cp(path.join(root, "public", "apple-touch-icon.png"), path.join(siteDirectory, "apple-touch-icon.png"), { force: true });
+  await cp(path.join(root, "public", "analytics.js"), path.join(siteDirectory, "analytics.js"), { force: true });
+  await cp(path.join(root, "public", "lead-form.js"), path.join(siteDirectory, "lead-form.js"), { force: true });
+  await cp(path.join(root, "public", "video-lazy.js"), path.join(siteDirectory, "video-lazy.js"), { force: true });
 
   await writeFile(path.join(blogDirectory, "index.html"), renderIndex(posts));
   await writeFile(path.join(blogDirectory, "index.json"), JSON.stringify(posts.map((post) => ({
