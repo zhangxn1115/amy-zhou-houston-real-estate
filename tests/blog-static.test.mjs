@@ -160,16 +160,32 @@ test("publishes Amy's Houston career and neighborhood guide for young profession
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-young-professionals-careers-neighborhoods\.jpg/);
 });
 
+test("publishes the Katy Tompkins video home tour with an embedded player", async () => {
+  const article = await read("../site/blog/2026-07-27-katy-tompkins-home-under-280k/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /不到28万美元读Katy 9分高中/);
+  assert.match(article, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/cO_B7WL_3_A"/);
+  assert.match(article, /"@type":"VideoObject"/);
+  assert.match(article, /Tompkins High School/);
+  assert.match(article, /挂牌价：279,900美元/);
+  assert.match(article, /二手房不能只看价格和装修/);
+  assert.match(article, /休斯顿华人房产经纪/);
+  assert.match(article, /katy-tompkins-under-280k-video-cover\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-27-katy-tompkins-home-under-280k\//);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const katyVideo = home.indexOf("不到28万美元读Katy 9分高中");
   const careers = home.indexOf("刚毕业来休斯顿，从哪里开始");
   const retirement = home.indexOf("为什么我觉得休斯顿适合养老");
-  const tools = home.indexOf("休斯顿买房前必查的10个实用网站");
 
+  assert.ok(katyVideo > -1);
   assert.ok(careers > -1);
   assert.ok(retirement > -1);
+  assert.ok(katyVideo < careers);
   assert.ok(careers < retirement);
-  assert.ok(retirement < tools);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解休斯顿房市"));

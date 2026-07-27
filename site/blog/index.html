@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'sha256-V/HDlbG2HGxpqCmkIGKbgYMK4j53kzLIBJW32uo5oqo='; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'sha256-wV0X7mIfIK3cupvUsLdNnWpDaHeDnWDafKmVojKDGcQ='; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>休斯顿房产博客｜Amy Zhou 房市、社区与学区指南</title>
   <meta name="description" content="Amy Zhou 的休斯顿中文房产博客，分享大休斯顿房市动态、热门社区、优质学区、新房探访和买房知识。">
@@ -116,8 +116,11 @@ main{background:var(--paper);overflow:hidden}
 .article-body a{color:#8f603d;border-bottom:1px solid rgba(143,96,61,.35)}
 .article-body img{max-height:680px;margin:2em auto;object-fit:contain}
 .article-body hr{margin:2.5em 0;border:0;border-top:1px solid var(--line)}
-.article-video-link{margin-top:45px!important}
-.article-video-link a{display:inline-block;padding:14px 18px;background:var(--forest);color:#fff;border:0}
+.article-video{margin:0 0 52px}
+.article-video-frame{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--forest);box-shadow:0 18px 48px rgba(23,58,50,.15)}
+.article-video-frame iframe{display:block;width:100%;height:100%;border:0}
+.article-video>p{margin:12px 0 0!important;color:#6a7b75;font-size:12px!important}
+.article-video>p a{color:#8e6849;border-bottom:1px solid rgba(142,104,73,.35)}
 .article-disclaimer{margin-top:60px;padding-top:24px;border-top:1px solid var(--line);color:#80908a;font-family:"Avenir Next","PingFang SC",sans-serif;font-size:10px;line-height:1.8}
 .lead-dialog{width:min(920px,calc(100vw - 32px));max-width:none;max-height:calc(100vh - 32px);margin:auto;padding:0;overflow:auto;border:0;background:transparent;color:var(--ink)}
 .lead-dialog::backdrop{background:rgba(14,35,29,.72);backdrop-filter:blur(5px)}
@@ -231,9 +234,20 @@ body:has(.lead-dialog[open]){overflow:hidden}
       <div class="blog-section-heading">
         <p>PROPERTY JOURNAL</p>
         <h2 id="latest-posts">最新文章</h2>
-        <span>共 5 篇</span>
+        <span>共 6 篇</span>
       </div>
       <div class="blog-grid"><article class="blog-card">
+    <a class="blog-card-image" href="/blog/2026-07-27-katy-tompkins-home-under-280k/">
+      <picture><source srcset="/blog-media/katy-tompkins-under-280k-video-cover-480.webp 480w, /blog-media/katy-tompkins-under-280k-video-cover-800.webp 800w, /blog-media/katy-tompkins-under-280k-video-cover.webp 1200w" sizes="(max-width: 760px) 100vw, 42vw" type="image/webp"><img src="/blog-media/katy-tompkins-under-280k-video-cover.jpg" alt="Amy Zhou实拍Katy Tompkins High School学区27.99万美元二手房" loading="lazy" decoding="async"></picture>
+    </a>
+    <div class="blog-card-copy">
+      <p class="blog-card-meta"><span>看房实拍</span><time datetime="2026-07-27T17:00:00.000Z">2026年7月27日</time></p>
+      <h2><a href="/blog/2026-07-27-katy-tompkins-home-under-280k/">不到28万美元读Katy 9分高中？实拍Tompkins High学区二手房</a></h2>
+      <p>Amy实拍Katy高分学区二手房，聊聊27.99万美元的房子值不值得买。</p>
+      <a class="blog-read-link" href="/blog/2026-07-27-katy-tompkins-home-under-280k/">阅读全文 <span>↗</span></a>
+    </div>
+  </article>
+<article class="blog-card">
     <a class="blog-card-image" href="/blog/2026-07-22-houston-young-professionals-careers-neighborhoods/">
       <picture><source srcset="/blog-media/houston-young-professionals-careers-neighborhoods-480.webp 480w, /blog-media/houston-young-professionals-careers-neighborhoods-800.webp 800w, /blog-media/houston-young-professionals-careers-neighborhoods.webp 1200w" sizes="(max-width: 760px) 100vw, 42vw" type="image/webp"><img src="/blog-media/houston-young-professionals-careers-neighborhoods.jpg" alt="两位年轻华人职场人士走在休斯顿市中心附近的现代社区" loading="lazy" decoding="async"></picture>
     </a>

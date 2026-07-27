@@ -201,6 +201,28 @@ function safeVideoUrl(value) {
   return /^https:\/\/(www\.)?(youtube\.com|youtu\.be)\//i.test(candidate) ? candidate : "";
 }
 
+function youtubeVideoId(value) {
+  if (!value) return "";
+  try {
+    const url = new URL(value);
+    const hostname = url.hostname.replace(/^www\./, "").toLowerCase();
+    let id = "";
+    if (hostname === "youtu.be") id = url.pathname.slice(1).split("/")[0];
+    if (hostname === "youtube.com") {
+      if (url.pathname === "/watch") id = url.searchParams.get("v") ?? "";
+      else if (/^\/(?:embed|shorts)\//.test(url.pathname)) id = url.pathname.split("/")[2] ?? "";
+    }
+    return /^[A-Za-z0-9_-]{11}$/.test(id) ? id : "";
+  } catch {
+    return "";
+  }
+}
+
+function youtubeEmbedUrl(value) {
+  const id = youtubeVideoId(value);
+  return id ? `https://www.youtube-nocookie.com/embed/${id}` : "";
+}
+
 function normalizeSlug(filename) {
   const slug = filename.replace(/\.md$/i, "").toLowerCase();
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
@@ -500,8 +522,12 @@ function renderArticle(post) {
   const canonical = `${origin}/blog/${post.slug}/`;
   const seoDescription = articleSeoDescription(post.excerpt);
   const webCover = webCoverUrl(post.cover);
-  const videoLink = post.youtube
-    ? `<p class="article-video-link"><a href="${escapeHtml(post.youtube)}" target="_blank" rel="noopener noreferrer">观看相关 YouTube 视频 <span>↗</span></a></p>`
+  const embedUrl = youtubeEmbedUrl(post.youtube);
+  const videoEmbed = embedUrl
+    ? `<section class="article-video" aria-label="Amy 视频看房">
+        <div class="article-video-frame"><iframe data-video-src="${escapeHtml(embedUrl)}" title="${escapeHtml(post.title)}｜Amy Zhou 视频看房" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" sandbox="allow-scripts allow-same-origin allow-presentation allow-popups" allowfullscreen></iframe></div>
+        <p>如果播放器没有显示，可以<a href="${escapeHtml(post.youtube)}" target="_blank" rel="noopener noreferrer">前往 YouTube 观看完整视频 <span>↗</span></a></p>
+      </section>`
     : "";
   const structuredData = JSON.stringify({
     "@context": "https://schema.org",
@@ -517,6 +543,17 @@ function renderArticle(post) {
     mainEntityOfPage: canonical,
     author: { "@type": "Person", name: "Amy Zhou", url: origin },
     publisher: { "@type": "RealEstateAgent", name: "Amy Zhou Houston Real Estate", url: origin },
+    ...(embedUrl ? {
+      video: {
+        "@type": "VideoObject",
+        name: post.title,
+        description: seoDescription,
+        thumbnailUrl: absoluteUrl(post.cover),
+        uploadDate: post.dateIso,
+        embedUrl,
+        contentUrl: post.youtube,
+      },
+    } : {}),
   }).replaceAll("<", "\\u003c");
 
   return `${pageHead({
@@ -550,7 +587,7 @@ function renderArticle(post) {
           <small class="article-author-license">License No. 839083</small>
           <button class="article-consult-button" type="button" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">在线咨询 <span>↗</span></button>
         </aside>
-        <div class="article-body">${post.body}${videoLink}
+        <div class="article-body">${videoEmbed}${post.body}
           <div class="article-disclaimer">本文用于提供一般市场与社区信息，不构成法律、税务、贷款或投资建议。房源、学区边界与市场数据可能变化，请以相关机构及交易时的最新资料为准。</div>
         </div>
       </div>

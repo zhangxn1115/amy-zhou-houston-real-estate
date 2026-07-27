@@ -8,9 +8,18 @@
   </url>
   <url>
     <loc>https://amyzhouhomes.net/blog/</loc>
-    <lastmod>2026-07-22</lastmod>
+    <lastmod>2026-07-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://amyzhouhomes.net/blog/2026-07-27-katy-tompkins-home-under-280k/</loc>
+    <lastmod>2026-07-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://amyzhouhomes.net/blog-media/katy-tompkins-under-280k-video-cover.jpg</image:loc>
+    </image:image>
   </url>
   <url>
     <loc>https://amyzhouhomes.net/blog/2026-07-22-houston-young-professionals-careers-neighborhoods/</loc>
