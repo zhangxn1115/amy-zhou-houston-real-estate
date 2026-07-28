@@ -1,8 +1,8 @@
 ---
-title: "刚拿到Summerview最新房源清单，Fulshear新房可以这样看"
+title: "Summerview最新房源：$299,990起售，Fulshear新房可以这样看"
 slug: summerview-fulshear-latest-homes
 date: 2026-07-28T11:15:00-05:00
-updated: 2026-07-28T11:15:00-05:00
+updated: 2026-07-28T11:35:00-05:00
 category: 最新房源
 excerpt: Amy刚拿到Fulshear Summerview最新房源清单，想了解户型、价格和优惠欢迎联系。
 cover: /blog-media/summerview-latest-inventory-cover.jpg

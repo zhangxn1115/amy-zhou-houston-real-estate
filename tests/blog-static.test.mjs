@@ -179,7 +179,7 @@ test("publishes Amy's latest Summerview inventory update", async () => {
   const article = await read("../site/blog/2026-07-28-summerview-fulshear-latest-homes/index.html");
   const sitemap = await read("../site/sitemap.xml");
 
-  assert.match(article, /刚拿到Summerview最新房源清单/);
+  assert.match(article, /Summerview最新房源：\$299,990起售/);
   assert.match(article, /Summerview 小区本身位于/);
   assert.match(article, /Fulshear, Texas/);
   assert.match(article, /Smart Series/);
@@ -194,7 +194,7 @@ test("publishes Amy's latest Summerview inventory update", async () => {
 
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
-  const summerview = home.indexOf("刚拿到Summerview最新房源清单");
+  const summerview = home.indexOf("Summerview最新房源：$299,990起售");
   const katyVideo = home.indexOf("不到28万美元读Katy 9分高中");
   const careers = home.indexOf("刚毕业来休斯顿，从哪里开始");
 
