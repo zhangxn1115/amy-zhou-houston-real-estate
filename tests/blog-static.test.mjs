@@ -175,17 +175,34 @@ test("publishes the Katy Tompkins video home tour with an embedded player", asyn
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-27-katy-tompkins-home-under-280k\//);
 });
 
+test("publishes Amy's latest Summerview inventory update", async () => {
+  const article = await read("../site/blog/2026-07-28-summerview-fulshear-latest-homes/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /刚拿到Summerview最新房源清单/);
+  assert.match(article, /Summerview 小区本身位于/);
+  assert.match(article, /Fulshear, Texas/);
+  assert.match(article, /Smart Series/);
+  assert.match(article, /Premier Series/);
+  assert.match(article, /准现房价格从 <strong>299,990 美元<\/strong>起/);
+  assert.match(article, /新房库存、成交价格、完工时间和 Builder 优惠变化都比较快/);
+  assert.match(article, /https:\/\/www\.mihomes\.com\/new-homes\/texas\/greater-houston\/fulshear\/summerview/);
+  assert.match(article, /summerview-latest-inventory-cover\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-28-summerview-fulshear-latest-homes\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/summerview-latest-inventory-cover\.jpg/);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const summerview = home.indexOf("刚拿到Summerview最新房源清单");
   const katyVideo = home.indexOf("不到28万美元读Katy 9分高中");
   const careers = home.indexOf("刚毕业来休斯顿，从哪里开始");
-  const retirement = home.indexOf("为什么我觉得休斯顿适合养老");
 
+  assert.ok(summerview > -1);
   assert.ok(katyVideo > -1);
   assert.ok(careers > -1);
-  assert.ok(retirement > -1);
+  assert.ok(summerview < katyVideo);
   assert.ok(katyVideo < careers);
-  assert.ok(careers < retirement);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解休斯顿房市"));
