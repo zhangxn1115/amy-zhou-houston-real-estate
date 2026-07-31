@@ -192,17 +192,38 @@ test("publishes Amy's latest Summerview inventory update", async () => {
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/summerview-latest-inventory-cover\.jpg/);
 });
 
+test("publishes Amy's latest Cross Creek West Lennar inventory update", async () => {
+  const article = await read("../site/blog/2026-07-31-cross-creek-west-lennar-latest-homes/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /Cross Creek West Lennar最新房源：\$352,990起/);
+  assert.match(article, /2026年7月31日/);
+  assert.match(article, /12套房源可售/);
+  assert.match(article, /Astoria/);
+  assert.match(article, /\$352,990/);
+  assert.match(article, /Netcher/);
+  assert.match(article, /Roseman/);
+  assert.match(article, /Bridle/);
+  assert.match(article, /Woodbridge Collection/);
+  assert.match(article, /Pinnacle Collection/);
+  assert.match(article, /参考地税率约为 <strong>3\.33%<\/strong>/);
+  assert.match(article, /https:\/\/www\.lennar\.com\/new-homes\/texas\/houston\/fulshear\/cross-creek-west/);
+  assert.match(article, /cross-creek-west-lennar-latest-cover\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-31-cross-creek-west-lennar-latest-homes\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/cross-creek-west-lennar-latest-cover\.jpg/);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const crossCreekWest = home.indexOf("Cross Creek West Lennar最新房源：$352,990起");
   const summerview = home.indexOf("Summerview最新房源：$299,990起售");
   const katyVideo = home.indexOf("不到28万美元读Katy 9分高中");
-  const careers = home.indexOf("刚毕业来休斯顿，从哪里开始");
 
+  assert.ok(crossCreekWest > -1);
   assert.ok(summerview > -1);
   assert.ok(katyVideo > -1);
-  assert.ok(careers > -1);
+  assert.ok(crossCreekWest < summerview);
   assert.ok(summerview < katyVideo);
-  assert.ok(katyVideo < careers);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解休斯顿房市"));
