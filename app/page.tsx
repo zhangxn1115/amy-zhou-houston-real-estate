@@ -176,7 +176,7 @@ export default function Home() {
               </div>
             </div>
             <nav className="portrait-actions" aria-label="页面重点内容">
-              <a href="#houston">了解休斯顿房市 <span>↓</span></a>
+              <a href="#services">了解华人生活区 <span>↓</span></a>
               <a href="#schools">了解优质学区 <span>↓</span></a>
               <a href="#videos">Amy 视频看房 <span>↓</span></a>
             </nav>

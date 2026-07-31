@@ -79,7 +79,8 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/videoseries/);
   assert.match(leadScript, /addEventListener\("click", openDialog\)/);
   assert.doesNotMatch(leadScript, /setTimeout\(openDialog/);
-  assert.ok(html.indexOf("License No. 839083") < html.indexOf("了解休斯顿房市"));
+  assert.ok(html.indexOf("License No. 839083") < html.indexOf("了解华人生活区"));
+  assert.match(html, /href="#services">了解华人生活区/);
   assert.doesNotMatch(html, /youtube-nocookie\.com\/embed\/vpIqfneYAhk/);
   assert.doesNotMatch(html, /codex-preview|Your site is taking shape/);
 });
