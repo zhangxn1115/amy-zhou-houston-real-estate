@@ -198,12 +198,12 @@ test("publishes Amy's latest Cross Creek West Lennar inventory update", async ()
 
   assert.match(article, /Cross Creek West Lennar最新房源：\$352,990起/);
   assert.match(article, /2026年7月31日/);
-  assert.match(article, /12套房源可售/);
+  assert.match(article, /14套房源可售/);
   assert.match(article, /Astoria/);
   assert.match(article, /\$352,990/);
   assert.match(article, /Netcher/);
   assert.match(article, /Roseman/);
-  assert.match(article, /Bridle/);
+  assert.match(article, /Larwood/);
   assert.match(article, /Woodbridge Collection/);
   assert.match(article, /Pinnacle Collection/);
   assert.match(article, /参考地税率约为 <strong>3\.33%<\/strong>/);
