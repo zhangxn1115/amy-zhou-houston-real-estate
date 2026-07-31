@@ -213,17 +213,35 @@ test("publishes Amy's latest Cross Creek West Lennar inventory update", async ()
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/cross-creek-west-lennar-latest-cover\.jpg/);
 });
 
+test("publishes Amy's Katy Cinco Ranch video home tour", async () => {
+  const article = await read("../site/blog/2026-07-31-katy-cinco-ranch-home-345k-video/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /34\.5万美元能买什么房？美国Katy学区4房独栋值不值？/);
+  assert.match(article, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/Gg8Nz_vnGd4"/);
+  assert.match(article, /"@type":"VideoObject"/);
+  assert.match(article, /挂牌价：345,000美元/);
+  assert.match(article, /Cinco Ranch High School/);
+  assert.match(article, /2,257平方英尺/);
+  assert.match(article, /00:53｜房屋外观及双车库/);
+  assert.match(article, /watch\?v=Gg8Nz_vnGd4&amp;t=529s/);
+  assert.match(article, /katy-cinco-ranch-345k-video-cover\.webp/);
+  assert.match(article, /休斯顿华人房产经纪/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-07-31-katy-cinco-ranch-home-345k-video\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/katy-cinco-ranch-345k-video-cover\.jpg/);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const katy345Video = home.indexOf("34.5万美元能买什么房？美国Katy学区4房独栋值不值？");
   const crossCreekWest = home.indexOf("Cross Creek West Lennar最新房源：$352,990起");
   const summerview = home.indexOf("Summerview最新房源：$299,990起售");
-  const katyVideo = home.indexOf("不到28万美元读Katy 9分高中");
 
+  assert.ok(katy345Video > -1);
   assert.ok(crossCreekWest > -1);
   assert.ok(summerview > -1);
-  assert.ok(katyVideo > -1);
+  assert.ok(katy345Video < crossCreekWest);
   assert.ok(crossCreekWest < summerview);
-  assert.ok(summerview < katyVideo);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解休斯顿房市"));
