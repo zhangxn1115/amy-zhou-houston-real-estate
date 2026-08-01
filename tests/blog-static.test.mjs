@@ -231,17 +231,35 @@ test("publishes Amy's Katy Cinco Ranch video home tour", async () => {
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/katy-cinco-ranch-345k-video-cover\.jpg/);
 });
 
+test("publishes Amy's latest Jordan Ranch Highland 55ft inventory update", async () => {
+  const article = await read("../site/blog/2026-08-01-jordan-ranch-highland-55-latest-home/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /Jordan Ranch Highland 55尺最新房源/);
+  assert.match(article, /2802 Peach Valley Road/);
+  assert.match(article, /Denton-A/);
+  assert.match(article, /2,263平方英尺/);
+  assert.match(article, /4房3卫/);
+  assert.match(article, /Lamar CISD/);
+  assert.match(article, /46万美元段起/);
+  assert.match(article, /https:\/\/www\.jordanranchtexas\.com\//);
+  assert.match(article, /https:\/\/www\.highlandhomes\.com\/houston\/fulshear\/jordan-ranch\/587-147/);
+  assert.match(article, /jordan-ranch-highland-55-latest-cover\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-01-jordan-ranch-highland-55-latest-home\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/jordan-ranch-highland-55-latest-cover\.jpg/);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const jordanRanch = home.indexOf("Jordan Ranch Highland 55尺最新房源：单层4房Denton户型");
   const katy345Video = home.indexOf("34.5万美元能买什么房？美国Katy学区4房独栋值不值？");
   const crossCreekWest = home.indexOf("Cross Creek West Lennar最新房源：$352,990起");
-  const summerview = home.indexOf("Summerview最新房源：$299,990起售");
 
+  assert.ok(jordanRanch > -1);
   assert.ok(katy345Video > -1);
   assert.ok(crossCreekWest > -1);
-  assert.ok(summerview > -1);
+  assert.ok(jordanRanch < katy345Video);
   assert.ok(katy345Video < crossCreekWest);
-  assert.ok(crossCreekWest < summerview);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解华人生活区"));
