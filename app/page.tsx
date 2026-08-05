@@ -115,6 +115,7 @@ export default function Home() {
           <div className="qr-placeholder">
             <img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" loading="lazy" decoding="async" fetchPriority="low" />
           </div>
+          <p className="header-qr-label">微信扫码咨询</p>
           <div className="header-contact-details">
             <p><span>电话</span><strong>+1 346 582 7694</strong></p>
             <p><span>邮箱</span><strong>ningimeng12@gmail.com</strong></p>

@@ -282,6 +282,7 @@ test("keeps the homepage latest articles in reverse chronological order", async 
   assert.ok(jordanRanch < katy345Video);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
+  assert.match(home, /class="header-qr-label">微信扫码咨询/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解华人生活区"));
   assert.match(home, /href="#services">了解华人生活区/);
 });
