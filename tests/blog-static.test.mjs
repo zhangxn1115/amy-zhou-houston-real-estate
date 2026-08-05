@@ -253,15 +253,15 @@ test("publishes Amy's latest Jordan Ranch Chesmar small-home pricing update", as
   const article = await read("../site/blog/2026-08-04-jordan-ranch-chesmar-small-homes-prices/index.html");
   const sitemap = await read("../site/sitemap.xml");
 
-  assert.match(article, /Jordan Ranch Chesmar小户型最新报价：\$324,990起，现房\$348,000起/);
+  assert.match(article, /Jordan Ranch Chesmar小户型最新房源：多种准现房可选/);
   assert.match(article, /2026年8月4日/);
   assert.match(article, /Chateau and Courtyard/);
-  assert.match(article, /2863 Orange Leaf Drive/);
-  assert.match(article, /\$348,000/);
-  assert.match(article, /2814 Peach Valley Road/);
-  assert.match(article, /\$474,000/);
-  assert.match(article, /31215 Morghan Mikell Drive/);
-  assert.match(article, /\$495,000/);
+  assert.match(article, /Berkley/);
+  assert.match(article, /Hillcrest/);
+  assert.match(article, /Viola/);
+  assert.match(article, /最新报价欢迎直接联系我确认/);
+  assert.doesNotMatch(article, /\$[0-9]/);
+  assert.doesNotMatch(article, /[0-9]{3},[0-9]{3}美元/);
   assert.match(article, /Lamar CISD/);
   assert.match(article, /https:\/\/www\.chesmar\.com\/texas\/houston-new-homes\/fulshear\/jordan-ranch-chateau-and-courtyard\//);
   assert.match(article, /jordan-ranch-chesmar-small-homes-prices-cover\.webp/);
@@ -271,7 +271,7 @@ test("publishes Amy's latest Jordan Ranch Chesmar small-home pricing update", as
 
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
-  const chesmar = home.indexOf("Jordan Ranch Chesmar小户型最新报价：$324,990起，现房$348,000起");
+  const chesmar = home.indexOf("Jordan Ranch Chesmar小户型最新房源：多种准现房可选");
   const jordanRanch = home.indexOf("Jordan Ranch Highland 55尺最新房源：单层4房Denton户型");
   const katy345Video = home.indexOf("34.5万美元能买什么房？美国Katy学区4房独栋值不值？");
 
