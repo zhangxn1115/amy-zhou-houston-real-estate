@@ -170,7 +170,9 @@ export default function Home() {
             <span>休斯顿房产经纪</span>
             <strong>Amy Zhou</strong>
             <div className="portrait-license">
-              <span className="license-badge">TX</span>
+              <span className="license-badge" aria-hidden="true">
+                <img src="/license-icon.webp" alt="" width="96" height="96" decoding="async" />
+              </span>
               <div>
                 <small>Texas Real Estate Sales Agent</small>
                 <small className="license-number">License No. 839083</small>

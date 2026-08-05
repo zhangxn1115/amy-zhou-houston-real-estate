@@ -12,7 +12,7 @@ let html = await readFile(sourcePath, "utf8");
 html = html.replace(/<script(?![^>]*type="application\/ld\+json")[^>]*>[\s\S]*?<\/script>/g, "");
 html = html.replace(/<link[^>]*rel="modulepreload"[^>]*\/?>/g, "");
 html = html.replace(/<link[^>]*rel="stylesheet"[^>]*\/?>/g, "");
-html = html.replaceAll("https://127.0.0.1:3000", siteUrl);
+html = html.replace(/https?:\/\/127\.0\.0\.1:\d+/g, siteUrl);
 html = html.replaceAll('href="/favicon.svg"', 'href="./favicon.svg"');
 html = html.replaceAll('href="/favicon.png"', 'href="./favicon.png"');
 html = html.replaceAll('href="/favicon-32.png"', 'href="./favicon-32.png"');
@@ -23,6 +23,7 @@ html = html.replaceAll('href="/wechat-qr.jpg"', 'href="./wechat-qr.jpg"');
 html = html.replaceAll('src="/amy-zhou.jpg"', 'src="./amy-zhou.jpg"');
 html = html.replaceAll('src="/amy-zhou-homes-logo.png"', 'src="./amy-zhou-homes-logo.png"');
 html = html.replaceAll('src="/wechat-qr.jpg"', 'src="./wechat-qr.jpg"');
+html = html.replaceAll('src="/license-icon.webp"', 'src="./license-icon.webp"');
 html = html.replaceAll('src="/areas/', 'src="./areas/');
 html = html.replace(/ nonce="[^"]+"/g, "");
 html = html.replace(
