@@ -167,7 +167,7 @@ export default function Home() {
         <div className="portrait-card" aria-label="Amy Zhou 个人照片">
           <img className="portrait-photo" src="/amy-zhou.jpg" alt="休斯顿华人房产经纪 Amy Zhou" width="1280" height="1920" fetchPriority="high" decoding="async" />
           <div className="portrait-caption">
-            <span>休斯顿房产经纪</span>
+            <span>休斯顿持牌房产经纪</span>
             <strong>Amy Zhou</strong>
             <div className="portrait-license">
               <span className="license-badge" aria-hidden="true">

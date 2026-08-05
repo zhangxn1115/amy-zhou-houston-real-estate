@@ -60,6 +60,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /class="hero-latest"/);
   assert.match(html, /为什么我觉得休斯顿适合养老/);
   assert.match(html, /class="portrait-actions"/);
+  assert.match(html, /<span>休斯顿持牌房产经纪<\/span>/);
   assert.match(html, /src="\/license-icon\.webp"/);
   assert.doesNotMatch(html, /class="license-badge">TX/);
   assert.match(html, /class="header-qr-label">微信扫码咨询/);
