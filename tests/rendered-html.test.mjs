@@ -58,7 +58,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /youtube-nocookie\.com\/embed\/videoseries\?list=UU1ymf6PCQwnLL8-ETiPteHw/);
   assert.match(html, /href="\/blog\/">阅读房产博客/);
   assert.match(html, /class="hero-latest"/);
-  assert.match(html, /为什么我觉得休斯顿适合养老/);
+  assert.match(html, /在休斯顿生活一个月要花多少钱？衣食住行成本一次说清/);
   assert.match(html, /class="portrait-actions"/);
   assert.match(html, /<span>休斯顿持牌房产经纪<\/span>/);
   assert.match(html, /src="\/license-icon\.webp"/);

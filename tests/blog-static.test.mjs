@@ -269,17 +269,32 @@ test("publishes Amy's latest Jordan Ranch Chesmar small-home pricing update", as
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/jordan-ranch-chesmar-small-homes-prices-cover\.jpg/);
 });
 
+test("publishes Amy's 2026 Houston cost of living guide", async () => {
+  const article = await read("../site/blog/2026-08-05-houston-cost-of-living-guide-2026/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /在休斯顿生活一个月要花多少钱？衣食住行成本一次说清/);
+  assert.match(article, /2026年8月5日/);
+  assert.match(article, /MIT Harris County Living Wage Calculator/);
+  assert.match(article, /HUD FY 2026 Fair Market Rents/);
+  assert.match(article, /RideMETRO官方票价/);
+  assert.match(article, /Texas Comptroller Property Tax Exemptions/);
+  assert.match(article, /houston-cost-of-living-guide-2026\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-05-houston-cost-of-living-guide-2026\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-cost-of-living-guide-2026\.jpg/);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const costOfLiving = home.indexOf("在休斯顿生活一个月要花多少钱？衣食住行成本一次说清");
   const chesmar = home.indexOf("Jordan Ranch Chesmar小户型最新房源：多种准现房可选");
   const jordanRanch = home.indexOf("Jordan Ranch Highland 55尺最新房源：单层4房Denton户型");
-  const katy345Video = home.indexOf("34.5万美元能买什么房？美国Katy学区4房独栋值不值？");
 
+  assert.ok(costOfLiving > -1);
   assert.ok(chesmar > -1);
   assert.ok(jordanRanch > -1);
-  assert.ok(katy345Video > -1);
+  assert.ok(costOfLiving < chesmar);
   assert.ok(chesmar < jordanRanch);
-  assert.ok(jordanRanch < katy345Video);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
