@@ -249,17 +249,37 @@ test("publishes Amy's latest Jordan Ranch Highland 55ft inventory update", async
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/jordan-ranch-highland-55-latest-cover\.jpg/);
 });
 
+test("publishes Amy's latest Jordan Ranch Chesmar small-home pricing update", async () => {
+  const article = await read("../site/blog/2026-08-04-jordan-ranch-chesmar-small-homes-prices/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /Jordan Ranch Chesmar小户型最新报价：\$324,990起，现房\$348,000起/);
+  assert.match(article, /2026年8月4日/);
+  assert.match(article, /Chateau and Courtyard/);
+  assert.match(article, /2863 Orange Leaf Drive/);
+  assert.match(article, /\$348,000/);
+  assert.match(article, /2814 Peach Valley Road/);
+  assert.match(article, /\$474,000/);
+  assert.match(article, /31215 Morghan Mikell Drive/);
+  assert.match(article, /\$495,000/);
+  assert.match(article, /Lamar CISD/);
+  assert.match(article, /https:\/\/www\.chesmar\.com\/texas\/houston-new-homes\/fulshear\/jordan-ranch-chateau-and-courtyard\//);
+  assert.match(article, /jordan-ranch-chesmar-small-homes-prices-cover\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-04-jordan-ranch-chesmar-small-homes-prices\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/jordan-ranch-chesmar-small-homes-prices-cover\.jpg/);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const chesmar = home.indexOf("Jordan Ranch Chesmar小户型最新报价：$324,990起，现房$348,000起");
   const jordanRanch = home.indexOf("Jordan Ranch Highland 55尺最新房源：单层4房Denton户型");
   const katy345Video = home.indexOf("34.5万美元能买什么房？美国Katy学区4房独栋值不值？");
-  const crossCreekWest = home.indexOf("Cross Creek West Lennar最新房源：$352,990起");
 
+  assert.ok(chesmar > -1);
   assert.ok(jordanRanch > -1);
   assert.ok(katy345Video > -1);
-  assert.ok(crossCreekWest > -1);
+  assert.ok(chesmar < jordanRanch);
   assert.ok(jordanRanch < katy345Video);
-  assert.ok(katy345Video < crossCreekWest);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解华人生活区"));
