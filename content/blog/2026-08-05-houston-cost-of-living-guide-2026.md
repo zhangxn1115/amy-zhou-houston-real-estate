@@ -2,11 +2,11 @@
 title: "在休斯顿生活一个月要花多少钱？衣食住行成本一次说清"
 slug: houston-cost-of-living-guide-2026
 date: 2026-08-05T10:00:00-05:00
-updated: 2026-08-05T10:00:00-05:00
+updated: 2026-08-06T10:00:00-05:00
 category: 生活方式
 excerpt: Amy结合最新公开数据和本地生活经验，拆解休斯顿住房、吃饭、交通、水电、医疗及家庭日常开支。
-cover: /blog-media/houston-cost-of-living-guide-2026.jpg
-cover_alt: 休斯顿市中心与华人年轻家庭的日常生活场景
+cover: /blog-media/houston-cost-of-living-guide-2026-v2.jpg
+cover_alt: 休斯顿衣食住行生活成本全解析封面
 featured: true
 draft: false
 ---

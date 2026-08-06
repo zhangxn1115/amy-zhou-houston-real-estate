@@ -279,9 +279,9 @@ test("publishes Amy's 2026 Houston cost of living guide", async () => {
   assert.match(article, /HUD FY 2026 Fair Market Rents/);
   assert.match(article, /RideMETRO官方票价/);
   assert.match(article, /Texas Comptroller Property Tax Exemptions/);
-  assert.match(article, /houston-cost-of-living-guide-2026\.webp/);
+  assert.match(article, /houston-cost-of-living-guide-2026-v2\.webp/);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-05-houston-cost-of-living-guide-2026\//);
-  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-cost-of-living-guide-2026\.jpg/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-cost-of-living-guide-2026-v2\.jpg/);
 });
 
 test("keeps the homepage latest articles in reverse chronological order", async () => {
