@@ -284,17 +284,35 @@ test("publishes Amy's 2026 Houston cost of living guide", async () => {
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/houston-cost-of-living-guide-2026-v2\.jpg/);
 });
 
+test("publishes Amy's Summerview MI Homes video tour", async () => {
+  const article = await read("../site/blog/2026-08-07-summerview-mi-homes-350k-video/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /35万买休斯顿四卧新房？实拍 MI Homes 高性价比社区/);
+  assert.match(article, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/nmipopUBtjE"/);
+  assert.match(article, /"@type":"VideoObject"/);
+  assert.match(article, /售价：约349,900美元/);
+  assert.match(article, /1,872平方英尺/);
+  assert.match(article, /Fulshear High School/);
+  assert.match(article, /HOA：约726美元\/年/);
+  assert.match(article, /房产税率：约3\.16%/);
+  assert.match(article, /summerview-mi-homes-350k-video-cover\.webp/);
+  assert.match(article, /休斯顿华人房产经纪/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-07-summerview-mi-homes-350k-video\//);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/summerview-mi-homes-350k-video-cover\.jpg/);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const summerviewVideo = home.indexOf("35万买休斯顿四卧新房？实拍 MI Homes 高性价比社区");
   const costOfLiving = home.indexOf("在休斯顿生活一个月要花多少钱？衣食住行成本一次说清");
   const chesmar = home.indexOf("Jordan Ranch Chesmar小户型最新房源：多种准现房可选");
-  const jordanRanch = home.indexOf("Jordan Ranch Highland 55尺最新房源：单层4房Denton户型");
 
+  assert.ok(summerviewVideo > -1);
   assert.ok(costOfLiving > -1);
   assert.ok(chesmar > -1);
-  assert.ok(jordanRanch > -1);
+  assert.ok(summerviewVideo < costOfLiving);
   assert.ok(costOfLiving < chesmar);
-  assert.ok(chesmar < jordanRanch);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);

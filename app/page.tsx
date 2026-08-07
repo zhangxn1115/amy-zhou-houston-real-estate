@@ -67,6 +67,15 @@ const schoolDistricts = [
 
 const latestPosts = [
   {
+    title: "35万买休斯顿四卧新房？实拍 MI Homes 高性价比社区",
+    excerpt: "Amy实拍Summerview社区MI Homes四卧三卫全新现房，介绍户型、社区与持有成本。",
+    href: "/blog/2026-08-07-summerview-mi-homes-350k-video/",
+    image: "/blog-media/summerview-mi-homes-350k-video-cover.jpg",
+    alt: "Amy Zhou实拍休斯顿Summerview社区MI Homes约35万美元四卧新房",
+    width: 1280,
+    height: 720,
+  },
+  {
     title: "在休斯顿生活一个月要花多少钱？衣食住行成本一次说清",
     excerpt: "Amy结合最新公开数据和本地生活经验，拆解住房、吃饭、交通、水电、医疗及家庭日常开支。",
     href: "/blog/2026-08-05-houston-cost-of-living-guide-2026/",
@@ -81,15 +90,6 @@ const latestPosts = [
     href: "/blog/2026-08-04-jordan-ranch-chesmar-small-homes-prices/",
     image: "/blog-media/jordan-ranch-chesmar-small-homes-prices-cover.jpg",
     alt: "Jordan Ranch Chesmar Homes最新准现房报价资料",
-    width: 1707,
-    height: 1280,
-  },
-  {
-    title: "Jordan Ranch Highland 55尺最新房源：单层4房Denton户型",
-    excerpt: "Amy整理Jordan Ranch Highland Homes 55尺面宽最新房源与Denton单层户型重点。",
-    href: "/blog/2026-08-01-jordan-ranch-highland-55-latest-home/",
-    image: "/blog-media/jordan-ranch-highland-55-latest-cover.jpg",
-    alt: "Jordan Ranch Highland Homes 55尺面宽Denton户型资料",
     width: 1707,
     height: 1280,
   },
