@@ -302,17 +302,33 @@ test("publishes Amy's Summerview MI Homes video tour", async () => {
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog-media\/summerview-mi-homes-350k-video-cover\.jpg/);
 });
 
+test("publishes Amy's Cross Creek West lake-home video tour", async () => {
+  const article = await read("../site/blog/2026-08-10-cross-creek-west-village-builders-lake-home-video/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /50万在休斯顿能买什么？湖景＋子母房＋60尺大地块/);
+  assert.match(article, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/OFhk_QDd7tc"/);
+  assert.match(article, /"@type":"VideoObject"/);
+  assert.match(article, /2,792平方英尺/);
+  assert.match(article, /60尺宽/);
+  assert.match(article, /HOA：约1,450美元\/年/);
+  assert.match(article, /房产税率：约3\.29%/);
+  assert.match(article, /Fulshear High School/);
+  assert.match(article, /cross-creek-west-village-builders-500k-video-cover\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-10-cross-creek-west-village-builders-lake-home-video\//);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const crossCreekWestVideo = home.indexOf("50万在休斯顿能买什么？湖景＋子母房＋60尺大地块");
+  const fulshearGuide = home.indexOf("Fulshear 到底好在哪里？为什么越来越多客户选择这里？");
   const summerviewVideo = home.indexOf("35万买休斯顿四卧新房？实拍 MI Homes 高性价比社区");
-  const costOfLiving = home.indexOf("在休斯顿生活一个月要花多少钱？衣食住行成本一次说清");
-  const chesmar = home.indexOf("Jordan Ranch Chesmar小户型最新房源：多种准现房可选");
 
+  assert.ok(crossCreekWestVideo > -1);
+  assert.ok(fulshearGuide > -1);
   assert.ok(summerviewVideo > -1);
-  assert.ok(costOfLiving > -1);
-  assert.ok(chesmar > -1);
-  assert.ok(summerviewVideo < costOfLiving);
-  assert.ok(costOfLiving < chesmar);
+  assert.ok(crossCreekWestVideo < fulshearGuide);
+  assert.ok(fulshearGuide < summerviewVideo);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
