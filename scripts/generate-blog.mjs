@@ -9,6 +9,8 @@ const publicMediaDirectory = path.join(root, "public", "blog-media");
 const siteDirectory = path.join(root, "site");
 const blogDirectory = path.join(siteDirectory, "blog");
 const siteMediaDirectory = path.join(siteDirectory, "blog-media");
+const publicVideoThumbnailDirectory = path.join(root, "public", "video-thumbnails");
+const siteVideoThumbnailDirectory = path.join(siteDirectory, "video-thumbnails");
 const origin = "https://amyzhouhomes.net";
 let blogCss = "";
 const seoKeywords = [
@@ -667,6 +669,8 @@ async function buildBlog() {
   await rm(siteMediaDirectory, { recursive: true, force: true });
   await mkdir(siteMediaDirectory, { recursive: true });
   await cp(publicMediaDirectory, siteMediaDirectory, { recursive: true, force: true });
+  await rm(siteVideoThumbnailDirectory, { recursive: true, force: true });
+  await cp(publicVideoThumbnailDirectory, siteVideoThumbnailDirectory, { recursive: true, force: true });
   await cp(path.join(root, "public", "favicon.png"), path.join(siteDirectory, "favicon.png"), { force: true });
   await cp(path.join(root, "public", "favicon-32.png"), path.join(siteDirectory, "favicon-32.png"), { force: true });
   await cp(path.join(root, "public", "favicon-16.png"), path.join(siteDirectory, "favicon-16.png"), { force: true });

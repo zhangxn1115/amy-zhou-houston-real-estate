@@ -65,6 +65,39 @@ const schoolDistricts = [
   { name: "Pearland ISD", area: "Pearland", text: "靠近医学中心与南部就业区，是兼顾通勤、社区生活和教育需求的选择。", website: "https://www.pearlandisd.org/" },
 ];
 
+const latestVideos = [
+  {
+    id: "OFhk_QDd7tc",
+    title: "三代同堂太合适了！CCW 50万湖景现房",
+    thumbnail: "/video-thumbnails/ccw-lake-home.jpg",
+  },
+  {
+    id: "nmipopUBtjE",
+    title: "35万买休斯顿四卧新房？实拍 MI Homes",
+    thumbnail: "/video-thumbnails/summerview-mi-homes.jpg",
+  },
+  {
+    id: "Gg8Nz_vnGd4",
+    title: "34.5万美元能买什么房？Katy学区4房独栋",
+    thumbnail: "/video-thumbnails/katy-cinco-ranch.jpg",
+  },
+  {
+    id: "cO_B7WL_3_A",
+    title: "不到28万读Katy 9分高中，适合预算有限家庭",
+    thumbnail: "/video-thumbnails/katy-tompkins.jpg",
+  },
+  {
+    id: "CR_avmxrtEY",
+    title: "巴菲特看好的建商，60尺大面宽高性价比新房",
+    thumbnail: "/video-thumbnails/builder-60ft.jpg",
+  },
+  {
+    id: "lEJpOPpB3_U",
+    title: "Sugar Land附近高性价比社区，44万美元起值不值？",
+    thumbnail: "/video-thumbnails/sugar-land-community.jpg",
+  },
+];
+
 const latestPosts = [
   {
     title: "35万买休斯顿四卧新房？实拍 MI Homes 高性价比社区",
@@ -260,16 +293,26 @@ export default function Home() {
           </div>
           <p>通过中文视频分享房市趋势、热门社区、学区信息与置业知识，让您在看房之前先建立清晰判断。</p>
         </div>
-        <div className="video-feature">
-          <iframe
-            data-video-src="https://www.youtube-nocookie.com/embed/videoseries?list=UU1ymf6PCQwnLL8-ETiPteHw"
-            title="Amy Zhou 休斯顿房产最新视频"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            sandbox="allow-scripts allow-same-origin allow-presentation allow-popups"
-            allowFullScreen
-          />
+        <div className="video-grid">
+          {latestVideos.map((video, index) => (
+            <article className="video-card" key={video.id}>
+              <div className="video-card-frame">
+                <button
+                  type="button"
+                  className="video-play"
+                  data-video-play
+                  data-video-src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1`}
+                  data-video-title={video.title}
+                  aria-label={`播放视频：${video.title}`}
+                >
+                  <img src={video.thumbnail} alt="" width="480" height="270" loading="lazy" decoding="async" />
+                  <span className="video-play-icon" aria-hidden="true">▶</span>
+                  <span className="video-order" aria-hidden="true">0{index + 1}</span>
+                </button>
+              </div>
+              <h3><a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">{video.title}</a></h3>
+            </article>
+          ))}
         </div>
       </section>
 

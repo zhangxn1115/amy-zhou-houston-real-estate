@@ -144,8 +144,21 @@ h2 { font-size:clamp(42px,4.4vw,68px); line-height:1.16; }
 .video-intro .kicker { margin-top:0; }
 .video-intro h2 { font-size:clamp(36px,3.5vw,54px); }
 .video-intro > p { margin:0; color:#5d706a; font-family:Georgia,"Songti SC",serif; font-size:15px; line-height:1.9; }
-.video-feature { width:100%; aspect-ratio:16/9; overflow:hidden; background:#173a32; box-shadow:0 24px 65px rgba(23,58,50,.14); }
-.video-feature iframe { display:block; width:100%; height:100%; border:0; }
+.video-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:38px 24px; }
+.video-card { min-width:0; }
+.video-card-frame { width:100%; aspect-ratio:16/9; overflow:hidden; background:#173a32; box-shadow:0 15px 38px rgba(23,58,50,.13); }
+.video-card-frame iframe { display:block; width:100%; height:100%; border:0; }
+.video-play { position:relative; display:block; width:100%; height:100%; padding:0; border:0; overflow:hidden; background:#173a32; cursor:pointer; }
+.video-play img { width:100%; height:100%; object-fit:cover; filter:saturate(.86) contrast(.96); transition:transform .35s,filter .35s; }
+.video-play::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,transparent 48%,rgba(10,35,29,.45)); transition:background .3s; }
+.video-play:hover img { transform:scale(1.025); filter:saturate(1) contrast(1); }
+.video-play:focus-visible { outline:3px solid var(--gold); outline-offset:3px; }
+.video-play-icon { position:absolute; z-index:2; left:50%; top:50%; display:grid; width:52px; height:52px; place-items:center; border:1px solid rgba(255,255,255,.72); border-radius:50%; background:rgba(23,58,50,.86); color:#fff; font-size:16px; transform:translate(-50%,-50%); transition:transform .25s,background .25s; }
+.video-play:hover .video-play-icon { background:#9d6f49; transform:translate(-50%,-50%) scale(1.08); }
+.video-order { position:absolute; z-index:2; right:14px; bottom:11px; color:rgba(255,255,255,.85); font-size:9px; letter-spacing:1.5px; }
+.video-card h3 { margin:17px 3px 0; font-family:Georgia,"Songti SC",serif; font-size:17px; font-weight:400; line-height:1.55; }
+.video-card h3 a { transition:color .2s; }
+.video-card h3 a:hover { color:#9d6f49; }
 .blog-promo { display:grid; grid-template-columns:1fr .8fr; gap:11vw; align-items:end; background:#e7e2d8; }
 .blog-promo .section-label { font-size:11px; }
 .blog-promo .kicker { margin-top:52px; }
@@ -249,6 +262,7 @@ footer p:last-child { text-align:right; }
   .school-card { min-height:210px; }
   .school-note { text-align:left; }
   .video-intro { grid-template-columns:1fr; gap:28px; }
+  .video-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:32px 20px; }
   footer { grid-template-columns:1fr; text-align:center; }
   footer p:nth-child(2),footer p:last-child { text-align:center; }
   .footer-brand { justify-content:center; }
@@ -264,6 +278,8 @@ footer p:last-child { text-align:right; }
   .hero-blog-item { grid-template-columns:92px minmax(0,1fr); gap:12px; }
   .hero-blog-item > img,.hero-blog-item > picture { width:92px; height:58px; }
   .hero-blog-copy strong { font-size:13px; }
+  .video-grid { grid-template-columns:1fr; gap:30px; }
+  .video-card h3 { font-size:16px; }
   .contact-card { padding:30px 24px; }
   .lead-dialog { width:calc(100vw - 20px); max-height:calc(100dvh - 20px); }
   .lead-dialog-panel { grid-template-columns:1fr; min-height:0; }
