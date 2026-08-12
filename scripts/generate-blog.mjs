@@ -253,11 +253,11 @@ function displayExcerpt(value, limit = 50) {
 }
 
 function articleSeoDescription(excerpt) {
-  const candidate = Array.from(String(excerpt).trim()).slice(0, 72).join("");
+  const candidate = Array.from(String(excerpt).replace(/\s+/g, " ").trim()).slice(0, 118).join("");
   const punctuationIndex = Math.max(...["。", "！", "？", "，", ".", "!", "?", ","].map((mark) => candidate.lastIndexOf(mark)));
-  const lead = (punctuationIndex >= 40 ? candidate.slice(0, punctuationIndex + 1) : displayExcerpt(candidate, 72)).replace(/[，,]$/, "。");
+  const lead = (punctuationIndex >= 72 ? candidate.slice(0, punctuationIndex + 1) : displayExcerpt(candidate, 118)).replace(/[，,]$/, "。");
   const separator = lead && !/[。！？.!?]$/.test(lead) ? "。" : "";
-  return `${lead}${separator}Amy Zhou 是休斯顿华人房产经纪，提供休斯顿买房、休斯顿购房、休斯顿新房、休斯顿看房及休斯顿二手房中文服务。`;
+  return `${lead}${separator}`;
 }
 
 function readingMinutes(content) {
@@ -283,7 +283,7 @@ function localeButton() {
   return '<button type="button" class="locale-toggle" data-locale-control="true" aria-label="切换为繁体中文"><span class="active">简</span><i></i><span>繁</span></button>';
 }
 
-function pageHead({ title, description, canonical, image, type = "website", keywords = seoKeywords, preloadImage = "" }) {
+function pageHead({ title, description, canonical, image, type = "website" }) {
   const safeTitle = escapeHtml(title);
   const safeDescription = escapeHtml(description);
   const imageUrl = escapeHtml(absoluteUrl(image));
@@ -298,7 +298,6 @@ function pageHead({ title, description, canonical, image, type = "website", keyw
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>${safeTitle}</title>
   <meta name="description" content="${safeDescription}">
-  <meta name="keywords" content="${escapeHtml(keywords.join(", "))}">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="${escapeHtml(canonical)}">
   <meta property="og:type" content="${type}">
@@ -317,7 +316,7 @@ function pageHead({ title, description, canonical, image, type = "website", keyw
   <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
   <link rel="shortcut icon" href="/favicon-32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-${preloadImage ? `  <link rel="preload" href="${escapeHtml(preloadImage)}" as="image" fetchpriority="high">\n` : ""}  <style>${inlineCss}</style>
+  <style>${inlineCss}</style>
   <script src="/analytics.js?v=20260727-1" defer></script>
   <script src="/locale.js?v=20260727-1" defer></script>
   <script src="/lead-form.js?v=20260727-1" defer></script>
@@ -518,7 +517,33 @@ function renderIndex(posts) {
 </html>`;
 }
 
-function renderArticle(post) {
+function relatedPostsFor(post, posts, limit = 3) {
+  return posts
+    .filter((candidate) => candidate.slug !== post.slug)
+    .sort((a, b) => {
+      const aSameCategory = a.category === post.category ? 1 : 0;
+      const bSameCategory = b.category === post.category ? 1 : 0;
+      return bSameCategory - aSameCategory || b.date.getTime() - a.date.getTime();
+    })
+    .slice(0, limit);
+}
+
+function renderRelatedPosts(post, posts) {
+  const related = relatedPostsFor(post, posts);
+  if (!related.length) return "";
+  return `<aside class="article-related" aria-labelledby="related-posts-title">
+    <div class="article-related-heading"><p>RELATED READING</p><h2 id="related-posts-title">相关阅读</h2></div>
+    <div class="article-related-list">${related.map((item) => {
+      const webCover = webCoverUrl(item.cover);
+      return `<a href="/blog/${item.slug}/">
+        <picture>${webCover ? `<source srcset="${escapeHtml(webCoverSrcSet(item.cover))}" sizes="96px" type="image/webp">` : ""}<img src="${escapeHtml(item.cover)}" alt="${escapeHtml(item.coverAlt)}" width="160" height="90" loading="lazy" decoding="async"></picture>
+        <span><strong>${escapeHtml(item.title)}</strong><small>${escapeHtml(displayExcerpt(item.excerpt, 44))}</small></span>
+      </a>`;
+    }).join("")}</div>
+  </aside>`;
+}
+
+function renderArticle(post, posts) {
   const canonical = `${origin}/blog/${post.slug}/`;
   const seoDescription = articleSeoDescription(post.excerpt);
   const webCover = webCoverUrl(post.cover);
@@ -531,38 +556,45 @@ function renderArticle(post) {
     : "";
   const structuredData = JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: seoDescription,
-    keywords: seoKeywords,
-    articleSection: post.category,
-    inLanguage: "zh-CN",
-    image: absoluteUrl(post.cover),
-    datePublished: post.dateIso,
-    dateModified: post.updatedIso,
-    mainEntityOfPage: canonical,
-    author: { "@type": "Person", name: "Amy Zhou", url: origin },
-    publisher: { "@type": "RealEstateAgent", name: "Amy Zhou Houston Real Estate", url: origin },
-    ...(embedUrl ? {
-      video: {
-        "@type": "VideoObject",
-        name: post.title,
-        description: seoDescription,
-        thumbnailUrl: absoluteUrl(post.cover),
-        uploadDate: post.dateIso,
-        embedUrl,
-        contentUrl: post.youtube,
-      },
-    } : {}),
+    "@graph": [{
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: seoDescription,
+      keywords: seoKeywords,
+      articleSection: post.category,
+      inLanguage: "zh-CN",
+      image: absoluteUrl(post.cover),
+      datePublished: post.dateIso,
+      dateModified: post.updatedIso,
+      mainEntityOfPage: canonical,
+      author: { "@type": "Person", name: "Amy Zhou", url: origin },
+      publisher: { "@type": "RealEstateAgent", name: "Amy Zhou Houston Real Estate", url: origin },
+      ...(embedUrl ? {
+        video: {
+          "@type": "VideoObject",
+          name: post.title,
+          description: seoDescription,
+          thumbnailUrl: absoluteUrl(post.cover),
+          uploadDate: post.dateIso,
+          embedUrl,
+        },
+      } : {}),
+    }, {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "首页", item: `${origin}/` },
+        { "@type": "ListItem", position: 2, name: "房产博客", item: `${origin}/blog/` },
+        { "@type": "ListItem", position: 3, name: post.title, item: canonical },
+      ],
+    }],
   }).replaceAll("<", "\\u003c");
 
   return `${pageHead({
-    title: `${post.title}｜Amy Zhou 休斯顿房产博客`,
+    title: `${post.title}｜Amy Zhou`,
     description: seoDescription,
     canonical,
     image: post.cover,
     type: "article",
-    preloadImage: webCover || post.cover,
   })}
 <body>
   <script type="application/ld+json">${structuredData}</script>
@@ -570,7 +602,7 @@ function renderArticle(post) {
   ${siteHeader()}
   <main id="article-content">
     <article class="article-shell">
-      <a class="article-back" href="/blog/">← 返回房产博客</a>
+      <nav class="article-breadcrumb" aria-label="面包屑"><a href="/">首页</a><span>/</span><a href="/blog/">房产博客</a><span>/</span><span aria-current="page">${escapeHtml(post.title)}</span></nav>
       <header class="article-header">
         <p class="article-category">${escapeHtml(post.category)}</p>
         <h1>${escapeHtml(post.title)}</h1>
@@ -589,6 +621,7 @@ function renderArticle(post) {
         </aside>
         <div class="article-body">${videoEmbed}${post.body}
           <div class="article-disclaimer">本文用于提供一般市场与社区信息，不构成法律、税务、贷款或投资建议。房源、学区边界与市场数据可能变化，请以相关机构及交易时的最新资料为准。</div>
+          ${renderRelatedPosts(post, posts)}
         </div>
       </div>
     </article>
@@ -655,7 +688,7 @@ async function buildBlog() {
   for (const post of posts) {
     const postDirectory = path.join(blogDirectory, post.slug);
     await mkdir(postDirectory, { recursive: true });
-    await writeFile(path.join(postDirectory, "index.html"), renderArticle(post));
+    await writeFile(path.join(postDirectory, "index.html"), renderArticle(post, posts));
   }
 
   await updateHomeLatest(posts);

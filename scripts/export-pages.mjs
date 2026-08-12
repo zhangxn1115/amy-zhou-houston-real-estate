@@ -11,6 +11,7 @@ let html = await readFile(sourcePath, "utf8");
 // server-navigation payload. GitHub Pages serves this site as static HTML.
 html = html.replace(/<script(?![^>]*type="application\/ld\+json")[^>]*>[\s\S]*?<\/script>/g, "");
 html = html.replace(/<link[^>]*rel="modulepreload"[^>]*\/?>/g, "");
+html = html.replace(/<link rel="preload" href="\/(?:amy-zhou-homes-logo\.png|license-icon\.webp)" as="image"\/>/g, "");
 html = html.replace(/<link[^>]*rel="stylesheet"[^>]*\/?>/g, "");
 html = html.replace(/https?:\/\/127\.0\.0\.1:\d+/g, siteUrl);
 html = html.replaceAll('href="/favicon.svg"', 'href="./favicon.svg"');

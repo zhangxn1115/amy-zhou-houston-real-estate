@@ -30,6 +30,7 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(index, /object-src 'none'/);
   assert.match(article, /application\/ld\+json/);
   assert.match(article, /"@type":"BlogPosting"/);
+  assert.match(article, /"@type":"BreadcrumbList"/);
   assert.match(article, /休斯顿房产经纪 Amy Zhou/);
   assert.match(article, /class="article-author-qr"/);
   assert.match(article, /Amy Zhou 微信二维码/);
@@ -39,12 +40,17 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(article, /id="lead-dialog"/);
   assert.match(article, /action="\/api\/leads"/);
   assert.match(article, /src="\/lead-form\.js\?v=20260727-1"/);
-  assert.match(article, /rel="preload" href="\/blog-media\/_20260718140820_5_9\.webp" as="image" fetchpriority="high"/);
+  assert.doesNotMatch(article, /rel="preload"[^>]*blog-media/);
   assert.match(article, /<source srcset="\/blog-media\/_20260718140820_5_9-480\.webp 480w, \/blog-media\/_20260718140820_5_9-800\.webp 800w, \/blog-media\/_20260718140820_5_9\.webp 1200w"/);
-  assert.match(article, /<meta name="keywords" content="[^"]*休斯顿华人房产经纪[^"]*休斯顿买房[^"]*休斯顿二手房/);
-  assert.match(article, /<meta name="description" content="[^"]*休斯顿华人房产经纪[^"]*休斯顿购房[^"]*休斯顿新房[^"]*休斯顿看房/);
+  assert.doesNotMatch(article, /<meta name="keywords"/);
+  assert.match(article, /<meta name="description" content="如果你想了解Sugar Land Ryehill/);
+  assert.doesNotMatch(article, /<meta name="description" content="[^"]*提供休斯顿买房、休斯顿购房/);
   assert.match(article, /"keywords":\["休斯顿华人房产经纪"/);
   assert.match(article, /"inLanguage":"zh-CN"/);
+  assert.doesNotMatch(article, /"contentUrl":"https:\/\/www\.youtube\.com/);
+  assert.match(article, /class="article-breadcrumb"/);
+  assert.match(article, /class="article-related"/);
+  assert.match(article, /相关阅读/);
   const articleDeck = article.match(/<p class="article-deck">([^<]*)<\/p>/)?.[1] ?? "";
   assert.ok(articleDeck.length > 0);
   assert.match(articleDeck, /整理最新房源和优惠，陪你一起实地看房/);
@@ -260,8 +266,9 @@ test("publishes Amy's latest Jordan Ranch Chesmar small-home pricing update", as
   assert.match(article, /Hillcrest/);
   assert.match(article, /Viola/);
   assert.match(article, /最新报价欢迎直接联系我确认/);
-  assert.doesNotMatch(article, /\$[0-9]/);
-  assert.doesNotMatch(article, /[0-9]{3},[0-9]{3}美元/);
+  const articleBeforeRelatedReading = article.split('<aside class="article-related"')[0];
+  assert.doesNotMatch(articleBeforeRelatedReading, /\$[0-9]/);
+  assert.doesNotMatch(articleBeforeRelatedReading, /[0-9]{3},[0-9]{3}美元/);
   assert.match(article, /Lamar CISD/);
   assert.match(article, /https:\/\/www\.chesmar\.com\/texas\/houston-new-homes\/fulshear\/jordan-ranch-chateau-and-courtyard\//);
   assert.match(article, /jordan-ranch-chesmar-small-homes-prices-cover\.webp/);
@@ -334,4 +341,6 @@ test("keeps the homepage latest articles in reverse chronological order", async 
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解华人生活区"));
   assert.match(home, /href="#services">了解华人生活区/);
+  assert.match(home, /rel="preload" href="\.\/amy-zhou\.jpg"/);
+  assert.doesNotMatch(home, /rel="preload" href="\/(?:amy-zhou-homes-logo\.png|license-icon\.webp)"/);
 });
