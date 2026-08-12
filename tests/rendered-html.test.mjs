@@ -85,7 +85,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /最多5个汉字或10个英文字符/);
   assert.match(html, /textarea[^>]*maxLength="100"/);
   assert.match(html, /src="\/lead-form\.js\?v=20260727-1"/);
-  assert.match(html, /src="\/video-lazy\.js\?v=20260727-1"/);
+  assert.match(html, /src="\/video-lazy\.js\?v=20260811-2"/);
   assert.match(html, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/OFhk_QDd7tc\?autoplay=1"/);
   assert.match(videoScript, /\[data-video-play\]\[data-video-src\]/);
   assert.match(videoScript, /frame\.replaceChildren\(iframe\)/);

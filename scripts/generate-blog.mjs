@@ -322,7 +322,7 @@ function pageHead({ title, description, canonical, image, type = "website" }) {
   <script src="/analytics.js?v=20260727-1" defer></script>
   <script src="/locale.js?v=20260727-1" defer></script>
   <script src="/lead-form.js?v=20260727-1" defer></script>
-  <script src="/video-lazy.js?v=20260727-1" defer></script>
+  <script src="/video-lazy.js?v=20260811-2" defer></script>
 </head>`;
 }
 

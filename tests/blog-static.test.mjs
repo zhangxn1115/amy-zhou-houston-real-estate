@@ -40,6 +40,7 @@ test("generates the blog index and SEO-ready article", async () => {
   assert.match(article, /id="lead-dialog"/);
   assert.match(article, /action="\/api\/leads"/);
   assert.match(article, /src="\/lead-form\.js\?v=20260727-1"/);
+  assert.match(article, /src="\/video-lazy\.js\?v=20260811-2"/);
   assert.doesNotMatch(article, /rel="preload"[^>]*blog-media/);
   assert.match(article, /<source srcset="\/blog-media\/_20260718140820_5_9-480\.webp 480w, \/blog-media\/_20260718140820_5_9-800\.webp 800w, \/blog-media\/_20260718140820_5_9\.webp 1200w"/);
   assert.doesNotMatch(article, /<meta name="keywords"/);
