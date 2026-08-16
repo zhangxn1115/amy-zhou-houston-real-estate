@@ -67,6 +67,11 @@ const schoolDistricts = [
 
 const latestVideos = [
   {
+    id: "_zinBh8UtJ8",
+    title: "$137/尺！Cypress低价Townhouse，但有两个问题",
+    thumbnail: "/video-thumbnails/cypress-townhouse.jpg",
+  },
+  {
     id: "OFhk_QDd7tc",
     title: "三代同堂太合适了！CCW 50万湖景现房",
     thumbnail: "/video-thumbnails/ccw-lake-home.jpg",
@@ -91,40 +96,35 @@ const latestVideos = [
     title: "巴菲特看好的建商，60尺大面宽高性价比新房",
     thumbnail: "/video-thumbnails/builder-60ft.jpg",
   },
-  {
-    id: "lEJpOPpB3_U",
-    title: "Sugar Land附近高性价比社区，44万美元起值不值？",
-    thumbnail: "/video-thumbnails/sugar-land-community.jpg",
-  },
 ];
 
 const latestPosts = [
   {
-    title: "35万买休斯顿四卧新房？实拍 MI Homes 高性价比社区",
-    excerpt: "Amy实拍Summerview社区MI Homes四卧三卫全新现房，介绍户型、社区与持有成本。",
-    href: "/blog/2026-08-07-summerview-mi-homes-350k-video/",
-    image: "/blog-media/summerview-mi-homes-350k-video-cover.jpg",
-    alt: "Amy Zhou实拍休斯顿Summerview社区MI Homes约35万美元四卧新房",
+    title: "$137/尺！Cypress低价Townhouse，但有两个问题",
+    excerpt: "Amy实拍休斯顿Cypress约25.99万美元Townhouse，分析户型、采光，也提醒买家关注疑似漏水痕迹和主路噪音。",
+    href: "/blog/2026-08-16-cypress-townhouse-259900-video/",
+    image: "/blog-media/cypress-townhouse-259900-video-cover.jpg",
+    alt: "Amy Zhou实拍休斯顿Cypress售价259900美元的三卧Townhouse",
     width: 1280,
     height: 720,
   },
   {
-    title: "在休斯顿生活一个月要花多少钱？衣食住行成本一次说清",
-    excerpt: "Amy结合最新公开数据和本地生活经验，拆解住房、吃饭、交通、水电、医疗及家庭日常开支。",
-    href: "/blog/2026-08-05-houston-cost-of-living-guide-2026/",
-    image: "/blog-media/houston-cost-of-living-guide-2026-v2.jpg",
-    alt: "休斯顿衣食住行生活成本全解析封面",
-    width: 1600,
-    height: 900,
+    title: "50万在休斯顿能买什么？湖景＋子母房＋60尺大地块",
+    excerpt: "Amy实拍Cross Creek West社区Village Builders子母房户型，带您了解湖景现房、空间设计、社区配套与持有成本。",
+    href: "/blog/2026-08-10-cross-creek-west-village-builders-lake-home-video/",
+    image: "/blog-media/cross-creek-west-village-builders-500k-video-cover.jpg",
+    alt: "Amy Zhou实拍休斯顿Cross Creek West社区约50万美元湖景子母房",
+    width: 1280,
+    height: 720,
   },
   {
-    title: "Jordan Ranch Chesmar小户型最新房源：多种准现房可选",
-    excerpt: "Amy拿到Jordan Ranch Chesmar Homes小户型最新房源资料，整理社区、户型及选房重点。",
-    href: "/blog/2026-08-04-jordan-ranch-chesmar-small-homes-prices/",
-    image: "/blog-media/jordan-ranch-chesmar-small-homes-prices-cover.jpg",
-    alt: "Jordan Ranch Chesmar Homes最新准现房报价资料",
-    width: 1707,
-    height: 1280,
+    title: "Fulshear 到底好在哪里？为什么越来越多客户选择这里？",
+    excerpt: "Amy从位置、发展规划、生活配套、教育医疗、社区环境、通勤和房价等方面，聊聊越来越多家庭选择Fulshear的原因。",
+    href: "/blog/2026-08-08-why-families-choose-fulshear/",
+    image: "/blog-media/fulshear-why-families-choose-cover.jpg",
+    alt: "Fulshear社区住宅、绿地与家庭生活环境",
+    width: 1280,
+    height: 720,
   },
 ];
 

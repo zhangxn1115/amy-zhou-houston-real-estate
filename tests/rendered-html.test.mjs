@@ -58,13 +58,14 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /href="mailto:ningimeng12@gmail\.com"/);
   assert.equal((html.match(/<article class="video-card"/g) ?? []).length, 6);
   assert.equal((html.match(/<button[^>]*data-video-play/g) ?? []).length, 6);
-  assert.match(html, /youtube-nocookie\.com\/embed\/OFhk_QDd7tc\?autoplay=1/);
-  assert.match(html, /youtube-nocookie\.com\/embed\/lEJpOPpB3_U\?autoplay=1/);
+  assert.match(html, /youtube-nocookie\.com\/embed\/_zinBh8UtJ8\?autoplay=1/);
+  assert.match(html, /youtube-nocookie\.com\/embed\/cO_B7WL_3_A\?autoplay=1/);
+  assert.ok(html.indexOf("_zinBh8UtJ8") < html.indexOf("OFhk_QDd7tc"));
   assert.ok(html.indexOf("OFhk_QDd7tc") < html.indexOf("nmipopUBtjE"));
   assert.ok(html.indexOf("nmipopUBtjE") < html.indexOf("Gg8Nz_vnGd4"));
   assert.match(html, /href="\/blog\/">阅读房产博客/);
   assert.match(html, /class="hero-latest"/);
-  assert.match(html, /在休斯顿生活一个月要花多少钱？衣食住行成本一次说清/);
+  assert.match(html, /\$137\/尺！Cypress低价Townhouse，但有两个问题/);
   assert.match(html, /class="portrait-actions"/);
   assert.match(html, /<span>休斯顿持牌房产经纪<\/span>/);
   assert.match(html, /src="\/license-icon\.webp"/);
@@ -86,7 +87,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /textarea[^>]*maxLength="100"/);
   assert.match(html, /src="\/lead-form\.js\?v=20260727-1"/);
   assert.match(html, /src="\/video-lazy\.js\?v=20260811-2"/);
-  assert.match(html, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/OFhk_QDd7tc\?autoplay=1"/);
+  assert.match(html, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/_zinBh8UtJ8\?autoplay=1"/);
   assert.match(videoScript, /\[data-video-play\]\[data-video-src\]/);
   assert.match(videoScript, /frame\.replaceChildren\(iframe\)/);
   assert.match(leadScript, /addEventListener\("click", openDialog\)/);

@@ -326,17 +326,32 @@ test("publishes Amy's Cross Creek West lake-home video tour", async () => {
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-10-cross-creek-west-village-builders-lake-home-video\//);
 });
 
+test("publishes Amy's Cypress townhouse video tour", async () => {
+  const article = await read("../site/blog/2026-08-16-cypress-townhouse-259900-video/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /\$137\/尺！Cypress低价Townhouse，但有两个问题/);
+  assert.match(article, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/_zinBh8UtJ8"/);
+  assert.match(article, /"@type":"VideoObject"/);
+  assert.match(article, /259,900美元/);
+  assert.match(article, /1,897平方英尺/);
+  assert.match(article, /HOA：约1,200美元\/年/);
+  assert.match(article, /房产税率：约3\.23%/);
+  assert.match(article, /cypress-townhouse-259900-video-cover\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-16-cypress-townhouse-259900-video\//);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const cypressTownhouse = home.indexOf("$137/尺！Cypress低价Townhouse，但有两个问题");
   const crossCreekWestVideo = home.indexOf("50万在休斯顿能买什么？湖景＋子母房＋60尺大地块");
   const fulshearGuide = home.indexOf("Fulshear 到底好在哪里？为什么越来越多客户选择这里？");
-  const summerviewVideo = home.indexOf("35万买休斯顿四卧新房？实拍 MI Homes 高性价比社区");
 
+  assert.ok(cypressTownhouse > -1);
   assert.ok(crossCreekWestVideo > -1);
   assert.ok(fulshearGuide > -1);
-  assert.ok(summerviewVideo > -1);
+  assert.ok(cypressTownhouse < crossCreekWestVideo);
   assert.ok(crossCreekWestVideo < fulshearGuide);
-  assert.ok(fulshearGuide < summerviewVideo);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
