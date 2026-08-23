@@ -67,6 +67,11 @@ const schoolDistricts = [
 
 const latestVideos = [
   {
+    id: "DwZtif3WLx8",
+    title: "46.9万买Highland现房！Jordan Ranch 4房3卫实拍",
+    thumbnail: "/video-thumbnails/jordan-ranch-highland.jpg",
+  },
+  {
     id: "_zinBh8UtJ8",
     title: "$137/尺！Cypress低价Townhouse，但有两个问题",
     thumbnail: "/video-thumbnails/cypress-townhouse.jpg",
@@ -90,11 +95,6 @@ const latestVideos = [
     id: "cO_B7WL_3_A",
     title: "不到28万读Katy 9分高中，适合预算有限家庭",
     thumbnail: "/video-thumbnails/katy-tompkins.jpg",
-  },
-  {
-    id: "CR_avmxrtEY",
-    title: "巴菲特看好的建商，60尺大面宽高性价比新房",
-    thumbnail: "/video-thumbnails/builder-60ft.jpg",
   },
 ];
 

@@ -341,17 +341,32 @@ test("publishes Amy's Cypress townhouse video tour", async () => {
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-16-cypress-townhouse-259900-video\//);
 });
 
+test("publishes Amy's Jordan Ranch Highland video tour", async () => {
+  const article = await read("../site/blog/2026-08-23-jordan-ranch-highland-469k-video/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /46\.9万买Highland现房！Jordan Ranch 4房3卫实拍/);
+  assert.match(article, /data-video-src="https:\/\/www\.youtube-nocookie\.com\/embed\/DwZtif3WLx8"/);
+  assert.match(article, /"@type":"VideoObject"/);
+  assert.match(article, /469,000美元/);
+  assert.match(article, /2,263平方英尺/);
+  assert.match(article, /HOA约1,200美元\/年/);
+  assert.match(article, /房产税率约2\.8%/);
+  assert.match(article, /jordan-ranch-highland-469k-video-cover\.webp/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-08-23-jordan-ranch-highland-469k-video\//);
+});
+
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const highlandVideo = home.indexOf("46.9万买Highland现房！Jordan Ranch 4房3卫实拍");
   const lakesOfCaneIsland = home.indexOf("北Katy新社区 Lakes of Cane Island：多家建商最新房源可索取");
   const cypressTownhouse = home.indexOf("$137/尺！Cypress低价Townhouse，但有两个问题");
-  const crossCreekWestVideo = home.indexOf("50万在休斯顿能买什么？湖景＋子母房＋60尺大地块");
 
+  assert.ok(highlandVideo > -1);
   assert.ok(lakesOfCaneIsland > -1);
   assert.ok(cypressTownhouse > -1);
-  assert.ok(crossCreekWestVideo > -1);
+  assert.ok(highlandVideo < lakesOfCaneIsland);
   assert.ok(lakesOfCaneIsland < cypressTownhouse);
-  assert.ok(cypressTownhouse < crossCreekWestVideo);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
