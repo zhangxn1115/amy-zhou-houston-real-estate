@@ -343,15 +343,15 @@ test("publishes Amy's Cypress townhouse video tour", async () => {
 
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const lakesOfCaneIsland = home.indexOf("北Katy新社区 Lakes of Cane Island：多家建商最新房源可索取");
   const cypressTownhouse = home.indexOf("$137/尺！Cypress低价Townhouse，但有两个问题");
   const crossCreekWestVideo = home.indexOf("50万在休斯顿能买什么？湖景＋子母房＋60尺大地块");
-  const fulshearGuide = home.indexOf("Fulshear 到底好在哪里？为什么越来越多客户选择这里？");
 
+  assert.ok(lakesOfCaneIsland > -1);
   assert.ok(cypressTownhouse > -1);
   assert.ok(crossCreekWestVideo > -1);
-  assert.ok(fulshearGuide > -1);
+  assert.ok(lakesOfCaneIsland < cypressTownhouse);
   assert.ok(cypressTownhouse < crossCreekWestVideo);
-  assert.ok(crossCreekWestVideo < fulshearGuide);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
