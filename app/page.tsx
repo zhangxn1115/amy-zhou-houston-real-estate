@@ -67,6 +67,11 @@ const schoolDistricts = [
 
 const latestVideos = [
   {
+    id: "v40I6X4KraQ",
+    title: "新房早卖光，华人还在追！Cross Creek Ranch到底好在哪",
+    thumbnail: "/video-thumbnails/cross-creek-ranch-394500.jpg",
+  },
+  {
     id: "DwZtif3WLx8",
     title: "46.9万买Highland现房！Jordan Ranch 4房3卫实拍",
     thumbnail: "/video-thumbnails/jordan-ranch-highland.jpg",
@@ -90,11 +95,6 @@ const latestVideos = [
     id: "Gg8Nz_vnGd4",
     title: "34.5万美元能买什么房？Katy学区4房独栋",
     thumbnail: "/video-thumbnails/katy-cinco-ranch.jpg",
-  },
-  {
-    id: "cO_B7WL_3_A",
-    title: "不到28万读Katy 9分高中，适合预算有限家庭",
-    thumbnail: "/video-thumbnails/katy-tompkins.jpg",
   },
 ];
 
