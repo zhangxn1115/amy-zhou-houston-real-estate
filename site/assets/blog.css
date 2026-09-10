@@ -88,7 +88,10 @@ main{background:var(--paper);overflow:hidden}
 .article-body li{margin:.45em 0}
 .article-body blockquote{margin:2em 0;padding:18px 24px;border-left:3px solid var(--gold);background:#f1ede5;color:#556b63}
 .article-body a{color:#8f603d;border-bottom:1px solid rgba(143,96,61,.35)}
+.article-inline-image{margin:2.2em 0}
+.article-inline-image picture,.article-inline-image img{width:100%}
 .article-body img{max-height:680px;margin:2em auto;object-fit:contain}
+.article-inline-image img{margin:0 auto}
 .article-body hr{margin:2.5em 0;border:0;border-top:1px solid var(--line)}
 .article-video{margin:0 0 52px}
 .article-video-frame{width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--forest);box-shadow:0 18px 48px rgba(23,58,50,.15)}

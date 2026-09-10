@@ -358,15 +358,15 @@ test("publishes Amy's Jordan Ranch Highland video tour", async () => {
 
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const fulshearRetail = home.indexOf("Fulshear 新零售区正在落地：生活配套越来越方便了");
   const fulshearLakes = home.indexOf("Fulshear Lakes 最新房源更新：户型与报价清单欢迎索取");
   const crossCreekRanch = home.indexOf("新房早卖光，华人还在追！Cross Creek Ranch到底好在哪");
-  const highlandVideo = home.indexOf("46.9万买Highland现房！Jordan Ranch 4房3卫实拍");
 
+  assert.ok(fulshearRetail > -1);
   assert.ok(fulshearLakes > -1);
   assert.ok(crossCreekRanch > -1);
-  assert.ok(highlandVideo > -1);
+  assert.ok(fulshearRetail < fulshearLakes);
   assert.ok(fulshearLakes < crossCreekRanch);
-  assert.ok(crossCreekRanch < highlandVideo);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
@@ -385,4 +385,19 @@ test("publishes Amy's latest Fulshear Lakes inventory update", async () => {
   assert.match(article, /fulshear-lakes-latest-inventory-cover\.webp/);
   assert.match(article, /欢迎索取最新房源与报价/);
   assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-09-10-fulshear-lakes-latest-inventory\//);
+});
+
+test("publishes Amy's Fulshear retail development update", async () => {
+  const article = await read("../site/blog/2026-09-10-fulshear-crossing-new-retail/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /Fulshear 新零售区正在落地：生活配套越来越方便了/);
+  assert.match(article, /Pending（待落地）/);
+  assert.match(article, /Hawaiian Bros Island Grill/);
+  assert.match(article, /PNC Bank/);
+  assert.match(article, /fulshear-crossing-retail-cover\.webp/);
+  assert.match(article, /fulshear-crossing-retail-aerial-480\.webp 480w/);
+  assert.match(article, /fulshear-crossing-retail-site-plan-480\.webp 480w/);
+  assert.match(article, /loading="lazy" decoding="async"/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-09-10-fulshear-crossing-new-retail\//);
 });

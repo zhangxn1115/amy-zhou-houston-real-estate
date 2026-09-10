@@ -140,6 +140,19 @@ function renderMarkdown(source) {
       continue;
     }
 
+    const image = line.match(/^!\[([^\]]*)\]\((\/[^)\s]+)\)$/);
+    if (image) {
+      flushParagraph();
+      flushList();
+      const source = safeAssetUrl(image[2], "");
+      if (source) {
+        const webSource = webCoverUrl(source);
+        const sourceSet = webCoverSrcSet(source);
+        output.push(`<figure class="article-inline-image"><picture>${sourceSet ? `<source srcset="${escapeHtml(sourceSet)}" sizes="(max-width: 760px) 92vw, 786px" type="image/webp">` : ""}<img src="${escapeHtml(webSource || source)}" alt="${escapeHtml(image[1])}" loading="lazy" decoding="async"></picture></figure>`);
+      }
+      continue;
+    }
+
     const heading = line.match(/^(#{2,4})\s+(.+)$/);
     if (heading) {
       flushParagraph();
