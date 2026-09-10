@@ -358,15 +358,15 @@ test("publishes Amy's Jordan Ranch Highland video tour", async () => {
 
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
+  const fulshearLakes = home.indexOf("Fulshear Lakes 最新房源更新：户型与报价清单欢迎索取");
+  const crossCreekRanch = home.indexOf("新房早卖光，华人还在追！Cross Creek Ranch到底好在哪");
   const highlandVideo = home.indexOf("46.9万买Highland现房！Jordan Ranch 4房3卫实拍");
-  const lakesOfCaneIsland = home.indexOf("北Katy新社区 Lakes of Cane Island：多家建商最新房源可索取");
-  const cypressTownhouse = home.indexOf("$137/尺！Cypress低价Townhouse，但有两个问题");
 
+  assert.ok(fulshearLakes > -1);
+  assert.ok(crossCreekRanch > -1);
   assert.ok(highlandVideo > -1);
-  assert.ok(lakesOfCaneIsland > -1);
-  assert.ok(cypressTownhouse > -1);
-  assert.ok(highlandVideo < lakesOfCaneIsland);
-  assert.ok(lakesOfCaneIsland < cypressTownhouse);
+  assert.ok(fulshearLakes < crossCreekRanch);
+  assert.ok(crossCreekRanch < highlandVideo);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
@@ -374,4 +374,15 @@ test("keeps the homepage latest articles in reverse chronological order", async 
   assert.match(home, /href="#services">了解华人生活区/);
   assert.match(home, /rel="preload" href="\.\/amy-zhou\.jpg"/);
   assert.doesNotMatch(home, /rel="preload" href="\/(?:amy-zhou-homes-logo\.png|license-icon\.webp)"/);
+});
+
+test("publishes Amy's latest Fulshear Lakes inventory update", async () => {
+  const article = await read("../site/blog/2026-09-10-fulshear-lakes-latest-inventory/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+
+  assert.match(article, /Fulshear Lakes 最新房源更新：户型与报价清单欢迎索取/);
+  assert.match(article, /Fletcher Morgan Jr\. Elementary School/);
+  assert.match(article, /fulshear-lakes-latest-inventory-cover\.webp/);
+  assert.match(article, /欢迎索取最新房源与报价/);
+  assert.match(sitemap, /https:\/\/amyzhouhomes\.net\/blog\/2026-09-10-fulshear-lakes-latest-inventory\//);
 });
