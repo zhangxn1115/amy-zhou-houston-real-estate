@@ -16,9 +16,9 @@ const markup = renderToStaticMarkup(<BuyerTools />);
 html = html.slice(0, start.index) + markup + html.slice(end);
 html = html.replace(/<link\b[^>]*href="\.?\/?buyer-tools\.css[^\"]*"[^>]*\/?>(?:<\/link>)?/g, "");
 html = html.replace(/<script\b[^>]*src="\.?\/?buyer-tools\.js[^\"]*"[^>]*><\/script>/g, "");
-html = html.replace("</head>", '<link rel="stylesheet" href="/buyer-tools.css?v=20260929-1"/><script type="module" src="/buyer-tools.js?v=20260929-1"></script></head>');
+html = html.replace("</head>", '<link rel="stylesheet" href="/buyer-tools.css?v=20260929-2"/><script type="module" src="/buyer-tools.js?v=20260929-2"></script></head>');
 // The expanded Chinese vocabulary needs the new locale asset despite long caching.
-html = html.replace(/locale\.js\?v=[^"']+/g, "locale.js?v=20260929-1");
+html = html.replace(/locale\.js\?v=[^"']+/g, "locale.js?v=20260929-2");
 await writeFile(file, html);
 for (const asset of ["buyer-tools.css", "buyer-tools.js"]) await cp(path.join(root, "public", asset), path.join(root, "site", asset));
 console.log("Updated the homepage buyer toolkit and versioned static assets.");

@@ -5,7 +5,7 @@
 .buyer-heading h2{font-family:Georgia,"Songti SC",serif;font-size:clamp(28px,3vw,42px);font-weight:400;line-height:1.4;margin:0}
 .buyer-heading h2 span{display:block;font-style:normal}
 .buyer-heading>p{max-width:330px;color:#61756c;font-size:13px;line-height:1.9;margin:0 0 4px}
-.buyer-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;padding:6px;background:#e9e7de;border:1px solid #d8ddd2;border-radius:14px}
+.buyer-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;padding:6px;background:#e9e7de;border:1px solid #d8ddd2;border-radius:14px}
 .buyer-tabs a{min-height:56px;display:flex;justify-content:center;align-items:center;gap:12px;padding:12px 8px;border-radius:9px;font-size:14px;font-weight:600;color:#4a6359;text-align:center;transition:background .15s,color .15s}
 .buyer-tabs a>span{font-size:10px;font-weight:400;letter-spacing:1px;opacity:.65}
 .buyer-tabs a:hover{background:#f5f3ec}
@@ -27,7 +27,7 @@
 .buyer-links a span,.buyer-text-link span{flex-shrink:0;font-family:Arial,sans-serif}
 .buyer-text-link{margin-top:auto}
 .buyer-card>small{font-size:11px;line-height:1.8;color:#79867e;margin-top:13px}
-.buyer-mortgage{margin-top:26px;border:1px solid #d9dfd4;background:#eeeee5;border-radius:14px;padding:28px}
+.buyer-mortgage{margin-top:0;border:1px solid #d9dfd4;background:#eeeee5;border-radius:14px;padding:28px}
 .buyer-calculator-heading{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .buyer-calculator-heading h3{font-family:Georgia,"Songti SC",serif;font-size:25px;line-height:1.4;font-weight:500;margin:7px 0 0}
 .buyer-private{font-size:10px;color:#426556;border:1px solid #bccdbc;border-radius:30px;padding:7px 12px;white-space:nowrap}

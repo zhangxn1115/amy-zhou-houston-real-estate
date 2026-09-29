@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-const tabs = [["basic", "基础查询"], ["areas", "华人生活区域"], ["schools", "学区介绍"], ["resources", "Amy 的资源"]];
+const tabs = [["basic", "基础查询"], ["mortgage", "贷款计算器"], ["areas", "华人生活区域"], ["schools", "学区介绍"], ["resources", "Amy 的资源"]];
 const areas = [
   ["Katy / Fulshear", "西部 · 新房与规划社区", "从 Cinco Ranch 到 Cross Creek Ranch、Jordan Ranch，适合一起比较新旧房、生活配套和西部通勤路线。"],
   ["Sugar Land", "西南部 · 成熟生活圈", "关注 Riverstone、Telfair、New Territory 等社区，结合超市、餐饮、医疗和工作地点筛选日常生活半径。"],
@@ -40,6 +40,9 @@ export function BuyerTools() {
         <article className="buyer-card"><span className="buyer-eyebrow">MOVE-IN ESSENTIALS</span><h4>水 · 电 · 燃气开通</h4><p>服务商由具体地址决定，先确认供水单位、MUD 与燃气覆盖，再安排开通时间。</p><div className="buyer-links"><External href="https://www.powertochoose.org/">电力方案比较 · Power to Choose</External><External href="https://houstonpublicworks.org/utility-billing">休斯顿市供水开通</External><External href="https://www.puc.texas.gov/industry/water/utilities/gis.aspx">德州供水服务范围查询</External><External href="https://move.centerpointenergy.com/">CenterPoint 燃气开通</External></div><small>市供水入口不适用于所有郊区；电力比价仅适用于开放零售选择的地址。</small></article>
       </div>
 
+    </div>
+
+    <div className="buyer-panel" id="buyer-panel-mortgage" aria-labelledby="buyer-tab-mortgage" data-buyer-panel="mortgage">
       <section className="buyer-mortgage" aria-labelledby="buyer-mortgage-title">
         <div className="buyer-calculator-heading"><div><span className="buyer-eyebrow">PLAN YOUR BUDGET</span><h3 id="buyer-mortgage-title">房贷与每月预算</h3></div><span className="buyer-private">本地计算 · 不上传数据</span></div>
         <p className="buyer-calculator-intro">先算贷款本息，再加上税费与保险。默认值仅为演示，并非当前利率、税率或贷款承诺。</p>
@@ -57,7 +60,7 @@ export function BuyerTools() {
             </div>
             <div className="buyer-calc-actions"><button type="submit" className="buyer-primary" data-mortgage-submit disabled>计算月供 <span aria-hidden="true">↗</span></button><button type="reset" className="buyer-reset">恢复演示值</button></div>
             <p className="buyer-error" data-mortgage-error role="alert" hidden>请检查输入：所有项目都需填写有效的非负数字，房价须大于 0，首付须在 0–100% 之间，且不能超过字段上限。</p>
-            <noscript><p>请启用 JavaScript 使用计算器；上方官方查询链接仍可直接访问。</p></noscript>
+            <noscript><p>请启用 JavaScript 使用计算器；基础查询中的官方链接仍可直接访问。</p></noscript>
           </form>
           <div className="buyer-result" aria-live="polite" aria-atomic="true" data-mortgage-result>
             <p>每月持有成本估算</p><strong data-mortgage-output="total" data-locale-ignore>—</strong><small>美元 / 月 · 含以下项目</small>

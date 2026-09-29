@@ -50,7 +50,7 @@ export function initializeBuyerTools(root) {
   });
   panels.forEach((panel) => { panel.setAttribute("role", "tabpanel"); panel.tabIndex = 0; });
   const fromHash = () => {
-    const match = window.location.hash.match(/^#buyer-(?:panel|tab)-(basic|areas|schools|resources)$/);
+    const match = window.location.hash.match(/^#buyer-(?:panel|tab)-(basic|mortgage|areas|schools|resources)$/);
     if (match) activate(match[1]);
   };
   activate("basic");

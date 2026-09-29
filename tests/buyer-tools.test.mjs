@@ -36,10 +36,14 @@ test("rejects empty, malformed, negative and out-of-range input", () => {
   }
 });
 
-test("homepage exports four accessible tabs and preserves existing homepage content", async () => {
+test("homepage exports five accessible tabs and preserves existing homepage content", async () => {
   const html = await readFile(new URL("../site/index.html", import.meta.url), "utf8");
-  assert.equal((html.match(/data-buyer-tab=/g) || []).length, 4);
-  assert.equal((html.match(/data-buyer-panel=/g) || []).length, 4);
+  assert.equal((html.match(/data-buyer-tab=/g) || []).length, 5);
+  assert.equal((html.match(/data-buyer-panel=/g) || []).length, 5);
+  const basic = html.slice(html.indexOf('id="buyer-panel-basic"'), html.indexOf('id="buyer-panel-mortgage"'));
+  assert.doesNotMatch(basic, /data-mortgage-form/);
+  const mortgage = html.slice(html.indexOf('id="buyer-panel-mortgage"'), html.indexOf('id="buyer-panel-areas"'));
+  assert.match(mortgage, /data-mortgage-form/);
   assert.match(html, /德州购房工具箱/);
   assert.doesNotMatch(html, /01 \/ 认识休斯顿/);
   assert.match(html, /本地计算 · 不上传数据/);
@@ -49,12 +53,12 @@ test("homepage exports four accessible tabs and preserves existing homepage cont
   assert.equal((html.match(/<article class="video-card"/g) || []).length, 6);
   assert.match(html, /id="services"/);
   assert.match(html, /id="schools"/);
-  for (const key of ["basic", "areas", "schools", "resources"]) {
+  for (const key of ["basic", "mortgage", "areas", "schools", "resources"]) {
     assert.match(html, new RegExp(`id="buyer-panel-${key}" aria-labelledby="buyer-tab-${key}"`));
   }
   for (const asset of ["buyer-tools.css", "buyer-tools.js"]) {
     assert.equal(await readFile(new URL(`../public/${asset}`, import.meta.url), "utf8"), await readFile(new URL(`../site/${asset}`, import.meta.url), "utf8"));
-    assert.ok(html.includes(`/${asset}?v=20260929-1`));
+    assert.ok(html.includes(`/${asset}?v=20260929-2`));
   }
 });
 
