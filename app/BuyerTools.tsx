@@ -91,6 +91,7 @@ export function BuyerTools() {
       <div className="buyer-resource-grid">
         <article className="buyer-card buyer-resource"><span className="buyer-eyebrow">FINANCING</span><h4>贷款专员</h4><p>了解预批准、首付款、收入材料与贷款方案。比较利率时，也要比较 APR、点数及交割费用。</p><span className="buyer-pending">联系人资料待补充</span><button type="button" className="buyer-primary" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">咨询贷款资源 <span aria-hidden="true">↗</span></button></article>
         <article className="buyer-card buyer-resource"><span className="buyer-eyebrow">HOME INSPECTION</span><h4>独立验房师</h4><p>沟通检查范围、报告时效，以及屋顶、地基、机电系统等重点项目；按房屋情况评估是否需要专项检查。</p><span className="buyer-pending">联系人资料待补充</span><button type="button" className="buyer-primary" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">咨询验房资源 <span aria-hidden="true">↗</span></button></article>
+        <article className="buyer-card buyer-resource"><span className="buyer-eyebrow">TITLE COMPANY</span><h4>产权公司</h4><p>对接产权查询、产权保险与过户交割相关事宜。具体服务范围、费用和所需材料，请向产权公司确认。</p><span className="buyer-pending">联系人资料待补充</span><button type="button" className="buyer-primary" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">咨询产权公司 <span aria-hidden="true">↗</span></button></article>
       </div>
       <p className="buyer-note">服务由您自主选择。具体资质、服务范围、收费与结果以服务机构核实及双方合同为准；贷款审批由贷款机构独立决定。</p>
     </div>

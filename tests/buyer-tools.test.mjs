@@ -53,12 +53,15 @@ test("homepage exports five accessible tabs and preserves existing homepage cont
   assert.equal((html.match(/<article class="video-card"/g) || []).length, 6);
   assert.match(html, /id="services"/);
   assert.match(html, /id="schools"/);
+  assert.equal((html.match(/class="buyer-card buyer-resource"/g) || []).length, 3);
+  assert.match(html, /TITLE COMPANY/);
+  assert.match(html, /咨询产权公司/);
   for (const key of ["basic", "mortgage", "areas", "schools", "resources"]) {
     assert.match(html, new RegExp(`id="buyer-panel-${key}" aria-labelledby="buyer-tab-${key}"`));
   }
   for (const asset of ["buyer-tools.css", "buyer-tools.js"]) {
     assert.equal(await readFile(new URL(`../public/${asset}`, import.meta.url), "utf8"), await readFile(new URL(`../site/${asset}`, import.meta.url), "utf8"));
-    assert.ok(html.includes(`/${asset}?v=20260929-2`));
+    assert.ok(html.includes(`/${asset}?v=20260929-3`));
   }
 });
 

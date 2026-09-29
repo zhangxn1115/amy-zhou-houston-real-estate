@@ -68,11 +68,11 @@
 .buyer-school-footer{display:flex;align-items:center;gap:25px;margin-top:20px}
 .buyer-school-footer p{flex:1;margin:0}
 .buyer-school-footer a{max-width:220px}
-.buyer-resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.buyer-resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .buyer-resource{padding:32px}
 .buyer-resource h4{font-size:27px}
 .buyer-resource .buyer-primary{align-self:flex-start;margin-top:22px}
-.buyer-pending{font-size:11px;color:#8a775c}
+.buyer-pending{font-size:11px;color:#8a775c;margin-top:auto}
 .buyer-tool-footer{display:flex;justify-content:space-between;gap:20px;font-size:10px;line-height:1.8;letter-spacing:.3px;color:#7c877b;margin:27px 0 0;padding-top:18px;border-top:1px solid #dce1d5}
 @media(max-width:1000px){.buyer-query-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.buyer-query-grid>.buyer-card:last-child{grid-column:1/-1}.buyer-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.buyer-heading{align-items:start;flex-direction:column;gap:15px}.buyer-heading h2 span{display:inline}.buyer-heading>p{max-width:none}.buyer-calculator-layout{gap:20px}.buyer-tabs a{gap:7px;font-size:13px}}
 @media(max-width:620px){.buyer-tools{padding-top:50px;padding-bottom:45px}.buyer-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.buyer-tabs a{min-height:48px;justify-content:flex-start;padding-left:16px}.buyer-heading h2{font-size:28px}.buyer-heading h2 span{display:block}.buyer-heading>p{font-size:12px}.buyer-panel-heading{display:block}.buyer-panel-heading p{margin-top:8px}.buyer-query-grid,.buyer-directory-grid,.buyer-resource-grid{grid-template-columns:1fr}.buyer-query-grid>.buyer-card:last-child{grid-column:auto}.buyer-card{padding:23px}.buyer-mortgage{padding:21px 18px}.buyer-calculator-heading{align-items:start;flex-direction:column;gap:12px}.buyer-calculator-heading h3{font-size:24px}.buyer-private{padding:5px 10px}.buyer-calculator-layout{grid-template-columns:1fr}.buyer-input-grid{gap:15px 12px}.buyer-field>span:first-child{font-size:11px}.buyer-input-wrap{padding:0 9px}.buyer-result>strong{font-size:36px}.buyer-school-footer,.buyer-tool-footer{display:block}.buyer-school-footer>a{margin-top:14px;max-width:none}.buyer-tool-footer span{display:block;margin-top:4px}.buyer-calc-footer{flex-direction:column;gap:16px}}
