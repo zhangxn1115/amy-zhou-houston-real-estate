@@ -1,0 +1,79 @@
+.buyer-tools{padding-top:76px;padding-bottom:70px;scroll-margin-top:24px}
+.buyer-tools>.section-label{font-size:11px;letter-spacing:2px}
+.buyer-heading{display:flex;justify-content:space-between;align-items:end;gap:32px;margin:32px 0}
+.buyer-heading .kicker{font-size:10px;letter-spacing:2px;margin:0 0 15px}
+.buyer-heading h2{font-family:Georgia,"Songti SC",serif;font-size:clamp(28px,3vw,42px);font-weight:400;line-height:1.4;margin:0}
+.buyer-heading h2 span{display:block;font-style:normal}
+.buyer-heading>p{max-width:330px;color:#61756c;font-size:13px;line-height:1.9;margin:0 0 4px}
+.buyer-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;padding:6px;background:#e9e7de;border:1px solid #d8ddd2;border-radius:14px}
+.buyer-tabs a{min-height:56px;display:flex;justify-content:center;align-items:center;gap:12px;padding:12px 8px;border-radius:9px;font-size:14px;font-weight:600;color:#4a6359;text-align:center;transition:background .15s,color .15s}
+.buyer-tabs a>span{font-size:10px;font-weight:400;letter-spacing:1px;opacity:.65}
+.buyer-tabs a:hover{background:#f5f3ec}
+.buyer-tabs a[aria-selected=true]{background:#173a32;color:white;box-shadow:0 3px 9px #173a3214}
+.buyer-tools :is(a,button,input,select):focus-visible{outline:3px solid #a07848;outline-offset:4px}
+.buyer-panel{padding-top:30px;scroll-margin-top:24px}
+.buyer-panel[hidden],.buyer-tools [hidden]{display:none!important}
+.buyer-panel-heading{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:22px}
+.buyer-panel-heading h3{font-family:Georgia,"Songti SC",serif;font-size:21px;font-weight:500;margin:0;line-height:1.5}
+.buyer-panel-heading p{font-size:12px;color:#697970;line-height:1.8;margin:0}
+.buyer-query-grid,.buyer-directory-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.buyer-card{display:flex;flex-direction:column;padding:25px 22px;background:#fffefb;border:1px solid #dce1d7;border-radius:12px;min-width:0}
+.buyer-eyebrow{font-size:9px;letter-spacing:1.4px;color:#947551;line-height:1.7}
+.buyer-card h4{font-family:Georgia,"Songti SC",serif;font-size:22px;font-weight:500;margin:12px 0;line-height:1.35;overflow-wrap:anywhere}
+.buyer-card>p{font-size:13px;line-height:1.9;color:#5a7166;margin:0 0 18px}
+.buyer-links{display:grid;gap:0;margin-top:auto}
+.buyer-links a,.buyer-text-link{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid #e5e8df;font-size:12px;line-height:1.6;color:#245043;font-weight:600}
+.buyer-links a:hover,.buyer-text-link:hover,.buyer-calc-footer a:hover,.buyer-school-footer a:hover{text-decoration:underline;text-underline-offset:4px}
+.buyer-links a span,.buyer-text-link span{flex-shrink:0;font-family:Arial,sans-serif}
+.buyer-text-link{margin-top:auto}
+.buyer-card>small{font-size:11px;line-height:1.8;color:#79867e;margin-top:13px}
+.buyer-mortgage{margin-top:26px;border:1px solid #d9dfd4;background:#eeeee5;border-radius:14px;padding:28px}
+.buyer-calculator-heading{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.buyer-calculator-heading h3{font-family:Georgia,"Songti SC",serif;font-size:25px;line-height:1.4;font-weight:500;margin:7px 0 0}
+.buyer-private{font-size:10px;color:#426556;border:1px solid #bccdbc;border-radius:30px;padding:7px 12px;white-space:nowrap}
+.buyer-calculator-intro{font-size:12px;line-height:1.9;color:#607367;margin:15px 0 24px}
+.buyer-calculator-layout{display:grid;grid-template-columns:1.35fr 1fr;gap:28px;align-items:start}
+.buyer-input-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px 18px}
+.buyer-field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.buyer-field>span:first-child{font-size:12px;line-height:1.5;color:#39584b}
+.buyer-input-wrap{display:flex;align-items:center;gap:5px;padding:0 12px;background:#fffefb;border:1px solid #cbd5c7;border-radius:6px;min-width:0}
+.buyer-field input{min-width:0;width:100%;height:44px;border:0;background:transparent;color:#173a32;font:500 16px/1.4 Arial,sans-serif;box-shadow:none}
+.buyer-field input:focus{outline:none}
+.buyer-input-wrap:focus-within{outline:2px solid #69876f;outline-offset:1px}
+.buyer-field small{font-size:10px;white-space:nowrap;color:#63786a}
+.buyer-field select{width:100%;height:46px;border:1px solid #cbd5c7;border-radius:6px;background:#fffefb;color:#173a32;padding:0 12px;font-family:inherit;font-size:14px;line-height:1.4}
+.buyer-calc-actions{display:flex;align-items:center;gap:20px;margin-top:22px}
+.buyer-primary{display:flex;align-items:center;justify-content:space-between;gap:25px;min-height:45px;background:#173a32;color:white;border:0;border-radius:6px;padding:12px 20px;font:500 13px/1.5 "PingFang SC","Microsoft YaHei",sans-serif;cursor:pointer}
+.buyer-primary:hover{background:#245344}
+.buyer-primary:disabled{opacity:.5;cursor:not-allowed}
+.buyer-reset{background:none;border:0;padding:12px 0;min-height:44px;color:#5c7265;text-decoration:underline;text-underline-offset:4px;font-family:inherit;font-size:12px;line-height:1.5;cursor:pointer}
+.buyer-result{padding:26px 25px;border-radius:10px;background:#173a32;color:#fff}
+.buyer-result>p:first-child{font-size:12px;letter-spacing:.5px;margin:0 0 12px;color:#c3d0c4}
+.buyer-result>strong{display:block;font:400 clamp(26px,3vw,39px)/1.3 Georgia,serif;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.buyer-result>small{display:block;font-size:10px;margin-top:6px;color:#afc4b7}
+.buyer-result dl{margin:20px 0 0;padding-top:15px;border-top:1px solid #ffffff26}
+.buyer-result dl>div{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:12px}
+.buyer-result dt{color:#bfcfc3}
+.buyer-result dd{margin:0;font-family:Arial,sans-serif;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.buyer-loan-detail{margin-top:19px;padding-top:10px;border-top:1px solid #ffffff26}
+.buyer-loan-detail p{display:flex;justify-content:space-between;gap:12px;font-size:11px;color:#bfcfc3;margin:10px 0 0}
+.buyer-loan-detail b{font:400 12px Arial,sans-serif;color:#fff;overflow-wrap:anywhere}
+.buyer-note{font-size:11px;line-height:1.9;color:#6e7e70;margin:20px 0 0}
+.buyer-result-status{font-size:11px;line-height:1.7;color:#ecd9b4;margin:15px 0 0}
+.buyer-error{font-size:12px;line-height:1.7;color:#993c2c;margin:14px 0 0}
+.buyer-result[data-stale=true]>strong{opacity:.5}
+.buyer-calc-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid #d3dccd;margin-top:20px;padding-top:16px}
+.buyer-calc-footer a,.buyer-calc-footer button,.buyer-school-footer a{display:inline-flex;align-items:center;gap:12px;font-size:12px;font-weight:500;color:#365c48;line-height:1.6}
+.buyer-calc-footer button{background:none;border:0;cursor:pointer;padding:0;min-height:32px}
+.buyer-school-footer{display:flex;align-items:center;gap:25px;margin-top:20px}
+.buyer-school-footer p{flex:1;margin:0}
+.buyer-school-footer a{max-width:220px}
+.buyer-resource-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.buyer-resource{padding:32px}
+.buyer-resource h4{font-size:27px}
+.buyer-resource .buyer-primary{align-self:flex-start;margin-top:22px}
+.buyer-pending{font-size:11px;color:#8a775c}
+.buyer-tool-footer{display:flex;justify-content:space-between;gap:20px;font-size:10px;line-height:1.8;letter-spacing:.3px;color:#7c877b;margin:27px 0 0;padding-top:18px;border-top:1px solid #dce1d5}
+@media(max-width:1000px){.buyer-query-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.buyer-query-grid>.buyer-card:last-child{grid-column:1/-1}.buyer-directory-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.buyer-heading{align-items:start;flex-direction:column;gap:15px}.buyer-heading h2 span{display:inline}.buyer-heading>p{max-width:none}.buyer-calculator-layout{gap:20px}.buyer-tabs a{gap:7px;font-size:13px}}
+@media(max-width:620px){.buyer-tools{padding-top:50px;padding-bottom:45px}.buyer-tabs{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.buyer-tabs a{min-height:48px;justify-content:flex-start;padding-left:16px}.buyer-heading h2{font-size:28px}.buyer-heading h2 span{display:block}.buyer-heading>p{font-size:12px}.buyer-panel-heading{display:block}.buyer-panel-heading p{margin-top:8px}.buyer-query-grid,.buyer-directory-grid,.buyer-resource-grid{grid-template-columns:1fr}.buyer-query-grid>.buyer-card:last-child{grid-column:auto}.buyer-card{padding:23px}.buyer-mortgage{padding:21px 18px}.buyer-calculator-heading{align-items:start;flex-direction:column;gap:12px}.buyer-calculator-heading h3{font-size:24px}.buyer-private{padding:5px 10px}.buyer-calculator-layout{grid-template-columns:1fr}.buyer-input-grid{gap:15px 12px}.buyer-field>span:first-child{font-size:11px}.buyer-input-wrap{padding:0 9px}.buyer-result>strong{font-size:36px}.buyer-school-footer,.buyer-tool-footer{display:block}.buyer-school-footer>a{margin-top:14px;max-width:none}.buyer-tool-footer span{display:block;margin-top:4px}.buyer-calc-footer{flex-direction:column;gap:16px}}
+@media(prefers-reduced-motion:reduce){.buyer-tabs a{transition:none}}

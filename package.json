@@ -12,6 +12,7 @@
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
     "blog:build": "node scripts/generate-blog.mjs",
     "blog:optimize": "node blog-tools/optimize-images.mjs",
+    "tools:build": "tsx scripts/update-buyer-tools.tsx",
     "test": "pnpm run build && pnpm run blog:build && pnpm run blog:optimize && node --test tests/*.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
@@ -36,6 +37,7 @@
     "eslint-config-next": "16.2.11",
     "react-server-dom-webpack": "19.2.8",
     "tailwindcss": "4.3.3",
+    "tsx": "4.23.0",
     "typescript": "5.9.3",
     "vinext": "0.0.50",
     "vite": "8.1.5",

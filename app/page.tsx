@@ -1,3 +1,5 @@
+import { BuyerTools } from "./BuyerTools";
+
 const services = [
   {
     title: "Katy / Fulshear",
@@ -231,17 +233,7 @@ export default function Home() {
         <div><strong>全流程</strong><span>专属陪伴</span></div>
       </section>
 
-      <section className="about section" id="houston">
-        <div className="section-label">01 / 认识休斯顿</div>
-        <div className="about-heading">
-          <p className="kicker">SPACE CITY · BAYOU CITY</p>
-          <h2>一座充满机会，也适合<span>安家生活</span>的城市。</h2>
-        </div>
-        <div className="about-copy">
-          <p>休斯顿是美国最具活力和包容力的都会区之一。能源、医疗、航天、制造与国际贸易共同支撑着多元经济，也让这里持续吸引来自世界各地的家庭与专业人才。</p>
-          <p>宽阔的城市空间、丰富的社区选择、成熟的华人生活圈，以及相对友好的居住成本，让休斯顿同时适合家庭自住与长期资产配置。从市中心都市生活到西部优质社区，每一种生活方式都能找到对应的选择。</p>
-        </div>
-      </section>
+      <BuyerTools />
 
       <section className="services section" id="services">
         <div className="section-topline">
