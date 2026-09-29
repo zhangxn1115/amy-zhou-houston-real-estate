@@ -5,6 +5,25 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(path, import.meta.url), "utf8");
 
+test("publishes the EB-5 housing guide with safeguards and discovery links", async () => {
+  const slug = "2026-09-29-eb5-texas-new-immigrants-buy-or-rent";
+  const article = await read(`../site/blog/${slug}/index.html`);
+  const posts = JSON.parse(await read("../site/blog/index.json"));
+  assert.equal(posts[0].slug, slug);
+  assert.match(article, /2016 年开始参与 EB-5/);
+  assert.match(article, /不是准确的理解/);
+  assert.match(article, /少于一年/);
+  assert.match(article, /Fannie Mae/);
+  assert.match(article, /SB00017F\.htm/);
+  assert.match(article, /不构成移民、法律、税务或贷款意见/);
+  assert.match(article, new RegExp(`rel="canonical" href="https://amyzhouhomes.net/blog/${slug}/"`));
+  assert.ok((await read("../site/index.html")).includes(`/blog/${slug}/`));
+  assert.ok((await read("../site/sitemap.xml")).includes(`/blog/${slug}/`));
+  for (const match of article.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
+    assert.doesNotThrow(() => JSON.parse(match[1]));
+  }
+});
+
 test("generates the blog index and SEO-ready article", async () => {
   const index = await read("../site/blog/index.html");
   const article = await read("../site/blog/2026-07-18-sugar-land-ryehill-price/index.html");
