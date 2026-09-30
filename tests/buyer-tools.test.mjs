@@ -51,8 +51,13 @@ test("homepage exports five accessible tabs and preserves existing homepage cont
   assert.match(html, /action="\/api\/leads"/);
   assert.match(html, /2026-09-29-eb5-texas-new-immigrants-buy-or-rent/);
   assert.equal((html.match(/<article class="video-card"/g) || []).length, 6);
-  assert.match(html, /id="services"/);
-  assert.match(html, /id="schools"/);
+  assert.doesNotMatch(html, /id="(?:services|schools)"/);
+  assert.doesNotMatch(html, /查看生活区图文介绍|02 \/ 华人生活区|03 \/ 学区选择/);
+  assert.match(html, /href="#buyer-panel-areas"/);
+  assert.match(html, /href="#buyer-panel-schools"/);
+  assert.match(html, /02 \/ 视频解读/);
+  assert.match(html, /03 \/ 服务流程/);
+  assert.match(html, /04 \/ 房产博客/);
   assert.equal((html.match(/class="buyer-card buyer-resource"/g) || []).length, 3);
   assert.match(html, /TITLE COMPANY/);
   assert.match(html, /咨询产权公司/);
@@ -62,7 +67,7 @@ test("homepage exports five accessible tabs and preserves existing homepage cont
   }
   for (const asset of ["buyer-tools.css", "buyer-tools.js"]) {
     assert.equal(await readFile(new URL(`../public/${asset}`, import.meta.url), "utf8"), await readFile(new URL(`../site/${asset}`, import.meta.url), "utf8"));
-    assert.ok(html.includes(`/${asset}?v=20260929-3`));
+    assert.ok(html.includes(`/${asset}?v=20260929-4`));
   }
 });
 

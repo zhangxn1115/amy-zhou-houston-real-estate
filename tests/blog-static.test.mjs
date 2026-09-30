@@ -390,7 +390,7 @@ test("keeps the homepage latest articles in reverse chronological order", async 
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解华人生活区"));
-  assert.match(home, /href="#services">了解华人生活区/);
+  assert.match(home, /href="#buyer-panel-areas">了解华人生活区/);
   assert.match(home, /rel="preload" href="\.\/amy-zhou\.jpg"/);
   assert.doesNotMatch(home, /rel="preload" href="\/(?:amy-zhou-homes-logo\.png|license-icon\.webp)"/);
 });

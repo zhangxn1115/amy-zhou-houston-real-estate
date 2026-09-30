@@ -51,7 +51,12 @@ export function initializeBuyerTools(root) {
   panels.forEach((panel) => { panel.setAttribute("role", "tabpanel"); panel.tabIndex = 0; });
   const fromHash = () => {
     const match = window.location.hash.match(/^#buyer-(?:panel|tab)-(basic|mortgage|areas|schools|resources)$/);
-    if (match) activate(match[1]);
+    const legacy = { '#services': 'areas', '#schools': 'schools' };
+    const key = match?.[1] || legacy[window.location.hash];
+    if (key) {
+      activate(key);
+      root.querySelector(`#buyer-panel-${key}`).scrollIntoView({ block: 'start' });
+    }
   };
   activate("basic");
   fromHash();

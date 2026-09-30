@@ -76,7 +76,7 @@ export function BuyerTools() {
 
     <div className="buyer-panel" id="buyer-panel-areas" aria-labelledby="buyer-tab-areas" data-buyer-panel="areas">
       <div className="buyer-panel-heading"><h3>华人关注的生活区域</h3><p>从购物、通勤与社区环境出发，找到适合自己的生活半径。</p></div>
-      <div className="buyer-directory-grid">{areas.map(([name, tag, description]) => <article className="buyer-card" key={name}><span className="buyer-eyebrow">{tag}</span><h4>{name}</h4><p>{description}</p><a className="buyer-text-link" href="#services">查看生活区图文介绍 <span aria-hidden="true">↓</span></a></article>)}</div>
+      <div className="buyer-directory-grid">{areas.map(([name, tag, description]) => <article className="buyer-card" key={name}><span className="buyer-eyebrow">{tag}</span><h4>{name}</h4><p>{description}</p></article>)}</div>
       <p className="buyer-note">以上为生活区域速览，不代表人口比例、区域排名或居住限制。欢迎所有购房者根据自己的需求比较；房源、通勤和服务覆盖请按具体地址确认。</p>
     </div>
 

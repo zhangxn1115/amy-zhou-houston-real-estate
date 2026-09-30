@@ -1,71 +1,11 @@
 import { BuyerTools } from "./BuyerTools";
 
-const services = [
-  {
-    title: "Katy / Fulshear",
-    text: "新移民华人增长活跃，新房与大型规划社区集中。代表社区包括 Cinco Ranch、Elyson、Cross Creek Ranch 与 Jordan Ranch，兼顾学区、环境和家庭生活。",
-    image: "/areas/katy.jpg",
-    alt: "亚洲商业与餐饮街区氛围",
-    width: 1200,
-    height: 800,
-  },
-  {
-    title: "Sugar Land",
-    text: "休斯顿成熟的华人生活圈，亚洲超市、中餐、医疗与中文教育资源丰富。Riverstone、Telfair、Greatwood 等社区生活便利、配套完整。",
-    image: "/areas/sugar-land.jpg",
-    alt: "Sugar Land Town Square",
-    width: 1280,
-    height: 853,
-  },
-  {
-    title: "Bellaire / Asiatown",
-    text: "休斯顿亚洲商业中心，餐饮、超市、中医和亚洲商品高度集中。住宅较成熟，适合重视生活便利、医疗中心通勤或投资出租的买家。",
-    image: "/areas/asiatown.jpg",
-    alt: "休斯顿中国城绿色屋顶商业中心",
-    width: 1280,
-    height: 960,
-  },
-  {
-    title: "Cypress",
-    text: "快速成长的新房区域，房价通常比 Katy 更具亲和力。Bridgeland、Towne Lake 与 Fairfield 规划完善，华人家庭数量持续增加。",
-    image: "/areas/cypress.jpg",
-    alt: "Cypress Bridgeland 湖畔步行桥",
-    width: 1024,
-    height: 619,
-  },
-  {
-    title: "The Woodlands",
-    text: "森林环绕、环境优美，学区与社区管理表现突出。适合医生、企业高管、油气行业从业者及重视空间和居住品质的家庭。",
-    image: "/areas/woodlands.jpg",
-    alt: "林地与湖泊景观",
-    width: 1200,
-    height: 1716,
-  },
-  {
-    title: "Pearland",
-    text: "连接 Texas Medical Center 与 NASA 的便利选择，房价相对合理、社区成熟。受到医学中心工作人员、医生与航天行业家庭关注。",
-    image: "/areas/pearland.jpg",
-    alt: "Pearland Town Center",
-    width: 1280,
-    height: 960,
-  },
-];
-
 function responsiveWebp(image: string) {
   const base = image.replace(/\.(?:jpe?g|png)$/i, "");
   return `${base}-480.webp 480w, ${base}-800.webp 800w, ${base}.webp 1200w`;
 }
 
 const steps = ["了解您的需求", "制定置业方案", "筛选与实地看房", "谈判、签约与交割"];
-
-const schoolDistricts = [
-  { name: "Katy ISD", area: "Katy · Cinco Ranch · Elyson", text: "休斯顿西部家庭关注度较高的学区，覆盖多个成熟社区与大型新房社区。", website: "https://www.katyisd.org/" },
-  { name: "Fort Bend ISD", area: "Sugar Land · Missouri City", text: "社区类型多元，生活配套成熟，部分学校长期受到华人家庭关注。", website: "https://www.fortbendisd.gov/" },
-  { name: "Lamar CISD", area: "Fulshear · Richmond", text: "伴随西南部新社区快速发展，近年来成为新房买家的重要选择。", website: "https://www.lcisd.org/" },
-  { name: "Cy-Fair ISD", area: "Cypress · Bridgeland", text: "覆盖休斯顿西北部广阔区域，拥有成熟社区与持续扩张的新规划社区。", website: "https://www.cfisd.net/" },
-  { name: "Conroe ISD", area: "The Woodlands · South Montgomery", text: "服务 The Woodlands 及周边社区，适合重视自然环境与社区品质的家庭。", website: "https://www.conroeisd.net/" },
-  { name: "Pearland ISD", area: "Pearland", text: "靠近医学中心与南部就业区，是兼顾通勤、社区生活和教育需求的选择。", website: "https://www.pearlandisd.org/" },
-];
 
 const latestVideos = [
   {
@@ -214,8 +154,8 @@ export default function Home() {
               </div>
             </div>
             <nav className="portrait-actions" aria-label="页面重点内容">
-              <a href="#services">了解华人生活区 <span>↓</span></a>
-              <a href="#schools">了解优质学区 <span>↓</span></a>
+              <a href="#buyer-panel-areas">了解华人生活区 <span>↓</span></a>
+              <a href="#buyer-panel-schools">了解优质学区 <span>↓</span></a>
               <a href="#videos">Amy 视频看房 <span>↓</span></a>
             </nav>
           </div>
@@ -235,49 +175,8 @@ export default function Home() {
 
       <BuyerTools />
 
-      <section className="services section" id="services">
-        <div className="section-topline">
-          <div className="section-label light">02 / 华人生活区</div>
-          <p>从成熟华人生活圈到快速成长的新社区，<br />找到适合您家庭节奏的休斯顿生活半径。</p>
-        </div>
-        <div className="service-grid">
-          {services.map((service) => (
-            <article className="service-card" key={service.title}>
-              <picture>
-                <source srcSet={responsiveWebp(service.image)} sizes="(max-width: 760px) 100vw, 33vw" type="image/webp" />
-                <img className="service-image" src={service.image} alt={service.alt} width={service.width} height={service.height} loading="lazy" decoding="async" />
-              </picture>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="schools section" id="schools">
-        <div className="section-label">03 / 学区选择</div>
-        <div className="schools-intro">
-          <div>
-            <p className="kicker">SCHOOLS &amp; COMMUNITIES</p>
-            <h2>选一所学校，也是在选择<span>一种生活。</span></h2>
-          </div>
-          <p>休斯顿都会区的学区边界与社区并不完全重合。同一社区、甚至同一条街的不同房屋，都可能对应不同学校。Amy 会结合家庭需求，逐套确认地址对应学校与社区信息。</p>
-        </div>
-        <div className="school-grid">
-          {schoolDistricts.map((district) => (
-            <article className="school-card" key={district.name}>
-              <span>{district.area}</span>
-              <h3>{district.name}</h3>
-              <p>{district.text}</p>
-              <a href={district.website} target="_blank" rel="noopener noreferrer">访问学区官网 <i>↗</i></a>
-            </article>
-          ))}
-        </div>
-        <p className="school-note">学区边界、学校分配及相关信息可能调整，购房前应以学区和学校官方查询结果为准。</p>
-      </section>
-
       <section className="videos section" id="videos">
-        <div className="section-label">04 / 视频解读</div>
+        <div className="section-label">02 / 视频解读</div>
         <div className="video-intro">
           <div>
             <p className="kicker">HOUSTON IN FOCUS</p>
@@ -310,7 +209,7 @@ export default function Home() {
 
       <section className="process section" id="process">
         <div>
-          <div className="section-label">05 / 服务流程</div>
+          <div className="section-label">03 / 服务流程</div>
           <p className="kicker">A CLEAR PATH HOME</p>
           <h2>安心置业，<span>从清晰开始。</span></h2>
           <p className="process-intro">跨城市、跨国家买房也可以很从容。Amy 会提前告诉您每个阶段需要准备什么，以及下一步会发生什么。</p>
@@ -324,7 +223,7 @@ export default function Home() {
 
       <section className="blog-promo section" id="blog">
         <div>
-          <div className="section-label">06 / 房产博客</div>
+          <div className="section-label">04 / 房产博客</div>
           <p className="kicker">AMY&apos;S HOUSTON NOTES</p>
           <h2>持续更新的休斯顿<span>房产观察。</span></h2>
         </div>
