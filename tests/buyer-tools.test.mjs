@@ -56,6 +56,7 @@ test("homepage exports five accessible tabs and preserves existing homepage cont
   assert.equal((html.match(/class="buyer-card buyer-resource"/g) || []).length, 3);
   assert.match(html, /TITLE COMPANY/);
   assert.match(html, /咨询产权公司/);
+  assert.doesNotMatch(html, /联系人资料待补充/);
   for (const key of ["basic", "mortgage", "areas", "schools", "resources"]) {
     assert.match(html, new RegExp(`id="buyer-panel-${key}" aria-labelledby="buyer-tab-${key}"`));
   }
