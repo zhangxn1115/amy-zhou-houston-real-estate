@@ -50,7 +50,7 @@ test("homepage exports five accessible tabs and preserves existing homepage cont
   assert.match(html, /默认值仅为演示/);
   assert.match(html, /action="\/api\/leads"/);
   assert.match(html, /2026-09-29-eb5-texas-new-immigrants-buy-or-rent/);
-  assert.equal((html.match(/<article class="video-card"/g) || []).length, 6);
+  assert.equal((html.match(/class="video-playlist"/g) || []).length, 1);
   assert.doesNotMatch(html, /id="(?:services|schools)"/);
   assert.doesNotMatch(html, /查看生活区图文介绍|02 \/ 华人生活区|03 \/ 学区选择/);
   assert.match(html, /href="#buyer-panel-areas"/);

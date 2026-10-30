@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 const sourcePath = process.argv[2] ?? "/tmp/amy-index.html";
 const outputPath = process.argv[3] ?? "site/index.html";
 const siteUrl = "https://amyzhouhomes.net";
-const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20260811-1"/>';
+const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20260811-1"/><link rel="stylesheet" href="/video-playlist.css?v=20261029-1"/>';
 
 let html = await readFile(sourcePath, "utf8");
 
@@ -29,7 +29,7 @@ html = html.replaceAll('src="/areas/', 'src="./areas/');
 html = html.replace(/ nonce="[^"]+"/g, "");
 html = html.replace(
   '<meta charSet="utf-8"/>',
-  '<meta charSet="utf-8"/><meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\' https://www.googletagmanager.com; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src \'self\' data:; connect-src \'self\' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src \'none\'; base-uri \'self\'; form-action \'self\'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin">'
+  '<meta charSet="utf-8"/><meta http-equiv="Content-Security-Policy" content="default-src \'self\'; script-src \'self\' https://www.googletagmanager.com; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src \'self\' data:; connect-src \'self\' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com; object-src \'none\'; base-uri \'self\'; form-action \'self\'; upgrade-insecure-requests"><meta name="referrer" content="strict-origin-when-cross-origin">'
 );
 html = html.replace(
   "</head>",

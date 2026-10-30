@@ -91,6 +91,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script src="/analytics.js?v=20260727-1" defer />
         <script src="/lead-form.js?v=20260727-1" defer />
         <script src="/video-lazy.js?v=20260811-2" defer />
+        <link rel="stylesheet" href="/video-playlist.css?v=20261029-1" />
         <link rel="stylesheet" href="/buyer-tools.css?v=20260929-4" />
         <script type="module" src="/buyer-tools.js?v=20260929-4" />
       </head>

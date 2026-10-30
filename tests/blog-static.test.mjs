@@ -379,13 +379,13 @@ test("keeps the homepage latest articles in reverse chronological order", async 
   const home = await read("../site/index.html");
   const fulshearRetail = home.indexOf("Fulshear 新零售区正在落地：生活配套越来越方便了");
   const fulshearLakes = home.indexOf("Fulshear Lakes 最新房源更新：户型与报价清单欢迎索取");
-  const crossCreekRanch = home.indexOf("新房早卖光，华人还在追！Cross Creek Ranch到底好在哪");
+  const eb5 = home.indexOf("EB-5 排期向前走了：新移民到德州，先买房还是先租房？");
 
   assert.ok(fulshearRetail > -1);
   assert.ok(fulshearLakes > -1);
-  assert.ok(crossCreekRanch > -1);
+  assert.ok(eb5 > -1);
+  assert.ok(eb5 < fulshearRetail);
   assert.ok(fulshearRetail < fulshearLakes);
-  assert.ok(fulshearLakes < crossCreekRanch);
   assert.match(home, /class="hero-blog-item"/);
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);

@@ -1,4 +1,5 @@
 import { BuyerTools } from "./BuyerTools";
+import { VideoPlaylist } from "./VideoPlaylist";
 
 function responsiveWebp(image: string) {
   const base = image.replace(/\.(?:jpe?g|png)$/i, "");
@@ -6,39 +7,6 @@ function responsiveWebp(image: string) {
 }
 
 const steps = ["了解您的需求", "制定置业方案", "筛选与实地看房", "谈判、签约与交割"];
-
-const latestVideos = [
-  {
-    id: "v40I6X4KraQ",
-    title: "新房早卖光，华人还在追！Cross Creek Ranch到底好在哪",
-    thumbnail: "/video-thumbnails/cross-creek-ranch-394500.jpg",
-  },
-  {
-    id: "DwZtif3WLx8",
-    title: "46.9万买Highland现房！Jordan Ranch 4房3卫实拍",
-    thumbnail: "/video-thumbnails/jordan-ranch-highland.jpg",
-  },
-  {
-    id: "_zinBh8UtJ8",
-    title: "$137/尺！Cypress低价Townhouse，但有两个问题",
-    thumbnail: "/video-thumbnails/cypress-townhouse.jpg",
-  },
-  {
-    id: "OFhk_QDd7tc",
-    title: "三代同堂太合适了！CCW 50万湖景现房",
-    thumbnail: "/video-thumbnails/ccw-lake-home.jpg",
-  },
-  {
-    id: "nmipopUBtjE",
-    title: "35万买休斯顿四卧新房？实拍 MI Homes",
-    thumbnail: "/video-thumbnails/summerview-mi-homes.jpg",
-  },
-  {
-    id: "Gg8Nz_vnGd4",
-    title: "34.5万美元能买什么房？Katy学区4房独栋",
-    thumbnail: "/video-thumbnails/katy-cinco-ranch.jpg",
-  },
-];
 
 const latestPosts = [
   {
@@ -175,37 +143,7 @@ export default function Home() {
 
       <BuyerTools />
 
-      <section className="videos section" id="videos">
-        <div className="section-label">02 / 视频解读</div>
-        <div className="video-intro">
-          <div>
-            <p className="kicker">HOUSTON IN FOCUS</p>
-            <h2>用更直观的方式，<span>了解休斯顿。</span></h2>
-          </div>
-          <p>通过中文视频分享房市趋势、热门社区、学区信息与置业知识，让您在看房之前先建立清晰判断。</p>
-        </div>
-        <div className="video-grid">
-          {latestVideos.map((video, index) => (
-            <article className="video-card" key={video.id}>
-              <div className="video-card-frame">
-                <button
-                  type="button"
-                  className="video-play"
-                  data-video-play
-                  data-video-src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1`}
-                  data-video-title={video.title}
-                  aria-label={`播放视频：${video.title}`}
-                >
-                  <img src={video.thumbnail} alt="" width="480" height="270" loading="lazy" decoding="async" />
-                  <span className="video-play-icon" aria-hidden="true">▶</span>
-                  <span className="video-order" aria-hidden="true">0{index + 1}</span>
-                </button>
-              </div>
-              <h3><a href={`https://www.youtube.com/watch?v=${video.id}`} target="_blank" rel="noopener noreferrer">{video.title}</a></h3>
-            </article>
-          ))}
-        </div>
-      </section>
+      <VideoPlaylist />
 
       <section className="process section" id="process">
         <div>

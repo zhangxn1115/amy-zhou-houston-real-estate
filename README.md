@@ -1,5 +1,23 @@
 # vinext-starter
 
+## Production homepage video playlist
+
+The public site remains deployed from `site/` to GitHub Pages and the existing
+Hong Kong server. Do not move hosting when editing this module.
+
+`app/VideoPlaylist.tsx` embeds Amy's YouTube channel uploads playlist
+`UU1ymf6PCQwnLL8-ETiPteHw` (channel `UC1ymf6PCQwnLL8-ETiPteHw`, `@ningimeng`).
+YouTube maintains its public uploads and ordering; new public videos do not
+require a website rebuild. Each video must allow embedding. Private videos,
+restricted videos, and YouTube processing/cache delays can affect availability.
+YouTube access is still required; hosting the webpage in Hong Kong does not
+make YouTube accessible on mainland networks.
+
+After changing this component, run `tsx scripts/update-home-videos.tsx` to update
+only the production video section and copy its versioned stylesheet. This avoids
+overwriting the latest homepage blog entries or production-specific styling.
+The existing `video-lazy.js` defers the iframe until it approaches the viewport.
+
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
 Drizzle support.
