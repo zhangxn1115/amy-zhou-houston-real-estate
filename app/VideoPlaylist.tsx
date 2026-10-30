@@ -28,7 +28,7 @@ export function VideoPlaylist() {
           />
         </div>
         <div className="video-playlist-footer">
-          <p>点击播放器右上角的列表图标，选择更多视频。</p>
+          <p>在播放器内切换视频，或前往 YouTube 查看完整列表。</p>
           <a href={playlistUrl} target="_blank" rel="noopener noreferrer">在 YouTube 查看播放列表 <span aria-hidden="true">↗</span></a>
         </div>
         <p className="video-playlist-note">视频由 YouTube 提供，需在可访问 YouTube 的网络环境下观看。</p>
