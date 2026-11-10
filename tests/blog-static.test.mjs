@@ -9,7 +9,7 @@ test("publishes the EB-5 housing guide with safeguards and discovery links", asy
   const slug = "2026-09-29-eb5-texas-new-immigrants-buy-or-rent";
   const article = await read(`../site/blog/${slug}/index.html`);
   const posts = JSON.parse(await read("../site/blog/index.json"));
-  assert.equal(posts[0].slug, slug);
+  assert.ok(posts.some((post) => post.slug === slug));
   assert.match(article, /2016 年开始参与 EB-5/);
   assert.match(article, /不是准确的理解/);
   assert.match(article, /少于一年/);
@@ -22,6 +22,23 @@ test("publishes the EB-5 housing guide with safeguards and discovery links", asy
   for (const match of article.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
     assert.doesNotThrow(() => JSON.parse(match[1]));
   }
+});
+
+test("publishes the Texas SB 17 housing guide with key distinctions and official sources", async () => {
+  const slug = "2026-11-09-texas-buy-rent-sb17-eligibility";
+  const article = await read(`../site/blog/${slug}/index.html`);
+  const index = await read("../site/blog/index.html");
+  const sitemap = await read("../site/sitemap.xml");
+  assert.match(article, /德州买房、租房看什么身份？可以买几套？/);
+  assert.match(article, /这部法律没有规定他们只能买一套/);
+  assert.match(article, /整整 12 个月不属于这个短租例外/);
+  assert.match(article, /工卡不是绿卡/);
+  assert.match(article, /提案不等于已生效的规则/);
+  assert.match(article, /SB00017F\.HTM/);
+  assert.match(article, /www\.ca5\.uscourts\.gov\/oral-argument-recordings/);
+  assert.match(article, /href="\/#buyer-panel-basic"/);
+  assert.match(article, new RegExp(`rel="canonical" href="https://amyzhouhomes.net/blog/${slug}/"`));
+  for (const page of [index, sitemap]) assert.ok(page.includes(`/blog/${slug}/`));
 });
 
 test("generates the blog index and SEO-ready article", async () => {
@@ -381,16 +398,10 @@ test("publishes Amy's Jordan Ranch Highland video tour", async () => {
 
 test("keeps the homepage latest articles in reverse chronological order", async () => {
   const home = await read("../site/index.html");
-  const fulshearRetail = home.indexOf("Fulshear 新零售区正在落地：生活配套越来越方便了");
-  const fulshearLakes = home.indexOf("Fulshear Lakes 最新房源更新：户型与报价清单欢迎索取");
-  const eb5 = home.indexOf("EB-5 排期向前走了：新移民到德州，先买房还是先租房？");
-
-  assert.ok(fulshearRetail > -1);
-  assert.ok(fulshearLakes > -1);
-  assert.ok(eb5 > -1);
-  assert.ok(eb5 < fulshearRetail);
-  assert.ok(fulshearRetail < fulshearLakes);
-  assert.match(home, /class="hero-blog-item"/);
+  const posts = JSON.parse(await read("../site/blog/index.json"));
+  const latest = posts.toSorted((a, b) => Date.parse(b.date) - Date.parse(a.date)).slice(0, 3);
+  const latestLinks = [...home.matchAll(/class="hero-blog-item" href="(\/blog\/[^"/]+\/)"/g)].map(([, href]) => href);
+  assert.deepEqual(latestLinks, latest.map(({ slug }) => `/blog/${slug}/`));
   assert.match(home, /class="portrait-actions"/);
   assert.match(home, /class="header-qr-label">微信扫码咨询/);
   assert.ok(home.indexOf("License No. 839083") < home.indexOf("了解华人生活区"));
