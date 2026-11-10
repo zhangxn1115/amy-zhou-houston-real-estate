@@ -89,6 +89,26 @@ test("crime and safety card includes the city and county resources with clear la
   assert.match(card, /无记录不等于无风险/);
 });
 
+test("move-in card distinguishes water district lookup from city utility signup", async () => {
+  const html = await readFile(new URL("../site/index.html", import.meta.url), "utf8");
+  const card = html.match(/<article class="buyer-card"><span class="buyer-eyebrow">MOVE-IN ESSENTIALS<\/span>.*?<\/article>/s)?.[0];
+  assert.ok(card);
+  const links = [...card.matchAll(/<a href="([^"]+)" target="_blank" rel="noopener noreferrer">([^<]+)<span/g)];
+  assert.deepEqual(links.map(([, href, label]) => [href, label]), [
+    ["https://www.puc.texas.gov/industry/water/utilities/map.aspx", "德州供水与污水服务区地图"],
+    ["https://houstonpublicworks.org/utility-billing", "休斯顿市 · 供水开通"],
+    ["https://www.sugarlandtx.gov/320/StartCancel-Water-and-Garbage-Recycling-", "糖城 Sugar Land · 市供水开通"],
+    ["https://www.cityofkaty.com/residents/utilities-services", "Katy · 市供水开通"],
+    ["https://www.tceq.texas.gov/gis/iwudview.html", "Cypress · 按地址查水务区（MUD）"],
+    ["https://www.fulsheartexas.gov/about-us/departments-h-z/utility-billing/forms", "Fulshear · 市供水开通表格"],
+    ["https://www.richmondtx.gov/departments/customer-service/start-cancel-utility-services", "Richmond · 市供水开通及服务范围"],
+    ["https://www.powertochoose.org/", "电力方案比较 · Power to Choose"],
+    ["https://move.centerpointenergy.com/", "CenterPoint 燃气开通"],
+  ]);
+  assert.match(card, /完整地址查供水服务区/);
+  assert.match(card, /邮寄地址上的城市名不代表由该市供水/);
+});
+
 test("calculator keeps input local and renders no user-supplied HTML", async () => {
   const script = await readFile(new URL("../public/buyer-tools.js", import.meta.url), "utf8");
   assert.doesNotMatch(script, /\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage|innerHTML|eval\s*\(/);

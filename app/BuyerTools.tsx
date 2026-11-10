@@ -10,6 +10,17 @@ const safetyLinks = [
   ["Richmond · 警局记录申请", "https://www.richmondtx.gov/departments/police-department/support-services"],
   ["Fort Bend County · 犯罪地图", "https://www.fortbendcountytx.gov/government/departments/sheriff-s-office/information/criminal-statistics"],
 ];
+const utilityLinks = [
+  ["德州供水与污水服务区地图", "https://www.puc.texas.gov/industry/water/utilities/map.aspx"],
+  ["休斯顿市 · 供水开通", "https://houstonpublicworks.org/utility-billing"],
+  ["糖城 Sugar Land · 市供水开通", "https://www.sugarlandtx.gov/320/StartCancel-Water-and-Garbage-Recycling-"],
+  ["Katy · 市供水开通", "https://www.cityofkaty.com/residents/utilities-services"],
+  ["Cypress · 按地址查水务区（MUD）", "https://www.tceq.texas.gov/gis/iwudview.html"],
+  ["Fulshear · 市供水开通表格", "https://www.fulsheartexas.gov/about-us/departments-h-z/utility-billing/forms"],
+  ["Richmond · 市供水开通及服务范围", "https://www.richmondtx.gov/departments/customer-service/start-cancel-utility-services"],
+  ["电力方案比较 · Power to Choose", "https://www.powertochoose.org/"],
+  ["CenterPoint 燃气开通", "https://move.centerpointenergy.com/"],
+];
 const areas = [
   ["Katy / Fulshear", "西部 · 新房与规划社区", "从 Cinco Ranch 到 Cross Creek Ranch、Jordan Ranch，适合一起比较新旧房、生活配套和西部通勤路线。"],
   ["Sugar Land", "西南部 · 成熟生活圈", "关注 Riverstone、Telfair、New Territory 等社区，结合超市、餐饮、医疗和工作地点筛选日常生活半径。"],
@@ -46,7 +57,7 @@ export function BuyerTools() {
       <div className="buyer-query-grid">
         <article className="buyer-card"><span className="buyer-eyebrow">SAFETY</span><h4>犯罪与治安</h4><p>先用完整地址确认警局辖区，再查看公开案件或申请记录。邮寄地址上的城市名不等于市界。</p><div className="buyer-links">{safetyLinks.map(([label, href]) => <External key={href} href={href}>{label}</External>)}</div><small>市界外可向所属县警长办公室查询。地图只显示公开记录；无记录不等于无风险。</small></article>
         <article className="buyer-card"><span className="buyer-eyebrow">FLOOD RISK</span><h4>洪水与洪泛区</h4><p>用完整地址查看 FEMA 洪水地图；Harris County 的房屋还可交叉查询县级工具。</p><div className="buyer-links"><External href="https://msc.fema.gov/portal/home">FEMA 官方洪水地图</External><External href="https://www.harriscountyfemt.org/">Harris County 洪水查询</External></div><small>不在高风险区不代表不会积水或进水，还需查看披露、排水情况及保险报价。</small></article>
-        <article className="buyer-card"><span className="buyer-eyebrow">MOVE-IN ESSENTIALS</span><h4>水 · 电 · 燃气开通</h4><p>服务商由具体地址决定，先确认供水单位、MUD 与燃气覆盖，再安排开通时间。</p><div className="buyer-links"><External href="https://www.powertochoose.org/">电力方案比较 · Power to Choose</External><External href="https://houstonpublicworks.org/utility-billing">休斯顿市供水开通</External><External href="https://www.puc.texas.gov/industry/water/utilities/gis.aspx">德州供水服务范围查询</External><External href="https://move.centerpointenergy.com/">CenterPoint 燃气开通</External></div><small>市供水入口不适用于所有郊区；电力比价仅适用于开放零售选择的地址。</small></article>
+        <article className="buyer-card"><span className="buyer-eyebrow">MOVE-IN ESSENTIALS</span><h4>水 · 电 · 燃气开通</h4><p>先用房屋的完整地址查供水服务区。确认由市政府还是水务区（MUD）供水后，再向对应单位申请开通。</p><div className="buyer-links">{utilityLinks.map(([label, href]) => <External key={href} href={href}>{label}</External>)}</div><small>邮寄地址上的城市名不代表由该市供水。电力比价仅适用于开放零售选择的地址；燃气也需确认服务覆盖。</small></article>
       </div>
 
     </div>
