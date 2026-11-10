@@ -142,6 +142,10 @@ test("publishes Amy's Houston homebuyer research toolbox and adds it to the site
   assert.match(article, /https:\/\/www\.houstonpermittingcenter\.org\/permit-finder/);
   assert.match(article, /https:\/\/www\.helpinsure\.com\//);
   assert.match(article, /Amy整理休斯顿买房前常用的查询工具/);
+  assert.match(article, /href="\/#buyer-panel-basic">休斯顿买房查询工具箱/);
+  assert.match(article, /href="\/#buyer-panel-schools">学区查询/);
+  assert.match(article, /href="\/#buyer-panel-mortgage">房贷月供计算器/);
+  assert.match(article, /按完整地址核对供水单位/);
   assert.match(article, /休斯顿华人房产经纪/);
   assert.match(article, /houston-homebuyer-research-tools-cover\.png/);
   assert.match(article, /houston-homebuyer-research-tools-cover\.webp/);

@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
 import { BuyerTools } from "../app/BuyerTools";
+import { siteConfig } from "../app/site-config";
 
 // Update only this module: preserve the published homepage's other sections,
 // recent blog entries, images, and hand-tuned production styles.
@@ -14,6 +15,19 @@ const end = html.indexOf('<section class="videos section"', start?.index ?? 0);
 if (start?.index === undefined || end < start.index) throw new Error("Cannot locate homepage toolkit boundaries");
 const markup = renderToStaticMarkup(<BuyerTools />);
 html = html.slice(0, start.index) + markup + html.slice(end);
+
+// Keep search metadata in sync with the app, without a full homepage export.
+const title = renderToStaticMarkup(<title>{siteConfig.title}</title>);
+const description = renderToStaticMarkup(<meta name="description" content={siteConfig.description} />);
+html = html.replace(/<title>[^<]*<\/title>/, () => title);
+html = html.replace(/<meta name="description" content="[^"]*"\s*\/?>/, () => description);
+html = html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/, (script, open, json, close) => {
+  const data = JSON.parse(json);
+  const website = data["@graph"]?.find((node: { "@type": string }) => node["@type"] === "WebSite");
+  if (!website) return script;
+  website.description = siteConfig.description;
+  return open + JSON.stringify(data).replace(/</g, "\\u003c") + close;
+});
 html = html.replaceAll('href="#services"', 'href="#buyer-panel-areas"').replaceAll('href="#schools"', 'href="#buyer-panel-schools"');
 html = html.replace('04 / 视频解读', '02 / 视频解读').replace('05 / 服务流程', '03 / 服务流程').replace('06 / 房产博客', '04 / 房产博客');
 html = html.replace(/<link\b[^>]*href="\.?\/?buyer-tools\.css[^\"]*"[^>]*\/?>(?:<\/link>)?/g, "");

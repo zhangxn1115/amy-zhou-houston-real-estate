@@ -89,6 +89,24 @@ test("crime and safety card includes the city and county resources with clear la
   assert.match(card, /无记录不等于无风险/);
 });
 
+test("public homepage describes address lookup tools in search metadata and visible content", async () => {
+  const html = await readFile(new URL("../site/index.html", import.meta.url), "utf8");
+  assert.match(html, /<title>休斯顿房产经纪 Amy Zhou｜买房查询工具<\/title>/);
+  const descriptions = [...html.matchAll(/<meta name="description" content="([^"]+)"/g)];
+  assert.equal(descriptions.length, 1);
+  const description = descriptions[0][1];
+  assert.match(description, /按房屋地址查学区、周边治安记录、FEMA 洪水风险和供水单位/);
+  assert.match(description, /房贷计算器估算月供/);
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]+?)<\/script>/)[1])["@graph"];
+  assert.equal(graph.find((node) => node["@type"] === "WebSite").description, description);
+  assert.match(graph.find((node) => node["@type"] === "RealEstateAgent").description, /中文自住买房/);
+  assert.match(html, /<link rel="canonical" href="https:\/\/amyzhouhomes\.net\/"/);
+  assert.match(html, /<h2 id="buyer-tools-title">休斯顿买房<span>查询工具箱<\/span><\/h2>/);
+  assert.match(html, /href="\/blog\/2026-07-20-houston-homebuyer-research-tools\/">阅读休斯顿买房查询指南/);
+  assert.match(html, /<h3>休斯顿学区查询<\/h3>/);
+  assert.match(html, /href="https:\/\/tea\.texas\.gov\/families-and-students\/school-district-locator\/school-district-locator"/);
+});
+
 test("move-in card distinguishes water district lookup from city utility signup", async () => {
   const html = await readFile(new URL("../site/index.html", import.meta.url), "utf8");
   const card = html.match(/<article class="buyer-card"><span class="buyer-eyebrow">MOVE-IN ESSENTIALS<\/span>.*?<\/article>/s)?.[0];

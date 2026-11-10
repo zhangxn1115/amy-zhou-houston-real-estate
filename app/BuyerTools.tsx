@@ -49,7 +49,7 @@ function MoneyField({ name, label, value, max = 1000000, step = "1", suffix = "$
 export function BuyerTools() {
   return <section className="buyer-tools section" id="houston" aria-labelledby="buyer-tools-title" data-buyer-tools>
     <div className="section-label">01 / 德州购房工具箱</div>
-    <div className="buyer-heading"><div><p className="kicker">AMY’S HOMEBUYER TOOLKIT</p><h2 id="buyer-tools-title">买房前，<span>先把信息查清楚。</span></h2></div><p>从了解社区到估算预算，把常用入口放在一起。<br />以休斯顿及周边为主，陪您一步步做好准备。</p></div>
+    <div className="buyer-heading"><div><p className="kicker">AMY’S HOMEBUYER TOOLKIT</p><h2 id="buyer-tools-title">休斯顿买房<span>查询工具箱</span></h2></div><p>拿到房屋地址后，先查学区、治安记录、洪水风险和供水单位，再用房贷计算器估算月供。</p></div>
     <nav className="buyer-tabs" aria-label="购房工具分类" data-buyer-tabs>{tabs.map(([key, label], index) => <a key={key} id={`buyer-tab-${key}`} href={`#buyer-panel-${key}`} data-buyer-tab={key}><span aria-hidden="true">0{index + 1}</span>{label}</a>)}</nav>
 
     <div className="buyer-panel" id="buyer-panel-basic" aria-labelledby="buyer-tab-basic" data-buyer-panel="basic">
@@ -60,6 +60,7 @@ export function BuyerTools() {
         <article className="buyer-card"><span className="buyer-eyebrow">MOVE-IN ESSENTIALS</span><h4>水 · 电 · 燃气开通</h4><p>先用房屋的完整地址查供水服务区。确认由市政府还是水务区（MUD）供水后，再向对应单位申请开通。</p><div className="buyer-links">{utilityLinks.map(([label, href]) => <External key={href} href={href}>{label}</External>)}</div><small>邮寄地址上的城市名不代表由该市供水。电力比价仅适用于开放零售选择的地址；燃气也需确认服务覆盖。</small></article>
       </div>
 
+      <div className="buyer-school-footer"><p className="buyer-note">还想查房产税、产权、建筑许可或通勤？</p><a href="/blog/2026-07-20-houston-homebuyer-research-tools/">阅读休斯顿买房查询指南 <span aria-hidden="true">↗</span></a></div>
     </div>
 
     <div className="buyer-panel" id="buyer-panel-mortgage" aria-labelledby="buyer-tab-mortgage" data-buyer-panel="mortgage">
@@ -101,9 +102,9 @@ export function BuyerTools() {
     </div>
 
     <div className="buyer-panel" id="buyer-panel-schools" aria-labelledby="buyer-tab-schools" data-buyer-panel="schools">
-      <div className="buyer-panel-heading"><h3>从学区开始，落实到每个地址</h3><p>不只看评分，也看课程、孩子的需求与接送距离。</p></div>
+      <div className="buyer-panel-heading"><h3>休斯顿学区查询</h3><p>先用德州教育署地图定位学区，再到学区官网确认门牌地址对应的学校。</p></div>
       <div className="buyer-directory-grid">{schools.map(([name, area, description, website]) => <article className="buyer-card" key={name}><span className="buyer-eyebrow">{area}</span><h4>{name}</h4><p>{description}</p><div className="buyer-links"><External href={website}>访问学区官网</External></div></article>)}</div>
-      <div className="buyer-school-footer"><p className="buyer-note">上述区域仅作定位参考，并非完整学区边界。学校分配可能调整，请以学区当年的地址查询及入学政策为准，不构成入学保证。</p><External href="https://tea.texas.gov/families-students/enrolling-and-finding-schools">TEA 官方学校与学区查询</External></div>
+      <div className="buyer-school-footer"><p className="buyer-note">上述区域仅作定位参考，并非完整学区边界。学校分配可能调整，请以学区当年的地址查询及入学政策为准，不构成入学保证。</p><External href="https://tea.texas.gov/families-and-students/school-district-locator/school-district-locator">TEA 官方学区地图</External></div>
     </div>
 
     <div className="buyer-panel" id="buyer-panel-resources" aria-labelledby="buyer-tab-resources" data-buyer-panel="resources">

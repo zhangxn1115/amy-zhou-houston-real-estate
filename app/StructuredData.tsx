@@ -27,7 +27,7 @@ export async function StructuredData() {
         logo: `${origin}/favicon.png`,
         telephone: "+1-346-582-7694",
         email: "ningimeng12@gmail.com",
-        description: siteConfig.description,
+        description: siteConfig.businessDescription,
         address: {
           "@type": "PostalAddress",
           addressLocality: "Houston",
