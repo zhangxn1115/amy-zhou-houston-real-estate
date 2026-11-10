@@ -1,6 +1,15 @@
 import type { ReactNode } from "react";
 
 const tabs = [["basic", "基础查询"], ["mortgage", "贷款计算器"], ["areas", "华人生活区域"], ["schools", "学区介绍"], ["resources", "Amy 的资源"]];
+const safetyLinks = [
+  ["休斯顿警局犯罪查询", "https://www.houstontx.gov/police/cs/index-2.htm"],
+  ["糖城 Sugar Land · 犯罪地图", "https://www.sugarlandtx.gov/619/Crime-Map"],
+  ["Katy · 警局记录申请", "https://www.cityofkaty.com/government/city-departments/police-department/records-and-communications"],
+  ["Cypress · Harris County 事件查询", "https://hcsop2c.cad.hctx.net/"],
+  ["Fulshear · 警局年报", "https://www.fulsheartexas.gov/about-us/departments-h-z/police/crime-reports/racial-profiling-reports"],
+  ["Richmond · 警局记录申请", "https://www.richmondtx.gov/departments/police-department/support-services"],
+  ["Fort Bend County · 犯罪地图", "https://www.fortbendcountytx.gov/government/departments/sheriff-s-office/information/criminal-statistics"],
+];
 const areas = [
   ["Katy / Fulshear", "西部 · 新房与规划社区", "从 Cinco Ranch 到 Cross Creek Ranch、Jordan Ranch，适合一起比较新旧房、生活配套和西部通勤路线。"],
   ["Sugar Land", "西南部 · 成熟生活圈", "关注 Riverstone、Telfair、New Territory 等社区，结合超市、餐饮、医疗和工作地点筛选日常生活半径。"],
@@ -35,7 +44,7 @@ export function BuyerTools() {
     <div className="buyer-panel" id="buyer-panel-basic" aria-labelledby="buyer-tab-basic" data-buyer-panel="basic">
       <div className="buyer-panel-heading"><h3>基础查询</h3><p>先查地址，再比较房屋。外部查询将在新窗口打开。</p></div>
       <div className="buyer-query-grid">
-        <article className="buyer-card"><span className="buyer-eyebrow">SAFETY</span><h4>犯罪与治安</h4><p>按地点、时间和案件类型了解记录，结合现场考察判断，不把单一数字当作安全保证。</p><div className="buyer-links"><External href="https://www.houstontx.gov/police/cs/index-2.htm">休斯顿警局犯罪查询</External></div><small>HPD 数据有辖区限制；Katy、Sugar Land 等地址应另向当地警局核实。无记录不等于无风险。</small></article>
+        <article className="buyer-card"><span className="buyer-eyebrow">SAFETY</span><h4>犯罪与治安</h4><p>先用完整地址确认警局辖区，再查看公开案件或申请记录。邮寄地址上的城市名不等于市界。</p><div className="buyer-links">{safetyLinks.map(([label, href]) => <External key={href} href={href}>{label}</External>)}</div><small>市界外可向所属县警长办公室查询。地图只显示公开记录；无记录不等于无风险。</small></article>
         <article className="buyer-card"><span className="buyer-eyebrow">FLOOD RISK</span><h4>洪水与洪泛区</h4><p>用完整地址查看 FEMA 洪水地图；Harris County 的房屋还可交叉查询县级工具。</p><div className="buyer-links"><External href="https://msc.fema.gov/portal/home">FEMA 官方洪水地图</External><External href="https://www.harriscountyfemt.org/">Harris County 洪水查询</External></div><small>不在高风险区不代表不会积水或进水，还需查看披露、排水情况及保险报价。</small></article>
         <article className="buyer-card"><span className="buyer-eyebrow">MOVE-IN ESSENTIALS</span><h4>水 · 电 · 燃气开通</h4><p>服务商由具体地址决定，先确认供水单位、MUD 与燃气覆盖，再安排开通时间。</p><div className="buyer-links"><External href="https://www.powertochoose.org/">电力方案比较 · Power to Choose</External><External href="https://houstonpublicworks.org/utility-billing">休斯顿市供水开通</External><External href="https://www.puc.texas.gov/industry/water/utilities/gis.aspx">德州供水服务范围查询</External><External href="https://move.centerpointenergy.com/">CenterPoint 燃气开通</External></div><small>市供水入口不适用于所有郊区；电力比价仅适用于开放零售选择的地址。</small></article>
       </div>

@@ -71,6 +71,24 @@ test("homepage exports five accessible tabs and preserves existing homepage cont
   }
 });
 
+test("crime and safety card includes the city and county resources with clear labels", async () => {
+  const html = await readFile(new URL("../site/index.html", import.meta.url), "utf8");
+  const card = html.match(/<article class="buyer-card"><span class="buyer-eyebrow">SAFETY<\/span>.*?<\/article>/s)?.[0];
+  assert.ok(card);
+  const links = [...card.matchAll(/<a href="([^"]+)" target="_blank" rel="noopener noreferrer">([^<]+)<span/g)];
+  assert.deepEqual(links.map(([, href, label]) => [href, label]), [
+    ["https://www.houstontx.gov/police/cs/index-2.htm", "休斯顿警局犯罪查询"],
+    ["https://www.sugarlandtx.gov/619/Crime-Map", "糖城 Sugar Land · 犯罪地图"],
+    ["https://www.cityofkaty.com/government/city-departments/police-department/records-and-communications", "Katy · 警局记录申请"],
+    ["https://hcsop2c.cad.hctx.net/", "Cypress · Harris County 事件查询"],
+    ["https://www.fulsheartexas.gov/about-us/departments-h-z/police/crime-reports/racial-profiling-reports", "Fulshear · 警局年报"],
+    ["https://www.richmondtx.gov/departments/police-department/support-services", "Richmond · 警局记录申请"],
+    ["https://www.fortbendcountytx.gov/government/departments/sheriff-s-office/information/criminal-statistics", "Fort Bend County · 犯罪地图"],
+  ]);
+  assert.match(card, /邮寄地址上的城市名不等于市界/);
+  assert.match(card, /无记录不等于无风险/);
+});
+
 test("calculator keeps input local and renders no user-supplied HTML", async () => {
   const script = await readFile(new URL("../public/buyer-tools.js", import.meta.url), "utf8");
   assert.doesNotMatch(script, /\bfetch\s*\(|XMLHttpRequest|localStorage|sessionStorage|innerHTML|eval\s*\(/);
