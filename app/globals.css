@@ -61,16 +61,17 @@ h1 em,h2 span { color:#9d6f49; font-weight:400; font-style:italic; }
 .button-primary:hover { background:#245346; transform:translateY(-2px); }
 .text-link { font-size:13px; padding:14px 0; border-bottom:1px solid var(--line); }
 .text-link span { margin-left:24px; }
-.portrait-card { width:min(33vw,430px); height:min(74vh,700px); position:absolute; right:4.5vw; top:17%; background:#d5d9cd; box-shadow:0 24px 65px rgba(38,53,46,.13); z-index:1; }
+.portrait-card { width:min(33vw,430px); height:min(74vh,700px); position:absolute; right:4.5vw; top:17%; background:#d5d9cd; box-shadow:0 24px 65px rgba(38,53,46,.13); z-index:1; display:flex; flex-direction:column; }
 .portrait-placeholder { height:calc(100% - 122px); display:flex; flex-direction:column; justify-content:center; align-items:center; background:linear-gradient(145deg,#bcc7ba,#e7e5d8); color:rgba(23,58,50,.4); }
 .portrait-placeholder span { font-family:Georgia,serif; font-size:110px; font-style:italic; }
 .portrait-placeholder small { font-size:8px; letter-spacing:3px; }
-.portrait-photo { display:block; width:100%; height:calc(100% - 250px); object-fit:cover; object-position:center 38%; }
-.portrait-caption { position:relative; height:250px; padding:14px 20px; background:white; display:flex; flex-direction:column; gap:3px; }
+.portrait-photo { display:block; width:100%; min-height:0; flex:1 1 0; object-fit:cover; object-position:center 38%; }
+.portrait-caption { position:relative; min-height:250px; flex:none; padding:14px 20px; background:white; display:flex; flex-direction:column; gap:3px; }
 .portrait-caption > span { font-size:12px; color:#75827d; }
 .portrait-caption > strong { font-family:Georgia,"Songti SC",serif; font-size:21px; font-weight:400; }
 .portrait-caption small { display:block; color:#71817b; font-size:12px; line-height:1.35; letter-spacing:.2px; }
 .portrait-caption .license-number { color:#29483f; font-weight:700; }
+.portrait-caption .portrait-broker { margin-top:5px; color:#29483f; font-size:16px; font-weight:700; }
 .portrait-license { display:flex; align-items:center; justify-content:flex-end; gap:10px; margin-top:8px; text-align:right; }
 .portrait-caption .license-badge { width:42px; height:42px; flex:0 0 42px; display:grid; place-items:center; overflow:hidden; background:#fff; }
 .portrait-caption .license-badge img { display:block; width:100%; height:100%; object-fit:contain; }
@@ -218,6 +219,7 @@ h2 { font-size:clamp(42px,4.4vw,68px); line-height:1.16; }
 body:has(.lead-dialog[open]) { overflow:hidden; }
 footer { padding:45px 6vw; background:#102d26; color:#a4b5af; display:grid; grid-template-columns:1fr 1fr 1fr; align-items:center; gap:30px; font-size:9px; letter-spacing:1px; }
 .footer-brand { color:white; }
+.footer-broker { display:block; margin-top:6px; color:white; font-size:16px; font-weight:700; letter-spacing:.2px; line-height:1.4; }
 footer p:nth-child(2) { text-align:center; }
 footer p:last-child { text-align:right; }
 .image-credits { grid-column:1/-1; padding-top:12px; border-top:1px solid rgba(255,255,255,.1); text-align:center; color:#758b84; font-size:7px; line-height:1.5; letter-spacing:.3px; }
@@ -239,7 +241,8 @@ footer p:last-child { text-align:right; }
   h1 { font-size:clamp(46px,11vw,66px); }
   .hero-consult-row { width:100%; }
   .hero-latest { width:100%; }
-  .portrait-card { position:relative; width:100%; height:640px; right:auto; top:auto; margin-top:60px; }
+  .portrait-card { position:relative; width:100%; height:auto; right:auto; top:auto; margin-top:60px; }
+  .portrait-photo { height:390px; flex:none; }
   .trust-strip { height:auto; padding:32px 6vw; display:grid; grid-template-columns:1fr 1fr; gap:28px; }
   .trust-strip i { display:none; }
   .section { padding:90px 6vw; }
@@ -274,7 +277,8 @@ footer p:last-child { text-align:right; }
   .hero { display:flex; flex-direction:column; align-items:stretch; padding-top:138px; }
   .hero-content { order:2; }
   .hero-intro br { display:none; }
-  .portrait-card { order:1; height:580px; margin:0 0 42px; }
+  .portrait-card { order:1; margin:0 0 42px; }
+  .portrait-photo { height:330px; }
   .hero-blog-item { grid-template-columns:92px minmax(0,1fr); gap:12px; }
   .hero-blog-item > img,.hero-blog-item > picture { width:92px; height:58px; }
   .hero-blog-copy strong { font-size:13px; }

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'sha256-GfSzcxam629UmCNkHKJ9XHyUaL6RMibUAgw5viMr7Zo='; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.googletagmanager.com; style-src 'self' 'sha256-BxHYGLzD8In34sI9UEktfNDRRntRyO8jex8sP1Hzp6I='; img-src 'self' data: https://www.google-analytics.com https://www.googletagmanager.com; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://analytics.google.com; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>休斯顿房产博客｜Amy Zhou 房市、社区与学区指南</title>
   <meta name="description" content="Amy Zhou 的休斯顿中文房产博客，分享大休斯顿房市动态、热门社区、优质学区、新房探访和买房知识。">
@@ -77,6 +77,7 @@ main{background:var(--paper);overflow:hidden}
 .blog-footer>div span{margin-top:4px;font-size:7px;letter-spacing:2px}
 .blog-footer p:nth-child(2){text-align:center}
 .blog-footer p:last-child{text-align:right}
+.blog-footer-broker{display:block;margin-top:6px;color:#fff;font-size:16px;letter-spacing:.2px;line-height:1.4}
 .locale-toggle{position:fixed;right:8px;top:8px;z-index:30;display:flex;align-items:center;gap:7px;padding:9px 11px;border:1px solid var(--line);border-radius:999px;background:rgba(250,248,243,.92);color:#87968f;box-shadow:0 8px 24px rgba(24,54,47,.1);backdrop-filter:blur(10px);cursor:pointer;font:11px/1 "Avenir Next","PingFang SC",sans-serif}
 .locale-toggle span.active{color:var(--ink);font-weight:700}
 .locale-toggle i{width:1px;height:11px;background:var(--line)}
@@ -103,6 +104,7 @@ main{background:var(--paper);overflow:hidden}
 .article-author-qr img{width:138px;height:138px;aspect-ratio:1;padding:12px;object-fit:contain;background:#fff;border:1px solid rgba(24,54,47,.1)}
 .article-author-qr small{display:block;margin-top:9px;color:#6e8179;font-size:11px;letter-spacing:.5px}
 .article-author-license{margin-top:17px;color:var(--gold);font-size:11px;font-weight:700}
+.article-author-broker{margin-top:5px;color:var(--ink);font-size:16px;font-weight:700;line-height:1.4}
 .article-consult-button{display:flex;align-items:center;justify-content:space-between;width:138px;margin-top:18px;padding:12px 14px;border:0;background:var(--forest);color:#fff;cursor:pointer;font-family:Georgia,"Songti SC",serif;font-size:12px;transition:background .2s,transform .2s}
 .article-consult-button:hover{background:#245346;transform:translateY(-2px)}
 .article-consult-button span{margin:0;color:#d4b59c;font-size:12px}
@@ -205,6 +207,7 @@ body:has(.lead-dialog[open]){overflow:hidden}
   .article-author-qr img{width:88px;height:88px;padding:9px}
   .article-author-qr small{margin:0;text-align:center;line-height:1.35}
   .article-author-license{grid-column:1/-1;margin-top:14px}
+  .article-author-broker{grid-column:1/-1}
   .article-consult-button{grid-column:1/-1;width:100%;margin-top:12px}
   .article-body{font-size:16px;line-height:1.95}
   .article-body h2{font-size:28px}
@@ -512,7 +515,7 @@ body:has(.lead-dialog[open]){overflow:hidden}
   <footer class="blog-footer">
     <div><strong>AMY ZHOU</strong><span>HOUSTON REAL ESTATE</span></div>
     <p>为全球华人家庭提供休斯顿房产服务</p>
-    <p>Texas Real Estate Sales Agent · License #839083</p>
+    <p>Texas Real Estate Sales Agent · License #839083<strong class="blog-footer-broker">Realm Real Estate Professionals</strong></p>
   </footer>
   <button type="button" class="locale-toggle" data-locale-control="true" aria-label="切换为繁体中文"><span class="active">简</span><i></i><span>繁</span></button>
 </body>

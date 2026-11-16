@@ -66,6 +66,7 @@ test("renders the realtor site with defensive response headers", async () => {
   assert.match(html, /<span>休斯顿持牌房产经纪<\/span>/);
   assert.match(html, /src="\/license-icon\.webp"/);
   assert.doesNotMatch(html, /class="license-badge">TX/);
+  assert.match(html, /License No\. 839083<\/small><small class="portrait-broker">Realm Real Estate Professionals/);
   assert.match(html, /class="header-qr-label">微信扫码咨询/);
   assert.match(html, /class="hero-consult-button"/);
   assert.match(html, /class="hero-consult-row"/);

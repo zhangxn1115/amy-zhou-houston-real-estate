@@ -5,6 +5,18 @@ import test from "node:test";
 
 const read = (path) => readFile(new URL(path, import.meta.url), "utf8");
 
+test("shows the sponsoring broker next to the license on home and blog pages", async () => {
+  const home = await read("../site/index.html");
+  const index = await read("../site/blog/index.html");
+  const article = await read("../site/blog/2026-07-18-sugar-land-ryehill-price/index.html");
+  assert.match(home, /License No\. 839083<\/small><small class="portrait-broker">Realm Real Estate Professionals/);
+  assert.match(home, /License #839083<strong class="footer-broker">Realm Real Estate Professionals/);
+  for (const page of [index, article]) {
+    assert.match(page, /License #839083<strong class="blog-footer-broker">Realm Real Estate Professionals/);
+  }
+  assert.match(article, /License No\. 839083<\/small>\s*<small class="article-author-broker">Realm Real Estate Professionals/);
+});
+
 test("publishes the EB-5 housing guide with safeguards and discovery links", async () => {
   const slug = "2026-09-29-eb5-texas-new-immigrants-buy-or-rent";
   const article = await read(`../site/blog/${slug}/index.html`);

@@ -1,5 +1,6 @@
 import { BuyerTools } from "./BuyerTools";
 import { VideoPlaylist } from "./VideoPlaylist";
+import { sponsoringBroker } from "./site-broker.mjs";
 
 function responsiveWebp(image: string) {
   const base = image.replace(/\.(?:jpe?g|png)$/i, "");
@@ -119,6 +120,7 @@ export default function Home() {
               <div>
                 <small>Texas Real Estate Sales Agent</small>
                 <small className="license-number">License No. 839083</small>
+                <small className="portrait-broker">{sponsoringBroker}</small>
               </div>
             </div>
             <nav className="portrait-actions" aria-label="页面重点内容">
@@ -261,7 +263,7 @@ export default function Home() {
       <footer>
         <div className="brand footer-brand"><span className="brand-mark">AZ</span><span className="brand-copy"><strong>AMY ZHOU</strong><small>HOUSTON REAL ESTATE</small></span></div>
         <p>为全球华人家庭提供休斯顿房产服务</p>
-        <p>Texas Real Estate Sales Agent · License #839083</p>
+        <p>Texas Real Estate Sales Agent · License #839083<strong className="footer-broker">{sponsoringBroker}</strong></p>
         <small className="image-credits">区域图片来源：Wikimedia Commons（Ed Schipul、WhisperToMe、Michael Martin、Brian Reading）及 Unsplash（Ben Kim 等），依各自开放授权使用。</small>
       </footer>
     </main>

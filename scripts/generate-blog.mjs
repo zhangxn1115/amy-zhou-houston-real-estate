@@ -2,6 +2,7 @@ import { cp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { sponsoringBroker } from "../app/site-broker.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentDirectory = path.join(root, "content", "blog");
@@ -356,7 +357,7 @@ function siteFooter() {
   return `<footer class="blog-footer">
     <div><strong>AMY ZHOU</strong><span>HOUSTON REAL ESTATE</span></div>
     <p>为全球华人家庭提供休斯顿房产服务</p>
-    <p>Texas Real Estate Sales Agent · License #839083</p>
+    <p>Texas Real Estate Sales Agent · License #839083<strong class="blog-footer-broker">${escapeHtml(sponsoringBroker)}</strong></p>
   </footer>`;
 }
 
@@ -491,12 +492,22 @@ function renderHomeLatest(posts) {
   </section>`;
 }
 
-async function updateHomeLatest(posts) {
+async function updateHomePage(posts) {
   const homePath = path.join(siteDirectory, "index.html");
   let home = await readFile(homePath, "utf8");
   const region = /<section[^>]*class="hero-latest"[^>]*data-blog-latest="true"[^>]*>[\s\S]*?<\/section>/;
   if (!region.test(home)) throw new Error("Homepage latest-blog region is missing");
   home = home.replace(region, renderHomeLatest(posts));
+  const portraitLicense = /(<small class="license-number">License No\. 839083<\/small>)(?:<small class="portrait-broker">[^<]*<\/small>)?/;
+  const footerLicense = /(<p>Texas Real Estate Sales Agent · License #839083)(?:<strong class="footer-broker">[^<]*<\/strong>)?<\/p>/;
+  if (!portraitLicense.test(home) || !footerLicense.test(home)) {
+    throw new Error("Homepage license information is missing");
+  }
+  const broker = escapeHtml(sponsoringBroker);
+  home = home
+    .replace(portraitLicense, (_, license) => `${license}<small class="portrait-broker">${broker}</small>`)
+    .replace(footerLicense, (_, license) => `${license}<strong class="footer-broker">${broker}</strong></p>`)
+    .replace("assets/site.css?v=20260811-1", "assets/site.css?v=20261115-1");
   await writeFile(homePath, home);
 }
 
@@ -632,6 +643,7 @@ function renderArticle(post, posts) {
           <span>休斯顿房产经纪</span>
           <div class="article-author-qr"><img src="/wechat-qr.jpg" alt="Amy Zhou 微信二维码" width="830" height="830" loading="lazy" decoding="async"><small>微信扫码咨询</small></div>
           <small class="article-author-license">License No. 839083</small>
+          <small class="article-author-broker">${escapeHtml(sponsoringBroker)}</small>
           <button class="article-consult-button" type="button" data-lead-open aria-haspopup="dialog" aria-controls="lead-dialog">在线咨询 <span>↗</span></button>
         </aside>
         <div class="article-body">${videoEmbed}${post.body}
@@ -708,7 +720,7 @@ async function buildBlog() {
     await writeFile(path.join(postDirectory, "index.html"), renderArticle(post, posts));
   }
 
-  await updateHomeLatest(posts);
+  await updateHomePage(posts);
   await writeFile(path.join(siteDirectory, "sitemap.xml"), renderSitemap(posts));
   console.log(`Generated ${posts.length} blog post${posts.length === 1 ? "" : "s"}.`);
 }
