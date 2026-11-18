@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 const sourcePath = process.argv[2] ?? "/tmp/amy-index.html";
 const outputPath = process.argv[3] ?? "site/index.html";
 const siteUrl = "https://amyzhouhomes.net";
-const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20261115-1"/><link rel="stylesheet" href="/video-playlist.css?v=20261029-1"/>';
+const staticStylesheet = '<link rel="stylesheet" href="./assets/site.css?v=20261118-1"/><link rel="stylesheet" href="/video-playlist.css?v=20261029-1"/>';
 
 let html = await readFile(sourcePath, "utf8");
 

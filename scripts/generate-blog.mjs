@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { sponsoringBroker } from "../app/site-broker.mjs";
+import { homeDisclosures } from "../app/site-disclosures.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const contentDirectory = path.join(root, "content", "blog");
@@ -504,10 +505,20 @@ async function updateHomePage(posts) {
     throw new Error("Homepage license information is missing");
   }
   const broker = escapeHtml(sponsoringBroker);
+  const disclosures = `<nav class="compliance-links" data-home-disclosures="true" aria-label="TREC 合规披露文件">${homeDisclosures.map((document) => `<a href="${escapeHtml(document.href)}" type="application/pdf" target="_blank" rel="noopener noreferrer" title="${escapeHtml(document.description)}">${escapeHtml(document.title)}</a>`).join("")}</nav>`;
+  const disclosureRegion = /<nav class="compliance-links" data-home-disclosures="true"[^>]*>[\s\S]*?<\/nav>/;
+  if (disclosureRegion.test(home)) {
+    home = home.replace(disclosureRegion, disclosures);
+  } else {
+    const credits = '<small class="image-credits">';
+    if (!home.includes(credits)) throw new Error("Homepage disclosure link location is missing");
+    home = home.replace(credits, `${disclosures}${credits}`);
+  }
   home = home
     .replace(portraitLicense, (_, license) => `${license}<small class="portrait-broker">${broker}</small>`)
     .replace(footerLicense, (_, license) => `${license}<strong class="footer-broker">${broker}</strong></p>`)
-    .replace("assets/site.css?v=20260811-1", "assets/site.css?v=20261115-1");
+    .replace("assets/site.css?v=20260811-1", "assets/site.css?v=20261115-1")
+    .replace("assets/site.css?v=20261115-1", "assets/site.css?v=20261118-1");
   await writeFile(homePath, home);
 }
 
@@ -689,6 +700,7 @@ ${url.image ? `    <image:image>
 async function buildBlog() {
   blogCss = await readFile(path.join(siteDirectory, "assets", "blog.css"), "utf8");
   const posts = await loadPosts();
+  await cp(path.join(root, "public", "legal"), path.join(siteDirectory, "legal"), { recursive: true, force: true });
   await rm(blogDirectory, { recursive: true, force: true });
   await mkdir(blogDirectory, { recursive: true });
   await rm(siteMediaDirectory, { recursive: true, force: true });

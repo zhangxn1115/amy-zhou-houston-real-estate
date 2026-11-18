@@ -1,6 +1,7 @@
 import { BuyerTools } from "./BuyerTools";
 import { VideoPlaylist } from "./VideoPlaylist";
 import { sponsoringBroker } from "./site-broker.mjs";
+import { homeDisclosures } from "./site-disclosures.mjs";
 
 function responsiveWebp(image: string) {
   const base = image.replace(/\.(?:jpe?g|png)$/i, "");
@@ -264,6 +265,11 @@ export default function Home() {
         <div className="brand footer-brand"><span className="brand-mark">AZ</span><span className="brand-copy"><strong>AMY ZHOU</strong><small>HOUSTON REAL ESTATE</small></span></div>
         <p>为全球华人家庭提供休斯顿房产服务</p>
         <p>Texas Real Estate Sales Agent · License #839083<strong className="footer-broker">{sponsoringBroker}</strong></p>
+        <nav className="compliance-links" data-home-disclosures="true" aria-label="TREC 合规披露文件">
+          {homeDisclosures.map((document) => (
+            <a key={document.href} href={document.href} type="application/pdf" target="_blank" rel="noopener noreferrer" title={document.description}>{document.title}</a>
+          ))}
+        </nav>
         <small className="image-credits">区域图片来源：Wikimedia Commons（Ed Schipul、WhisperToMe、Michael Martin、Brian Reading）及 Unsplash（Ben Kim 等），依各自开放授权使用。</small>
       </footer>
     </main>
